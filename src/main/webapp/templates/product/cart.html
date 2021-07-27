@@ -36,11 +36,12 @@
 
 <div class="container">
   <h1>Shopping</h1>
-  <div class="categories" th:each="item, iter : ${cart.keySet()}">
+  <div class="categories" th:each="item : ${cart.keySet()}">
     <div class="card">
       <strong th:text="${item.name}">Category Title</strong>
       <strong th:text="${item.price}">Category Title</strong>
       <strong th:text="${cart.get(item)}">Category Title</strong>
+      <strong th:text="${cart.get(item)} * ${item.defaultPrice}">Category Title</strong>
     </div>
   </div>
   <div class="summary">
