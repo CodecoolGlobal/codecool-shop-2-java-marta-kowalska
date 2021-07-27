@@ -45,4 +45,10 @@ public class ShoppingCart {
         }
 
     }
+
+    public void removeFromShoppingCart(Product product) {
+        shoppingCart.remove(product);
+
+
+    }
 }
