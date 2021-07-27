@@ -1,6 +1,6 @@
 package com.codecool.shop.controller.filter;
 
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.product.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
