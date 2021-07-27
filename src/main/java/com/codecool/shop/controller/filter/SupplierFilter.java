@@ -2,11 +2,13 @@ package com.codecool.shop.controller.filter;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.product.Product;
 import com.codecool.shop.service.ProductService;
 
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +29,9 @@ public class SupplierFilter extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
+        ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
 
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore);
+        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore, shoppingCart);
 
         List<Product> productsByCategory = productService.getProductsForSupplier(categoryId);
 
