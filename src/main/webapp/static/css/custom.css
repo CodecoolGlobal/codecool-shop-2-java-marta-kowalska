@@ -1,62 +1,186 @@
-.glyphicon {
-    margin-right:5px;
+:root {
+    /* container szélessége */
+    --container-width: min(100%, 1140px);
+
+    /* container távolsága az ablak széleitől */
+    --container-side-space: calc( ( 100% - var(--container-width) ) / 2 );
+
+    /* containerek horizontális gap-jei */
+    --container-side-gap: 30px;
+
+
+
+    /* boxok közötti távolság */
+    --box-gap: 30px;
+    --box-columns: 3;
+
+    /* rádiuszok */
+    --radius-normal: 10px;
+    --radius-small: 5px;
+
+    /* színek */
+    --c-fade: rgba(0,0,0,.1);
+
+    --c-background: #eee;
+    --c-foreground: #333;
+
+    --c-green: #50aa50;
+    --c-green-fg: white;
+
+    --c-blue: #6a98ff;
+    --c-blue-fg: white;
 }
-.thumbnail
-{
-    margin-bottom: 20px;
-    padding: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+
+@media screen and (max-width: 1140px) {
+    :root {
+        --box-columns: 2;
+    }
 }
-.thumbnail img
-{
-    margin-top: 10px;
+@media screen and (max-width: 768px) {
+    :root {
+        --box-columns: 1;
+    }
 }
-.item.list-group-item
-{
-    float: none;
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;
+    background: var(--c-background);
+    color: var(--c-foreground);
+    font-family: sans-serif;
+}
+
+.rel {
+    position: relative;
+}
+.abs {
+    position: absolute;
+}
+.fix {
+    position: fixed;
+}
+
+.boxfix {
+    font-size: 0;
+}
+.boxfix > * {
+    font-size: 1rem;
+}
+
+.container {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto; !important;
+    width: var(--container-width);
+}
+.container:not(.nogap) {
+    padding-left: var(--container-side-gap);
+    padding-right: var(--container-side-gap);
+}
+
+.container-fluid {
     width: 100%;
-    background-color: #fff;
-    margin-bottom: 10px;
+    padding-left: var(--container-side-space) !important;
+    padding-right: var(--container-side-space) !important;
 }
-.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
-{
-    background: #428bca;
-}
-
-.item.list-group-item .list-group-image
-{
-    margin-right: 10px;
-}
-.item.list-group-item .thumbnail
-{
-    margin-bottom: 0px;
-}
-.item.list-group-item .caption
-{
-    padding: 9px 9px 0px 9px;
-}
-.item.list-group-item:nth-of-type(odd)
-{
-    background: #eeeeee;
+.container-fluid:not(.nogap) {
+    padding-left: calc( var(--container-side-space) + var(--container-side-gap) ) !important;
+    padding-right: calc( var(--container-side-space) + var(--container-side-gap) ) !important;
 }
 
-.item.list-group-item:before, .item.list-group-item:after
-{
-    display: table;
-    content: " ";
+#header {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    background: var(--c-blue);
+    color: var(--c-blue-fg);
+    margin-bottom: 30px;
 }
 
-.item.list-group-item img
-{
-    float: left;
+#footer {
+    text-align: center;
+    color: var(--c-foreground);
+    opacity: 0.5;
 }
-.item.list-group-item:after
-{
-    clear: both;
+
+.products {
+    margin: 20px 0;
+    padding-left: var(--box-gap);
 }
-.list-group-item-text
-{
-    margin: 0 0 11px;
+
+.product.box {
+    width: calc(( 100% - var(--box-gap) * var(--box-columns) ) / var(--box-columns));
+    margin-right: var(--box-gap);
+    margin-bottom: var(--box-gap);
+    display: inline-block;
+    vertical-align: top;
+    background: var(--c-fade);
+    border: 1px solid var(--c-fade);
+    border-radius: var(--radius-normal);
+    overflow: hidden;
+    font-size: 0;
+    transition: all ease-in 0.2s;
+}
+.product.box:hover {
+    -webkit-box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 30%);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 30%);
+}
+.product.box > * {
+    font-size: 1rem;
+}
+
+.product {
+    position: relative;
+}
+
+.product > img {
+    width: 100%;
+    height: auto;
+}
+
+.product .name {
+    padding: 10px;
+    background: var(--c-fade);
+}
+
+.product .description {
+    padding: 10px;
+}
+
+.product button.add-to-cart {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background: var(--c-green);
+    color: var(--c-green-fg);
+    transition: all ease-in 0.1s;
+    border-radius: var(--radius-small);
+}
+
+.product button.add-to-cart:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.product .price {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    background: var(--c-green);
+    color: var(--c-green-fg);
+    font-weight: 600;
+    border-radius: var(--radius-small);
 }
