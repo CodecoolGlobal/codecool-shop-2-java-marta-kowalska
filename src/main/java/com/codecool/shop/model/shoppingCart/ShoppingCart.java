@@ -47,7 +47,11 @@ public class ShoppingCart {
     }
 
     public void removeFromShoppingCart(Product product) {
-        shoppingCart.remove(product);
+        if (shoppingCart.get(product) > 1) {
+            shoppingCart.put(product, shoppingCart.get(product) - 1);
+        } else {
+            shoppingCart.remove(product);
+        }
 
 
     }
