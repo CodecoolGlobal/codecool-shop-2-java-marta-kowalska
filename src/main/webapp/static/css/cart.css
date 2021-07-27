@@ -1,0 +1,124 @@
+
+.itemId {
+    font-size: .75em;
+    color: #777;
+    margin-bottom: .5em;
+}
+
+.itemInfo {
+    display: inline-block;
+}
+
+.cartContainer {
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.cartItem {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+                rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+                rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 50% 15% 30% 5%;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    align-items: center;
+}
+
+.cartItem h3 {
+    font-size: 1.2em;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .025em;
+}
+
+.cartItem > img {
+    width: 80%;
+    border: 1px solid black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+input[type=number]{
+    width: 2.5em;
+    margin: 1em 0;
+    vertical-align: middle;
+    align-items: center;
+    padding: 0.4em;
+    font-size: 1em;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+li:nth-of-type(odd) {
+    background-color: lightblue;
+}
+
+li:nth-of-type(even) {
+    background-color: azure;
+}
+
+.checkoutBtn {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background: green;
+    color: white;
+    transition: all ease-in 0.1s;
+    border: 0;
+    border-radius: 10px;
+}
+
+.checkoutBtn:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+
+.promoCode {
+    float: left;
+    border: 2px solid #efefef;
+    width: 35%;
+    padding: 2%;
+}
+.promoCode label {
+    display: block;
+    width: 100%;
+    font-style: italic;
+    font-size: 1.15em;
+    margin-bottom: .5em;
+    letter-spacing: -.025em;
+}
+.promoCode input {
+    width: 85%;
+    font-size: 1em;
+    padding: .5em;
+    float: left;
+    border: 1px solid #dadada;
+}
+.remove {
+    width: 2em;
+    height: 2em;
+    border: 1px solid black;
+    border-radius: 40%;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.remove:hover {
+    background: #f30;
+}
