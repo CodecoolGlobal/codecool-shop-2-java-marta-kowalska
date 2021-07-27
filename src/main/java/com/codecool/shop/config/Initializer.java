@@ -33,6 +33,21 @@ public class Initializer implements ServletContextListener {
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
 
+        ProductCategory cat1 = new ProductCategory("cat1", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(cat1);
+
+        ProductCategory cat2 = new ProductCategory("cat2", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(cat2);
+
+        ProductCategory cat3 = new ProductCategory("cat3", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(cat3);
+
+        ProductCategory cat4 = new ProductCategory("cat4", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(cat4);
+
+        ProductCategory cat5 = new ProductCategory("cat5", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(cat5);
+
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));

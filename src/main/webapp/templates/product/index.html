@@ -20,12 +20,19 @@
     <div class="container-fluid" id="header">
         <h1>Codecool Shop</h1>
     </div>
-
-    <div class="container-fluid">
-        <h1 class="tax-title" th:text="${category.name}">Category Title</h1>
+      
+    <div class="container-fluid" id="section-categories">
+        <h1>All categories</h1>
+        <div class="categories boxfix" th:each="category : ${categories}">
+            <a class="category" href="#" th:text="${category.name}">Category Title</a>
+        </div>
+        <h1>Products by supplier id:1</h1>
+        <div class="categories boxfix" th:each="supplier : ${suppliers}">
+            <a class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
+        </div>
     </div>
 
-    <div class="container nogap">
+    <div class="container nogap" id="section-highlighted-products">
         <div class="boxfix rel products">
             <div th:each="prod,iterStat : ${products}" class="product box">
                 <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
