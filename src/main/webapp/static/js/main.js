@@ -5,7 +5,7 @@ const cartCookieKey = 'USER_CART';
 /////////////////////// INIT ///////////////////////
 jQuery(document).ready(function () {
     getCart();
-    
+
     console.log(localCart);
 });
 
