@@ -61,7 +61,12 @@ public class Initializer implements ServletContextListener {
         shoppingCart.add(product3);
         shoppingCart.add(product3);
         shoppingCart.add(product3);
+        shoppingCart.remove(product3);
+        shoppingCart.remove(product3);
+        shoppingCart.remove(product3);
+        shoppingCart.add(product3);
         shoppingCart.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+//        shoppingCart.remove(product3);
         shoppingCart.add(new Product("asd", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         shoppingCart.add(new Product("sdfhfgh Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
 
