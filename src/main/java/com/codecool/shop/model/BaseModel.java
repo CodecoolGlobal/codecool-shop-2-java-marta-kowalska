@@ -2,11 +2,13 @@ package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
+import com.google.gson.annotations.Expose;
 
 public class BaseModel {
-
     protected int id;
+    @Expose
     protected String name;
+    @Expose
     protected String description;
 
     public BaseModel(String name) {
