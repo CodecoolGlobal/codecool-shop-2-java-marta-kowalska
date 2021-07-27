@@ -29,6 +29,14 @@ public class ShoppingCart {
         this.shoppingCart = shoppingCart;
     }
 
+    public int getCartItemCount(){
+        int sum = 0;
+        for(Product product : shoppingCart.keySet()){
+            sum += shoppingCart.get(product);
+        }
+        return sum;
+    }
+
     public void addToShoppingCart(Product product){
         if(shoppingCart.containsKey(product)){
             shoppingCart.put(product, shoppingCart.get(product) + 1);
