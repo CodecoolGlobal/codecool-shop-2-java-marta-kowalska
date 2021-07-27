@@ -13,6 +13,7 @@
     /* boxok közötti távolság */
     --box-gap: 30px;
     --box-columns: 3;
+    --tax-columns: 5;
 
     /* rádiuszok */
     --radius-normal: 10px;
@@ -34,11 +35,13 @@
 @media screen and (max-width: 1140px) {
     :root {
         --box-columns: 2;
+        --tax-columns: 3;
     }
 }
 @media screen and (max-width: 768px) {
     :root {
         --box-columns: 1;
+        --tax-columns: 2;
     }
 }
 
@@ -165,6 +168,7 @@ html {
     background: var(--c-green);
     color: var(--c-green-fg);
     transition: all ease-in 0.1s;
+    border: 0;
     border-radius: var(--radius-small);
 }
 
@@ -183,4 +187,34 @@ html {
     color: var(--c-green-fg);
     font-weight: 600;
     border-radius: var(--radius-small);
+}
+
+#section-categories > #categories {
+    margin-bottom: 30px;
+}
+
+.categories > .category {
+    display: inline-block;
+    vertical-align: top;
+    width: calc( ( 100% - var(--box-gap) * var(--tax-columns) ) / var(--tax-columns));
+    height: calc(1em + 20px);
+    overflow: hidden;
+    border: 10px solid #bbb;
+    text-align: center;
+    margin: calc( var(--box-gap) / 2 ) 0;
+    margin-right: var(--box-gap);
+    background: #bbb;
+    color: black;
+    border-radius: var(--radius-small);
+    transition: all ease-in 0.1s;
+}
+
+.categories > .category:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+#section-highlighted-products > h1 {
+    margin-left: var(--container-side-gap);
+    margin-top: 30px;
 }
