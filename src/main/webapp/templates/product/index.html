@@ -23,16 +23,17 @@
       
     <div class="container-fluid" id="section-categories">
         <h1>All categories</h1>
-        <div class="categories boxfix">
+        <div id="categories" class="boxfix rel categories">
             <a th:each="category : ${categories}" class="category" href="#" th:text="${category.name}">Category Title</a>
         </div>
         <h1>Products by supplier id:1</h1>
-        <div class="categories boxfix">
+        <div id="suppliers" class="boxfix rel categories">
             <a th:each="supplier : ${suppliers}" class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
         </div>
     </div>
 
     <div class="container nogap" id="section-highlighted-products">
+        <h1>Highlighted products</h1>
         <div class="boxfix rel products">
             <div th:each="prod,iterStat : ${products}" class="product box">
                 <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
