@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.controller.filter;
 
 import com.codecool.shop.model.Product;
 import com.google.gson.Gson;

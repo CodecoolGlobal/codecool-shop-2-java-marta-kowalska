@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.controller.filter;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -9,7 +9,6 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.service.ProductService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/get-supplier/*"})
-public class SupplierFilter extends HttpServlet {
+@WebServlet(urlPatterns = {"/get-category/*"})
+public class CategoryFilter extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -31,7 +30,7 @@ public class SupplierFilter extends HttpServlet {
 
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore);
 
-        List<Product> productsByCategory = productService.getProductsForSupplier(categoryId);
+        List<Product> productsByCategory = productService.getProductsForCategory(categoryId);
 
         String serializedProducts = FilterUtil.jsonifyData(productsByCategory);
 
