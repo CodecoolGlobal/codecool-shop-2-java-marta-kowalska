@@ -23,12 +23,12 @@
       
     <div class="container-fluid" id="section-categories">
         <h1>All categories</h1>
-        <div class="categories boxfix" th:each="category : ${categories}">
-            <a class="category" href="#" th:text="${category.name}">Category Title</a>
+        <div class="categories boxfix">
+            <a th:each="category : ${categories}" class="category" href="#" th:text="${category.name}">Category Title</a>
         </div>
         <h1>Products by supplier id:1</h1>
-        <div class="categories boxfix" th:each="supplier : ${suppliers}">
-            <a class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
+        <div class="categories boxfix">
+            <a th:each="supplier : ${suppliers}" class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
         </div>
     </div>
 
