@@ -40,6 +40,10 @@ public class CartController extends HttpServlet {
 
         context.setVariable("cart", productService.getCart());
 
+        context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
+
+
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

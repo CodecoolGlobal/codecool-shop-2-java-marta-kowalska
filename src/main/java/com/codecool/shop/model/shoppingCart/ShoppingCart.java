@@ -21,8 +21,8 @@ public class ShoppingCart {
         this.shoppingCart = new HashMap<>();
     }
 
-    public HashMap<Product, Integer> getShoppingCart() {
-        return shoppingCart;
+    public ShoppingCart getShoppingCart() {
+        return this;
     }
 
     public void setShoppingCart(HashMap<Product, Integer> shoppingCart) {
@@ -50,5 +50,9 @@ public class ShoppingCart {
         shoppingCart.remove(product);
 
 
+    }
+
+    public HashMap<Product, Integer> getCart() {
+        return this.shoppingCart;
     }
 }

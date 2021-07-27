@@ -38,6 +38,11 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     @Override
     public HashMap<Product, Integer> getAll() {
-        return shoppingCart.getShoppingCart();
+        return shoppingCart.getCart();
+    }
+
+    @Override
+    public ShoppingCart getCart() {
+       return shoppingCart.getShoppingCart();
     }
 }

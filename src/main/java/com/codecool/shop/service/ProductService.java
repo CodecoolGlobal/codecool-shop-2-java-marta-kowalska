@@ -6,6 +6,7 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
+import com.codecool.shop.model.shoppingCart.ShoppingCart;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,5 +50,7 @@ public class ProductService{
         return shoppingCart.getAll();
     }
 
-
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart.getCart();
+    }
 }
