@@ -156,7 +156,7 @@ html {
     padding: 10px;
 }
 
-.product a.btn {
+.product button.add-to-cart {
     display: block;
     width: fit-content;
     margin: 10px auto 20px;
@@ -168,7 +168,7 @@ html {
     border-radius: var(--radius-small);
 }
 
-.product a.btn:hover {
+.product button.add-to-cart:hover {
     opacity: 0.9;
     transform: scale(1.1);
 }

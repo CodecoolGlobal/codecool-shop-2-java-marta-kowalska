@@ -12,6 +12,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script src="/static/js/main.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -31,7 +32,7 @@
                 <h3 class="name" th:text="${prod.name}">Product name</h3>
                 <p class="description" th:text="${prod.description}">Product description... </p>
                 <label class="price" th:text="${prod.getPrice()}">100 USD</label>
-                <a class="btn" href="#">Add to cart</a>
+                <button type="button" class="add-to-cart" th:attr="onclick='addToCart(' + ${prod.id} + ', \'' + ${prod.name} + '\');'">Add to cart</button>
             </div>
         </div>
     </div>
