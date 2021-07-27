@@ -39,6 +39,13 @@
     border: 1px solid black;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+.stockStatus {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: darkgreen;
+    -webkit-text-stroke: 1px rgba(0,0,0,.15);
+}
 input[type=number]{
     width: 2.5em;
     margin: 1em 0;
@@ -53,13 +60,52 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-
 li:nth-of-type(odd) {
     background-color: lightblue;
 }
 
 li:nth-of-type(even) {
     background-color: azure;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.promoCode {
+    width: 33.3%;
+    padding: 2%;
+}
+.promoCode label {
+    display: block;
+    font-style: italic;
+    font-size: 1.15em;
+    margin-bottom: .5em;
+    letter-spacing: -.025em;
+}
+.promoCode input {
+    width: 85%;
+    font-size: 1em;
+    padding: .5em;
+    float: left;
+    border: 1px solid #dadada;
+}
+.remove {
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    font-size: 1.3em;
+    border: 1px solid black;
+    border-radius: 40%;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.remove:hover {
+    background: #f30;
+    cursor: pointer;
 }
 
 .checkoutBtn {
@@ -78,47 +124,4 @@ li:nth-of-type(even) {
 .checkoutBtn:hover {
     opacity: 0.9;
     transform: scale(1.1);
-}
-
-
-.promoCode {
-    float: left;
-    border: 2px solid #efefef;
-    width: 35%;
-    padding: 2%;
-}
-.promoCode label {
-    display: block;
-    width: 100%;
-    font-style: italic;
-    font-size: 1.15em;
-    margin-bottom: .5em;
-    letter-spacing: -.025em;
-}
-.promoCode input {
-    width: 85%;
-    font-size: 1em;
-    padding: .5em;
-    float: left;
-    border: 1px solid #dadada;
-}
-.remove {
-    width: 2em;
-    height: 2em;
-    border: 1px solid black;
-    border-radius: 40%;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-}
-
-.summary {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-}
-
-.remove:hover {
-    background: #f30;
 }

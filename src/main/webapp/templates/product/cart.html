@@ -27,13 +27,14 @@
 </div>
 
 <div class="container-fluid" id="section-categories">
-    <h1>My Cart</h1>
+
     <!-- IF CART IS EMPTY -->
     <div th:if="${cart.isEmpty()}">
-        <div><h1>Shopping cart is empty!</h1></div>
+       <h1>Shopping cart is empty!</h1>
     </div>
     <!-- ELSE -->
     <ul class="cartContainer" th:unless="${cart.isEmpty()}">
+        <h1>My Cart</h1>
         <li class="cartItem" th:each="prod : ${cart.keySet()}">
 
             <div class="itemInfo">
@@ -55,7 +56,7 @@
             <button type="button" class="remove">x</button>
         </li>
     </ul>
-    <div class="summary">
+    <div class="summary" th:unless="${cart.isEmpty()}">
         <div class="promoCode"><label for="promo">Have A Promo Code?</label>
             <input type="text" id="promo" placholder="Enter Code"/>
         </div>
