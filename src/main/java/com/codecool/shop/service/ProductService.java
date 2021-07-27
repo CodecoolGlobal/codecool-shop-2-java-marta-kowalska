@@ -2,21 +2,28 @@ package com.codecool.shop.service;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ProductService{
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao productSupplierDao;
+    private ShoppingCartDao shoppingCart;
 
-    public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao productSupplierDataStore) {
+    public ProductService(ProductDao productDao,
+                          ProductCategoryDao productCategoryDao,
+                          SupplierDao productSupplierDataStore,
+                          ShoppingCartDao shoppingCartDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.productSupplierDao = productSupplierDataStore;
+        this.shoppingCart = shoppingCartDao;
 
     }
 
@@ -36,6 +43,10 @@ public class ProductService{
 
     public List<ProductCategory> getAllCategory(){
         return productCategoryDao.getAll();
+    }
+
+    public HashMap<Product,Integer> getCart(){
+        return shoppingCart.getAll();
     }
 
 
