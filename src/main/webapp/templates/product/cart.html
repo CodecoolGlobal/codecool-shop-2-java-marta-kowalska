@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title>Codecool Shop | shopping cart</title>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
 
-    <script src="/static/js/main.js" type="text/javascript"></script>
+    <script src="/static/js/cart.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
        <h1>Shopping cart is empty!</h1>
     </div>
     <!-- ELSE -->
-    <h1>My Cart</h1>
+    <h2>Shopping cart</h2>
 
 
     <ul class="cartContainer" th:unless="${cart.isEmpty()}">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="productsTotal">
-                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')} + ' USD'">100 USD</p>
+                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')} +' '+ ${prod.defaultCurrency}">100 USD</p>
             </div>
 
             <button type="button" class="remove">x</button>
