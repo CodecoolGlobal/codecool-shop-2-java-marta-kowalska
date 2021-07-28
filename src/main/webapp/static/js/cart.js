@@ -138,6 +138,7 @@ function setLocalCart() {
  * @summary Creates a fetch to the servlet to do things with the cart items.
  * @param {Number} productID The ID of the product
  * @param {String} action The action (add/remove/delete)
+ * @return {Promise} The ajax promise
  */
 async function manageRemoteCartItem(productID, action) {
 
