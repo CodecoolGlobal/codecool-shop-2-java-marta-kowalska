@@ -1,12 +1,5 @@
 var userLoggedIn = true;
 
-/////////////////////// INIT ///////////////////////
-jQuery(document).ready(function () {
-    getCart();
-
-    console.log(localCart);
-});
-
 /////////////////////// MISC ///////////////////////
 /**
  * @summary Gets a cookies by its name

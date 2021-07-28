@@ -1,6 +1,14 @@
 let localCart = null;
 const cartCookieKey = 'USER_CART';
 
+// INIT
+jQuery(document).ready(function () {
+
+    if (userLoggedIn)
+        getLocalCart();
+
+});
+
 /**
  * @summary Adds a new item to the cart if its not there, otherwise adds one more to it.
  * @param {Number} productID The ID of the product
@@ -17,7 +25,7 @@ function addToCart(productID, productName) {
     }
     else {
 
-        getCart();
+        getLocalCart();
 
         if (localCart[productID] === undefined) {
             localCart[productID] = {
@@ -28,7 +36,7 @@ function addToCart(productID, productName) {
         } else
             localCart[productID].quantity++;
 
-        setCart();
+        setLocalCart();
 
     }
 }
@@ -48,7 +56,7 @@ function removeFromCart(productID) {
     }
     else {
 
-        getCart();
+        getLocalCart();
 
         if (localCart[productID] === undefined)
             return;
@@ -59,7 +67,7 @@ function removeFromCart(productID) {
         else
             localCart[productID].quantity--;
 
-        setCart();
+        setLocalCart();
 
     }
 }
@@ -80,14 +88,14 @@ function deleteFromCart(productID) {
     }
     else {
 
-        getCart()
+        getLocalCart()
 
         if (localCart[productID] === undefined)
             return;
 
         delete localCart[productID];
 
-        setCart();
+        setLocalCart();
 
     }
 }
@@ -95,7 +103,7 @@ function deleteFromCart(productID) {
 /**
  * @summary Gets the local cart from the cookies if no user logged in.
  */
-function getCart() {
+function getLocalCart() {
 
     if (localCart !== null)
         return;
@@ -115,7 +123,7 @@ function getCart() {
 /**
  * @summary Writes the local cart to the cookies if no user logged in.
  */
-function setCart() {
+function setLocalCart() {
     if (localCart === null)
         return;
 
