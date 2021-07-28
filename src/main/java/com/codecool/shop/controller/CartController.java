@@ -18,10 +18,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.http.HttpRequest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
@@ -34,9 +37,16 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       var productId = Integer.valueOf(req.getParameter("productId"));
+        Integer productId = Integer.valueOf(req.getParameter("productId"));
+        String action = req.getParameter("action");
 
+        System.out.println(productId);
+        System.out.println(action);
 
+        // switch-case
+
+        resp.setStatus(200);
+        resp.getWriter().write("ok");
     }
 
     @Override
@@ -46,8 +56,6 @@ public class CartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("cart", productService.getCart());
-
-        productService.getShoppingCart().addToShoppingCart(productDataStore.find(1));
 
         context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
 
