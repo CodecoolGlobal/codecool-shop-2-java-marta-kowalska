@@ -1,10 +1,20 @@
 package com.codecool.shop.model.product;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Currency;
 
 public class Product extends BaseModel {
+    private final static String IMG_PATH = "/static/img/product_";
+    private final static String IMG_TYPE = ".jpg";
 
+    @Expose
+    @SerializedName("price")
     private float defaultPrice;
+    @Expose
+    @SerializedName("image")
+    private String imageName;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
@@ -15,6 +25,10 @@ public class Product extends BaseModel {
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+    }
+
+    public void setImageName() {
+        this.imageName = IMG_PATH + this.getId() + IMG_TYPE;
     }
 
     public float getDefaultPrice() {
