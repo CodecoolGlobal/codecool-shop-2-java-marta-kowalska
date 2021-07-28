@@ -10,8 +10,6 @@ import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.service.ProductService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 
@@ -42,13 +39,7 @@ public class FilterController extends HttpServlet {
         List<Product> foundProducts = new ArrayList<>();
 
         if(category!=null && supplier!=null){
-            String[] allCategories = category.split(",");
-            String[] allSuppliers = supplier.split(",");
-            for (String c : allCategories) {
-                for (String s : allSuppliers) {
-                    foundProducts.addAll(productService.getProductsForCategoryAndSupplier(Integer.parseInt(c), Integer.parseInt(s)));
-                }
-            }
+            searchForCategoryAndSupplier(productService, category, supplier, foundProducts);
         } else if(category != null){
             String[] allCategories = category.split(",");
             for (String c : allCategories) {
@@ -66,6 +57,16 @@ public class FilterController extends HttpServlet {
         NetworkUtil.setResponseHeader(resp);
         NetworkUtil.sendJSONResponse(resp, serializedProducts);
 
+    }
+
+    private void searchForCategoryAndSupplier(ProductService productService, String category, String supplier, List<Product> foundProducts) {
+        String[] allCategories = category.split(",");
+        String[] allSuppliers = supplier.split(",");
+        for (String c : allCategories) {
+            for (String s : allSuppliers) {
+                foundProducts.addAll(productService.getProductsForCategoryAndSupplier(Integer.parseInt(c), Integer.parseInt(s)));
+            }
+        }
     }
 
 }
