@@ -36,6 +36,16 @@ public class ProductService{
         this.productDao = productDao;
     }
 
+    public ProductService(ProductDao productDao,
+                          ProductCategoryDao productCategoryDao,
+                          SupplierDao productSupplierDataStore
+    ) {
+        this.productDao = productDao;
+        this.productCategoryDao = productCategoryDao;
+        this.productSupplierDao = productSupplierDataStore;
+
+    }
+
     public ProductCategory getProductCategory(int categoryId){
         return productCategoryDao.find(categoryId);
     }
