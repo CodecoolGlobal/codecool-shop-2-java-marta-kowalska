@@ -1,5 +1,5 @@
 var localCart = null;
-var userLoggedIn = false;
+var userLoggedIn = true;
 const cartCookieKey = 'USER_CART';
 
 /////////////////////// INIT ///////////////////////
@@ -17,20 +17,16 @@ function getCart() {
     if (localCart !== null)
         return;
 
+    if (userLoggedIn)
+        return;
+
     localCart = {};
 
-    if (userLoggedIn)
-    {
-        // todo: fetch
-    }
-    else
-    {
-        let cartCookieString = getCookie(cartCookieKey);
-        if (cartCookieString === false)
-            return;
+    let cartCookieString = getCookie(cartCookieKey);
+    if (cartCookieString === false)
+        return;
 
-        localCart = JSON.parse(decodeURIComponent(cartCookieString));
-    }
+    localCart = JSON.parse(decodeURIComponent(cartCookieString));
 }
 
 function setCart() {
@@ -38,30 +34,31 @@ function setCart() {
         return;
 
     if (userLoggedIn)
-    {
-        // todo: fetch
-    }
-    else
-    {
-        let cartJSONString = JSON.stringify(localCart);
-        setCookie(cartCookieKey, encodeURIComponent(cartJSONString));
-    }
+        return;
+
+    let cartJSONString = JSON.stringify(localCart);
+    setCookie(cartCookieKey, encodeURIComponent(cartJSONString));
 }
 
 function addToCart(productID, productName) {
 
     getCart();
 
-    if (localCart[productID] === undefined)
-    {
-        localCart[productID] =  {
-                                    productID: productID,
-                                    productName: productName,
-                                    quantity: 1
-                                };
+    if (userLoggedIn) {
+
+        let result = manageRemoteCartItem(productID, 'add');
+
     }
-    else
-        localCart[productID].quantity ++;
+    else {
+        if (localCart[productID] === undefined) {
+            localCart[productID] = {
+                productID: productID,
+                productName: productName,
+                quantity: 1
+            };
+        } else
+            localCart[productID].quantity++;
+    }
 
     setCart();
 }
@@ -70,16 +67,55 @@ function removeFromCart(productID) {
 
     getCart();
 
-    if (localCart[productID] === undefined)
-        return;
+    if (userLoggedIn) {
 
-    if (localCart[productID].quantity <= 1)
-        delete localCart[productID];
+        let result = manageRemoteCartItem(productID, 'remove');
 
-    else
-        localCart[productID].quantity --;
+    }
+    else {
+        if (localCart[productID] === undefined)
+            return;
+
+        if (localCart[productID].quantity <= 1)
+            delete localCart[productID];
+
+        else
+            localCart[productID].quantity--;
+    }
 
     setCart();
+}
+
+function deleteFromCart(productID) {
+    getCart()
+
+    if (userLoggedIn) {
+
+        let result = manageRemoteCartItem(productID, 'delete');
+
+    }
+    else {
+        if (localCart[productID] === undefined)
+            return;
+
+        delete localCart[productID];
+    }
+
+    setCart();
+}
+
+async function manageRemoteCartItem(productID, action) {
+
+    let response = await fetch('/post', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: {
+            productId: productID,
+            action: action
+        }
+    });
+
+    return response.json();
 }
 
 /////////////////////// MISC ///////////////////////
