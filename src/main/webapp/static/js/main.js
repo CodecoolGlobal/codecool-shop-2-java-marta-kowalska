@@ -9,116 +9,12 @@ jQuery(document).ready(function () {
     console.log(localCart);
 });
 
-
-/////////////////////// CART ///////////////////////
-function getCart() {
-    console.log(localCart);
-
-    if (localCart !== null)
-        return;
-
-    if (userLoggedIn)
-        return;
-
-    localCart = {};
-
-    let cartCookieString = getCookie(cartCookieKey);
-    if (cartCookieString === false)
-        return;
-
-    localCart = JSON.parse(decodeURIComponent(cartCookieString));
-}
-
-function setCart() {
-    if (localCart === null)
-        return;
-
-    if (userLoggedIn)
-        return;
-
-    let cartJSONString = JSON.stringify(localCart);
-    setCookie(cartCookieKey, encodeURIComponent(cartJSONString));
-}
-
-function addToCart(productID, productName) {
-
-    getCart();
-
-    if (userLoggedIn) {
-
-        let result = manageRemoteCartItem(productID, 'add');
-
-    }
-    else {
-        if (localCart[productID] === undefined) {
-            localCart[productID] = {
-                productID: productID,
-                productName: productName,
-                quantity: 1
-            };
-        } else
-            localCart[productID].quantity++;
-    }
-
-    setCart();
-}
-
-function removeFromCart(productID) {
-
-    getCart();
-
-    if (userLoggedIn) {
-
-        let result = manageRemoteCartItem(productID, 'remove');
-
-    }
-    else {
-        if (localCart[productID] === undefined)
-            return;
-
-        if (localCart[productID].quantity <= 1)
-            delete localCart[productID];
-
-        else
-            localCart[productID].quantity--;
-    }
-
-    setCart();
-}
-
-function deleteFromCart(productID) {
-    getCart()
-
-    if (userLoggedIn) {
-
-        let result = manageRemoteCartItem(productID, 'delete');
-
-    }
-    else {
-        if (localCart[productID] === undefined)
-            return;
-
-        delete localCart[productID];
-    }
-
-    setCart();
-}
-
-async function manageRemoteCartItem(productID, action) {
-
-    let response = await fetch('/post', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: {
-            productId: productID,
-            action: action
-        }
-    });
-
-    return response.json();
-}
-
 /////////////////////// MISC ///////////////////////
+/**
+ * @summary Gets a cookies by its name
+ * @param name The name of the cookie
+ * @returns {String} The value of the cookie, or False if its not there.
+ */
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -126,6 +22,12 @@ function getCookie(name) {
     return false;
 }
 
+/**
+ * @summary Sets/Creates a cookie
+ * @param {String} name The name of the cookie
+ * @param {String} value The value of the cookie
+ * @param {Number} hours How many hours we want to store it? (Leave empty if forever)
+ */
 function setCookie(name, value, hours) {
     let expires = "";
 
