@@ -28,6 +28,10 @@ public class ProductService{
 
     }
 
+    public ProductService(ShoppingCartDao shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
     public ProductCategory getProductCategory(int categoryId){
         return productCategoryDao.find(categoryId);
     }
