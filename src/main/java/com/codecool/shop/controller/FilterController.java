@@ -36,27 +36,40 @@ public class FilterController extends HttpServlet {
         String category = req.getParameter("category").equals("") ? null : req.getParameter("category");
         String supplier = req.getParameter("supplier").equals("") ? null : req.getParameter("supplier");
 
-        List<Product> foundProducts = new ArrayList<>();
-
-        if(category!=null && supplier!=null){
-            searchForCategoryAndSupplier(productService, category, supplier, foundProducts);
-        } else if(category != null){
-            String[] allCategories = category.split(",");
-            for (String c : allCategories) {
-                foundProducts.addAll(productService.getProductsForCategory(Integer.parseInt(c)));
-            }
-        } else if(supplier != null){
-            String[] allSuppliers = supplier.split(",");
-            for (String s : allSuppliers) {
-                foundProducts.addAll(productService.getProductsForSupplier(Integer.parseInt(s)));
-            }
-        }
+        List<Product> foundProducts = findRequestedProducts(productService, category, supplier);
 
         String serializedProducts = NetworkUtil.jsonifyData(foundProducts);
 
         NetworkUtil.setResponseHeader(resp);
         NetworkUtil.sendJSONResponse(resp, serializedProducts);
 
+    }
+
+    private List<Product> findRequestedProducts(ProductService productService, String category, String supplier) {
+        List<Product> foundProducts = new ArrayList<>();
+
+        if(category !=null && supplier !=null){
+            searchForCategoryAndSupplier(productService, category, supplier, foundProducts);
+        } else if(category != null){
+            searchForCategory(productService, category, foundProducts);
+        } else if(supplier != null){
+            searchForSupplier(productService, supplier, foundProducts);
+        }
+        return foundProducts;
+    }
+
+    private void searchForSupplier(ProductService productService, String supplier, List<Product> foundProducts) {
+        String[] allSuppliers = supplier.split(",");
+        for (String s : allSuppliers) {
+            foundProducts.addAll(productService.getProductsForSupplier(Integer.parseInt(s)));
+        }
+    }
+
+    private void searchForCategory(ProductService productService, String category, List<Product> foundProducts) {
+        String[] allCategories = category.split(",");
+        for (String c : allCategories) {
+            foundProducts.addAll(productService.getProductsForCategory(Integer.parseInt(c)));
+        }
     }
 
     private void searchForCategoryAndSupplier(ProductService productService, String category, String supplier, List<Product> foundProducts) {
