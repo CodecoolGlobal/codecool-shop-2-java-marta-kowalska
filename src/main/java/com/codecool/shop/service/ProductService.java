@@ -20,13 +20,17 @@ public class ProductService{
 
     public ProductService(ProductDao productDao,
                           ProductCategoryDao productCategoryDao,
-                          SupplierDao productSupplierDataStore,
-                          ShoppingCartDao shoppingCartDao) {
+                          SupplierDao productSupplierDataStore) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.productSupplierDao = productSupplierDataStore;
-        this.shoppingCart = shoppingCartDao;
 
+
+    }
+
+    public ProductService(ProductDao productDao, ShoppingCartDao shoppingCartDao){
+        this.shoppingCart = shoppingCartDao;
+        this.productDao = productDao;
     }
 
     public ProductCategory getProductCategory(int categoryId){
@@ -53,7 +57,7 @@ public class ProductService{
         return productCategoryDao.getAll();
     }
 
-    public HashMap<Product,Integer> getCart(){
+    public HashMap<Product,Integer> getAllCartItems(){
         return shoppingCart.getAll();
     }
 

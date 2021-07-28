@@ -1,88 +1,11 @@
-var localCart = null;
-var userLoggedIn = false;
-const cartCookieKey = 'USER_CART';
-
-/////////////////////// INIT ///////////////////////
-jQuery(document).ready(function () {
-    getCart();
-
-    console.log(localCart);
-});
-
-
-/////////////////////// CART ///////////////////////
-function getCart() {
-    console.log(localCart);
-
-    if (localCart !== null)
-        return;
-
-    localCart = {};
-
-    if (userLoggedIn)
-    {
-        // todo: fetch
-    }
-    else
-    {
-        let cartCookieString = getCookie(cartCookieKey);
-        if (cartCookieString === false)
-            return;
-
-        localCart = JSON.parse(decodeURIComponent(cartCookieString));
-    }
-}
-
-function setCart() {
-    if (localCart === null)
-        return;
-
-    if (userLoggedIn)
-    {
-        // todo: fetch
-    }
-    else
-    {
-        let cartJSONString = JSON.stringify(localCart);
-        setCookie(cartCookieKey, encodeURIComponent(cartJSONString));
-    }
-}
-
-function addToCart(productID, productName) {
-
-    getCart();
-
-    if (localCart[productID] === undefined)
-    {
-        localCart[productID] =  {
-                                    productID: productID,
-                                    productName: productName,
-                                    quantity: 1
-                                };
-    }
-    else
-        localCart[productID].quantity ++;
-
-    setCart();
-}
-
-function removeFromCart(productID) {
-
-    getCart();
-
-    if (localCart[productID] === undefined)
-        return;
-
-    if (localCart[productID].quantity <= 1)
-        delete localCart[productID];
-
-    else
-        localCart[productID].quantity --;
-
-    setCart();
-}
+var userLoggedIn = true;
 
 /////////////////////// MISC ///////////////////////
+/**
+ * @summary Gets a cookies by its name
+ * @param name The name of the cookie
+ * @returns {String|Boolean} The value of the cookie, or False if its not there.
+ */
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -90,7 +13,13 @@ function getCookie(name) {
     return false;
 }
 
-function setCookie(name, value, hours) {
+/**
+ * @summary Sets/Creates a cookie
+ * @param {String} name The name of the cookie
+ * @param {String} value The value of the cookie
+ * @param {Number} hours How many hours we want to store it? (Leave empty if forever)
+ */
+function setCookie(name, value, hours = undefined) {
     let expires = "";
 
     if (hours) {

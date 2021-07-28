@@ -5,7 +5,6 @@ import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.shoppingCart.ShoppingCart;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
 
@@ -33,7 +32,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     @Override
     public void remove(Product product) {
-        shoppingCart.removeFromShoppingCart(product);
+        shoppingCart.removeOneItemFromShoppingCart(product);
     }
 
     @Override
