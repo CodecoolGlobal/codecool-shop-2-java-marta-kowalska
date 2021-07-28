@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -39,7 +37,7 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("categories", productService.getAllCategory());
 
-        context.setVariable("suppliers", productService.getProductsForSupplier(1));
+        context.setVariable("suppliers", productService.getAllSuppliers());
 
         context.setVariable("products", productService.getProductsForCategory(1));
         // // Alternative setting of the template context

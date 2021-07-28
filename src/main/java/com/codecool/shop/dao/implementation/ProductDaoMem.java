@@ -30,6 +30,7 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public void add(Product product) {
         product.setId(data.size() + 1);
+        product.setImageName(); //TODO change solution
         data.add(product);
     }
 
@@ -56,5 +57,12 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    }
+
+    public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
+        return data.stream()
+            .filter(t -> t.getProductCategory().equals(productCategory))
+            .filter(t -> t.getSupplier().equals(supplier))
+            .collect(Collectors.toList());
     }
 }

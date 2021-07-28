@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/js/main.js" type="text/javascript"></script>
     <script src="/static/js/cart.js" type="text/javascript"></script>
+    <script src="/static/js/filter.js" defer></script>
+
 </head>
 
 <body>
@@ -25,17 +27,24 @@
     <div class="container-fluid" id="section-categories">
         <h1>All categories</h1>
         <div id="categories" class="boxfix rel categories">
-            <a th:each="category : ${categories}" class="category" href="#" th:text="${category.name}">Category Title</a>
+            <label th:each="category : ${categories}">
+                <input class="category" type="checkbox"
+                       name="category" th:value="${category.id}" th:text="${category.name}">
+            </label>
+
         </div>
         <h1>Products by supplier id:1</h1>
         <div id="suppliers" class="boxfix rel categories">
-            <a th:each="supplier : ${suppliers}" class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
+            <label th:each="supplier : ${suppliers}">
+                <input class="supplier" type="checkbox"
+                       name="supplier" th:value="${supplier.id}" th:text="${supplier.name}">
+            </label>
         </div>
     </div>
 
     <div class="container nogap" id="section-highlighted-products">
         <h1>Highlighted products</h1>
-        <div class="boxfix rel products">
+        <div class="boxfix rel products" id="product-container">
             <div th:each="prod,iterStat : ${products}" class="product box">
                 <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
                 <h3 class="name" th:text="${prod.name}">Product name</h3>
@@ -43,6 +52,15 @@
                 <label class="price" th:text="${prod.getPrice()}">100 USD</label>
                 <button type="button" class="add-to-cart" th:attr="onclick='addToCart(' + ${prod.id} + ', \'' + ${prod.name} + '\');'">Add to cart</button>
             </div>
+
+            <div class="product box" id="product-template">
+                <img src="IMAGE" />
+                <h3 class="name" >NAME</h3>
+                <p class="description" >DESCRIPTION</p>
+                <label class="price" >PRICE</label>
+                <button type="button" class="add-to-cart" onclick='addToCart("ID", "NAME")'>Add to cart</button>
+            </div>
+
         </div>
     </div>
 
