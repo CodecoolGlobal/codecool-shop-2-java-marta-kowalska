@@ -1,52 +1,77 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8" />
-  <meta name="author" content="Codecool" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-  <title>Codecool Shop</title>
+    <title>Codecool Shop | shopping cart</title>
 
-  <!-- Bootstrap components -->
-  <!-- Latest compiled and minified Jquery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-  <!--Latest compiled and minified Popper -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-          integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-          integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 
-  <!-- Latest compiled and minified CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- End of Bootstrap components -->
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
 
-  <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script src="/static/js/cart.js" type="text/javascript"></script>
 </head>
 
 <body>
 
-<div class="jumbotron text-center">
-  <h1>Shopping Cart</h1>
+<div class="container-fluid" id="header">
+    <h1>Codecool Shop</h1>
 </div>
 
-<div class="container">
-  <h1>Shopping</h1>
-  <div class="categories" th:each="item : ${cart.keySet()}">
-    <div class="card">
-      <strong th:text="${item.name}">Category Title</strong>
-      <strong th:text="${item.price}">Category Title</strong>
-      <strong th:text="${cart.get(item)}">Category Title</strong>
-      <strong th:text="${cart.get(item)} * ${item.defaultPrice}">Category Title</strong>
+<div class="container-fluid" id="section-categories">
+
+    <!-- IF CART IS EMPTY -->
+    <div th:if="${cart.isEmpty()}">
+       <h1>Shopping cart is empty!</h1>
     </div>
-  </div>
-  <div class="summary">
-    <h3 th:text="${summary}">Summary</h3>
-  </div>
+    <!-- ELSE -->
+    <h2>Shopping cart</h2>
+
+
+    <ul class="cartContainer" th:unless="${cart.isEmpty()}">
+        <li class="cartItem" th:each="prod : ${cart.keySet()}">
+            <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
+                 th:alt="${prod.name}"/>
+
+            <div class="itemInfo">
+                <p class="itemId" th:text="'#CcShopPROD-iD:' + ${prod.id}">id</p>
+                <h3 th:text="${prod.name}">Item Name</h3>
+
+                <div class="quantity">
+                    <button type="button" class="qty-minus">-</button>
+                    <input type="number" class="qty" th:placeholder="${cart.get(prod)}"/>
+                    <button type="button" class="qty-plus">+</button>
+
+                    <span th:text="' x ' +${prod.getPrice()}"> x $5.00</span>
+
+                </div>
+                <p class="stockStatus">In Stock</p>
+            </div>
+
+            <div class="productsTotal">
+                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')} +' '+ ${prod.defaultCurrency}">100 USD</p>
+            </div>
+
+            <button type="button" class="remove">x</button>
+        </li>
+    </ul>
+    <div class="summary" th:unless="${cart.isEmpty()}">
+        <div class="Total">
+            <p th:text="'Subtotal: ' + ${summary}  + ' USD'">Summary</p>
+            <p>Shipping: 250 USD</p>
+            <p>Estimated Taxes & Fees: 150 USD</p>
+            <p class="total" th:text="'TOTAL: ' + ${#numbers.formatDecimal((summary+250+150), 0, 'COMMA', 2, 'POINT')} + ' USD'">Summary</p>
+        </div>
+        <button type="button" class="checkoutBtn">Checkout</button>
+    </div>
 
 
 </div>
