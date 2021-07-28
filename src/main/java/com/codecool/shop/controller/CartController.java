@@ -29,12 +29,13 @@ public class CartController extends HttpServlet {
 
     ProductDao productDataStore = ProductDaoMem.getInstance();
 
-    ProductService productService = new ProductService(productDataStore ,shoppingCart);
+    ProductService productService = new ProductService(productDataStore, shoppingCart);
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       var productId = req.getParameter("productId");
+       var productId = Integer.valueOf(req.getParameter("productId"));
+
 
     }
 
