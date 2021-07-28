@@ -46,14 +46,16 @@ public class ShoppingCart {
 
     }
 
-    public void removeFromShoppingCart(Product product) {
+    public void removeOneItemFromShoppingCart(Product product) {
         if (shoppingCart.get(product) > 1) {
             shoppingCart.put(product, shoppingCart.get(product) - 1);
         } else {
             shoppingCart.remove(product);
         }
+    }
 
-
+    public void removeItemFromShoppingCart(Product product) {
+        shoppingCart.remove(product);
     }
 
     public HashMap<Product, Integer> getCart() {

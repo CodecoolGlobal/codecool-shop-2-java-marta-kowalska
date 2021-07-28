@@ -19,30 +19,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
+    ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
+
+    ProductDao productDataStore = ProductDaoMem.getInstance();
+
+    ProductService productService = new ProductService(productDataStore ,shoppingCart);
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       var productId = req.getParameter("productId");
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
-        ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
-
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore, shoppingCart);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-
         context.setVariable("cart", productService.getCart());
 
+        productService.getShoppingCart().addToShoppingCart(productDataStore.find(1));
+
         context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
-
-
 
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
