@@ -50,7 +50,7 @@ public class ProductService{
         return productCategoryDao.getAll();
     }
 
-    public HashMap<Product,Integer> getCart(){
+    public HashMap<Product,Integer> getAllCartItems(){
         return shoppingCart.getAll();
     }
 
