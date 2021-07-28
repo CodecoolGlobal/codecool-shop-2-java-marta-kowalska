@@ -1,5 +1,11 @@
 const filter = {
+    PRODUCT_TEMPLATE: "",
+
     init () {
+        let productTemplate = document.querySelector("#product-template")
+        this.PRODUCT_TEMPLATE = productTemplate.outerHTML;
+        productTemplate.parentElement.removeChild(productTemplate);
+
         this.setEventListenersForFilters();
     },
 
@@ -52,17 +58,26 @@ const filter = {
 
 
     showFilteredProducts(data) {
-        // create queryString
         let queryStr = filter.createQueryString(data)
-        // fetch product data
-        // build new product div with fetched data
-        filter.fetchData(`/filter/?${queryStr}`, console.log)
-        // filter.fetchData(`/filter/?${queryStr}`, filter.buildProductView)
+        filter.fetchData(`/filter/?${queryStr}`, filter.buildProductView)
     },
 
-    buildProductView(products){
+    buildProductView(data){
+        const productContainer = document.querySelector("#product-container")
+        productContainer.innerHTML = ""
+        data.forEach(product => {
+            let productBox = filter.PRODUCT_TEMPLATE
+                .replace("IMAGE", product.image)
+                .replace("NAME", product.name)
+                .replace("DESCRIPTION", product.description)
+                .replace("PRICE", product.price)
+                .replace("PRICE", product.id)
+                .replace("id=\"product-container\"", "");
+            productContainer.innerHTML += productBox
+        })
 
     }
+
 }
 
 filter.init();
