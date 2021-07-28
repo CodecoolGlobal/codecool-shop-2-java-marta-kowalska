@@ -24,11 +24,18 @@
     <div class="container-fluid" id="section-categories">
         <h1>All categories</h1>
         <div id="categories" class="boxfix rel categories">
-            <a th:each="category : ${categories}" class="category" href="#" th:text="${category.name}">Category Title</a>
+            <label th:each="category : ${categories}">
+                <input class="category" type="checkbox"
+                       name="category" th:value="${category.id}" th:text="${category.name}">
+            </label>
+
         </div>
         <h1>Products by supplier id:1</h1>
         <div id="suppliers" class="boxfix rel categories">
-            <a th:each="supplier : ${suppliers}" class="category" href="#" th:text="${supplier.name}">Supplier Title</a>
+            <label th:each="supplier : ${suppliers}">
+                <input class="supplier" type="checkbox"
+                       name="supplier" th:value="${supplier.id}" th:text="${supplier.name}">
+            </label>
         </div>
     </div>
 
