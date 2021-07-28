@@ -61,41 +61,11 @@ public class FilterController extends HttpServlet {
             }
         }
 
-        String serializedProducts = FilterUtil.jsonifyData(foundProducts);
+        String serializedProducts = NetworkUtil.jsonifyData(foundProducts);
 
-        FilterUtil.setResponseHeader(resp);
-        FilterUtil.sendJSONResponse(resp, serializedProducts);
-
-    }
-
-    public static class FilterUtil {
-
-        public static int getRequestedId(HttpServletRequest req){
-            // TODO make sure not int values are handled as well
-            String path = req.getPathInfo();
-            String[] parts = path.split("/");
-            return Integer.parseInt(parts[1]);
-        }
-
-        public static String jsonifyData(List<Product> productsByCategory) {
-            Gson gson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
-                .setPrettyPrinting()
-                .create();
-
-            return gson.toJson(productsByCategory);
-        }
-
-        public static void setResponseHeader(HttpServletResponse resp){
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
-        }
-
-        public static void sendJSONResponse(HttpServletResponse resp, String serializedProducts) throws IOException {
-            PrintWriter out = resp.getWriter();
-            out.write(serializedProducts);
-            out.flush();
-        }
+        NetworkUtil.setResponseHeader(resp);
+        NetworkUtil.sendJSONResponse(resp, serializedProducts);
 
     }
+
 }
