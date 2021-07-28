@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import com.google.gson.annotations.Expose;
 
 public class BaseModel {
+    @Expose
     protected int id;
     @Expose
     protected String name;
