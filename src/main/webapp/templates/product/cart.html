@@ -33,38 +33,42 @@
        <h1>Shopping cart is empty!</h1>
     </div>
     <!-- ELSE -->
+    <h1>My Cart</h1>
+
+
     <ul class="cartContainer" th:unless="${cart.isEmpty()}">
-        <h1>My Cart</h1>
         <li class="cartItem" th:each="prod : ${cart.keySet()}">
+            <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
+                 th:alt="${prod.name}"/>
 
             <div class="itemInfo">
                 <p class="itemId" th:text="'#CcShopPROD-iD:' + ${prod.id}">id</p>
                 <h3 th:text="${prod.name}">Item Name</h3>
 
-                <p><input type="number" class="qty" th:placeholder="${cart.get(prod)}"/><span
-                        th:text="' x ' +${prod.getPrice()}"> x $5.00</span></p>
+                <div class="quantity">
+                    <button type="button" class="qty-minus">-</button>
+                    <input type="number" class="qty" th:placeholder="${cart.get(prod)}"/>
+                    <button type="button" class="qty-plus">+</button>
 
+                    <span th:text="' x ' +${prod.getPrice()}"> x $5.00</span>
+
+                </div>
                 <p class="stockStatus">In Stock</p>
             </div>
 
             <div class="productsTotal">
-                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')}">100
-                    USD</p>
+                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')} + ' USD'">100 USD</p>
             </div>
-            <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
-                 th:alt="${prod.name}"/>
+
             <button type="button" class="remove">x</button>
         </li>
     </ul>
     <div class="summary" th:unless="${cart.isEmpty()}">
-        <div class="promoCode"><label for="promo">Have A Promo Code?</label>
-            <input type="text" id="promo" placholder="Enter Code"/>
-        </div>
         <div class="Total">
-            <p th:text="'SUBTOTAL: $' + ${summary}">Summary</p>
-            <p>SHIPPING: 250$</p>
-            <p>TAX: 150$</p>
-            <p th:text="'TOTAL: $' + ${#numbers.formatDecimal((summary+250+150), 0, 'COMMA', 2, 'POINT')}">Summary</p>
+            <p th:text="'Subtotal: ' + ${summary}  + ' USD'">Summary</p>
+            <p>Shipping: 250 USD</p>
+            <p>Estimated Taxes & Fees: 150 USD</p>
+            <p class="total" th:text="'TOTAL: ' + ${#numbers.formatDecimal((summary+250+150), 0, 'COMMA', 2, 'POINT')} + ' USD'">Summary</p>
         </div>
         <button type="button" class="checkoutBtn">Checkout</button>
     </div>
