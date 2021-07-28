@@ -1,6 +1,4 @@
-var localCart = null;
 var userLoggedIn = true;
-const cartCookieKey = 'USER_CART';
 
 /////////////////////// INIT ///////////////////////
 jQuery(document).ready(function () {
@@ -13,7 +11,7 @@ jQuery(document).ready(function () {
 /**
  * @summary Gets a cookies by its name
  * @param name The name of the cookie
- * @returns {String} The value of the cookie, or False if its not there.
+ * @returns {String|Boolean} The value of the cookie, or False if its not there.
  */
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -28,7 +26,7 @@ function getCookie(name) {
  * @param {String} value The value of the cookie
  * @param {Number} hours How many hours we want to store it? (Leave empty if forever)
  */
-function setCookie(name, value, hours) {
+function setCookie(name, value, hours = undefined) {
     let expires = "";
 
     if (hours) {

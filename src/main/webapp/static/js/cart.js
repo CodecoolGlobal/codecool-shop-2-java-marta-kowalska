@@ -1,11 +1,12 @@
+let localCart = null;
+const cartCookieKey = 'USER_CART';
+
 /**
  * @summary Adds a new item to the cart if its not there, otherwise adds one more to it.
  * @param {Number} productID The ID of the product
  * @param {String} productName The name of the product
  */
 function addToCart(productID, productName) {
-
-    getCart();
 
     if (userLoggedIn) {
 
@@ -15,6 +16,9 @@ function addToCart(productID, productName) {
 
     }
     else {
+
+        getCart();
+
         if (localCart[productID] === undefined) {
             localCart[productID] = {
                 productID: productID,
@@ -23,9 +27,10 @@ function addToCart(productID, productName) {
             };
         } else
             localCart[productID].quantity++;
-    }
 
-    setCart();
+        setCart();
+
+    }
 }
 
 /**
@@ -33,8 +38,6 @@ function addToCart(productID, productName) {
  * @param productID The ID of the product
  */
 function removeFromCart(productID) {
-
-    getCart();
 
     if (userLoggedIn) {
 
@@ -44,6 +47,9 @@ function removeFromCart(productID) {
 
     }
     else {
+
+        getCart();
+
         if (localCart[productID] === undefined)
             return;
 
@@ -52,9 +58,10 @@ function removeFromCart(productID) {
 
         else
             localCart[productID].quantity--;
-    }
 
-    setCart();
+        setCart();
+
+    }
 }
 
 
@@ -63,7 +70,6 @@ function removeFromCart(productID) {
  * @param productID The ID of the product
  */
 function deleteFromCart(productID) {
-    getCart()
 
     if (userLoggedIn) {
 
@@ -73,20 +79,23 @@ function deleteFromCart(productID) {
 
     }
     else {
+
+        getCart()
+
         if (localCart[productID] === undefined)
             return;
 
         delete localCart[productID];
-    }
 
-    setCart();
+        setCart();
+
+    }
 }
 
 /**
  * @summary Gets the local cart from the cookies if no user logged in.
  */
 function getCart() {
-    console.log(localCart);
 
     if (localCart !== null)
         return;
