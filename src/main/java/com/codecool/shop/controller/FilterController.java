@@ -29,8 +29,9 @@ public class FilterController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
+        ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
 
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore);
+        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore, shoppingCart);
 
         String category = req.getParameter("category").equals("") ? null : req.getParameter("category");
         String supplier = req.getParameter("supplier").equals("") ? null : req.getParameter("supplier");
