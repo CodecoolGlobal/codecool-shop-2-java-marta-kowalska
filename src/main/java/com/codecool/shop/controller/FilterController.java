@@ -11,9 +11,6 @@ import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.service.ProductService;
-import com.codecool.shop.config.TemplateEngineUtil;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +34,8 @@ public class FilterController extends HttpServlet {
 
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore,productSupplierDataStore, shoppingCart);
 
-        String category = req.getParameter("category");
-        String supplier = req.getParameter("supplier");
+        String category = req.getParameter("category").equals("") ? null : req.getParameter("category");
+        String supplier = req.getParameter("supplier").equals("") ? null : req.getParameter("supplier");
 
         List<Product> foundProducts = new ArrayList<>();
 
