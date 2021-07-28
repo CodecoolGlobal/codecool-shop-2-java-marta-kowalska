@@ -153,7 +153,7 @@ li:nth-of-type(even) {
     transform: scale(1.1);
 }
 
-.total {
+.total_price {
     background:  var(--green);
     color: white;
     border: 1px solid black;

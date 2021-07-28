@@ -23,9 +23,10 @@ function addToCart(productID, productName) {
         }
         let qty = itemContainer.querySelector(".qty");
         qty.value++;
-        let subtotal = itemContainer.querySelector(".productsTotal span");
-        let price = parseFloat(subtotal.dataset.product_price) + parseFloat(subtotal.innerText)
-        subtotal.innerHTML = (Math.round(price * 100)/100).toString();
+        let itemPrice = itemContainer.querySelector(".productsTotal span");
+        let price = parseFloat(itemPrice.innerText) + parseFloat(itemPrice.dataset.product_price)
+        changeSums(itemPrice.dataset.product_price, "increment");
+        itemPrice.innerHTML = (Math.round(price * 100)/100).toString();
 
     }
 
@@ -33,7 +34,7 @@ function addToCart(productID, productName) {
 
         manageRemoteCartItem(productID, 'add').then(function (result) {
             incrementCartSum(productID);
-            console.log(result);
+            // console.log(result);
         });
 
     }
@@ -71,18 +72,17 @@ function removeFromCart(productID) {
         if (qty.value==0){
             itemContainer.remove();
         }
-        let subtotal = itemContainer.querySelector(".productsTotal span");
-        let price = parseFloat(subtotal.innerText) - parseFloat(subtotal.dataset.product_price)
-
-        console.log(price)
-        subtotal.innerHTML = (Math.round(price * 100)/100).toString();
+        let itemPrice = itemContainer.querySelector(".productsTotal span");
+        let price = parseFloat(itemPrice.innerText) - parseFloat(itemPrice.dataset.product_price)
+        changeSums(itemPrice.dataset.product_price, "decrement");
+        itemPrice.innerHTML = (Math.round(price * 100)/100).toString();
     }
 
     if (userLoggedIn) {
 
         manageRemoteCartItem(productID, 'remove').then(function (result) {
             decrementItemInCart()
-            console.log(result);
+            // console.log(result);
         });
 
     }
@@ -105,6 +105,22 @@ function removeFromCart(productID) {
 }
 
 
+function changeSums(price, change) {
+    let subtotal = document.querySelector(".subtotal")
+    let total = document.querySelector(".total")
+    let newSubPrice=0;
+    let newTotalPrice =0;
+    if(change==="decrement") {
+        newSubPrice = parseFloat(subtotal.innerText) - parseFloat(price)
+        newTotalPrice = parseFloat(total.innerText) - parseFloat(price)
+    } else {
+        newSubPrice = parseFloat(subtotal.innerText) + parseFloat(price)
+        newTotalPrice = parseFloat(total.innerText) + parseFloat(price)
+    }
+    subtotal.innerHTML = (Math.round(newSubPrice * 100) / 100).toString();
+    total.innerHTML = (Math.round(newTotalPrice * 100) / 100).toString();
+}
+
 /**
  * @summary Deletes an item from the cart completely
  * @param productID The ID of the product
@@ -113,12 +129,11 @@ function deleteFromCart(productID) {
 
     function deleteItemInCart() {
         let itemContainer = document.querySelector(`.cartItem[data-product_id="${productID}"]`);
-        let subtotal = document.querySelector(".subtotal")
-        let total = document.querySelector(".total")
         if (itemContainer===null){
             return;
         }
-
+        let itemPrice = itemContainer.querySelector(".productsTotal span");
+        changeSums(itemPrice.innerText, "decrement");
         itemContainer.remove();
 
     }
@@ -127,7 +142,7 @@ function deleteFromCart(productID) {
 
         manageRemoteCartItem(productID, 'delete').then(function (result) {
             deleteItemInCart();
-            console.log(result);
+            // console.log(result);
         });
 
     }

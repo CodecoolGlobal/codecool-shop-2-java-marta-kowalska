@@ -58,8 +58,9 @@
 
             <div class="productsTotal">
                 <span th:attr="data-product_price=${prod.defaultPrice}"
-                   th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')}">
-                </span><span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
+                   th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')}">
+                </span>
+                <span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
             </div>
 
             <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
@@ -67,10 +68,18 @@
     </ul>
     <div class="summary" th:unless="${cart.isEmpty()}">
         <div class="summary_details">
-            <p class="subtotal" th:text="'Subtotal: ' + ${summary}  + ' USD'">Summary</p>
+            <p>
+                <span>Subtotal</span>
+                <span class="subtotal" th:text="${summary}"></span>
+                <span> USD</span>
+            </p>
             <p>Shipping: 250 USD</p>
             <p>Estimated Taxes & Fees: 150 USD</p>
-            <p class="total" th:text="'TOTAL: ' + ${#numbers.formatDecimal((summary+250+150), 0, 'COMMA', 2, 'POINT')} + ' USD'">Summary</p>
+            <p class="total_price">
+                <span>TOTAL</span>
+                <span class="total" th:text="${#numbers.formatDecimal(summary, 1,  2, 'DEFAULT')}+250+150"></span>
+                <span> USD</span>
+            </p>
         </div>
         <button type="button" class="checkoutBtn">Checkout</button>
     </div>
