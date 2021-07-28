@@ -20,10 +20,13 @@ public class ProductService{
 
     public ProductService(ProductDao productDao,
                           ProductCategoryDao productCategoryDao,
-                          SupplierDao productSupplierDataStore) {
+                          SupplierDao productSupplierDataStore,
+                          ShoppingCartDao shoppingCart
+                          ) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.productSupplierDao = productSupplierDataStore;
+        this.shoppingCart = shoppingCart;
 
 
     }
