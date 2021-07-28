@@ -7,47 +7,25 @@ const filter = {
 
         const categories = document.querySelectorAll("input[type=checkbox][name=category]");
         const suppliers =  document.querySelectorAll("input[type=checkbox][name=supplier]");
-        let chosenCategories = []
-        let chosenSuppliers = []
 
         let data = {
-            category: chosenCategories,
-            supplier: chosenSuppliers
+            category: [],
+            supplier: []
         }
 
         categories.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-                chosenCategories =
-                    Array.from(categories) // Convert checkboxes to an array to use filter and map.
-                        .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-                        .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
-                // get categories and suppliers
-                data.category = chosenCategories
-                data.supplier = chosenSuppliers
-
-                // create queryString
-                let s = filter.createQueryString(data)
-                console.log(s)
-                console.log(decodeURIComponent(s))
-
-                // fetch product data
-                // build new product div with fetched data
+                data.category = filter.getCheckedBoxesId(categories)
+                filter.showFilteredProducts(data)
 
             })
         })
 
         suppliers.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-                chosenSuppliers =
-                    Array.from(suppliers) // Convert checkboxes to an array to use filter and map.
-                        .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-                        .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
-                // get categories and suppliers
-                data.category = chosenCategories
-                data.supplier = chosenSuppliers
+                data.supplier = filter.getCheckedBoxesId(suppliers)
+                filter.showFilteredProducts(data)
 
-                // create queryString
-                console.log(filter.createQueryString(data))
             })
         })
 
@@ -60,9 +38,31 @@ const filter = {
             .join('&');
     },
 
+    fetchData(url, callback) {
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => callback(data))
+    },
+
+    getCheckedBoxesId (boxes) {
+        return Array.from(boxes) // Convert checkboxes to an array to use filter and map.
+            .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+            .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+    },
 
 
+    showFilteredProducts(data) {
+        // create queryString
+        let queryStr = filter.createQueryString(data)
+        // fetch product data
+        // build new product div with fetched data
+        filter.fetchData(`/filter/?${queryStr}`, console.log)
+        // filter.fetchData(`/filter/?${queryStr}`, filter.buildProductView)
+    },
 
+    buildProductView(products){
+
+    }
 }
 
 filter.init();
