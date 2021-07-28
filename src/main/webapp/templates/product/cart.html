@@ -30,10 +30,10 @@
 
     <!-- IF CART IS EMPTY -->
     <div th:if="${cart.isEmpty()}">
-       <h1>Shopping cart is empty!</h1>
+       <h2>Shopping cart is empty!</h2>
     </div>
     <!-- ELSE -->
-    <h2>Shopping cart</h2>
+    <h2 th:unless="${cart.isEmpty()}">Shopping cart</h2>
 
 
     <ul class="cartContainer" th:unless="${cart.isEmpty()}">
