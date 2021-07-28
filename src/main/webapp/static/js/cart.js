@@ -141,16 +141,12 @@ function setLocalCart() {
  */
 async function manageRemoteCartItem(productID, action) {
 
-    let body = {
-        productId: productID,
-        action: action
-    };
-
-    console.log(body);
-
     return jQuery.ajax({
         method: "POST",
         url: "/cart",
-        data: body
+        data: {
+            productId: productID,
+            action: action
+        }
     });
 }
