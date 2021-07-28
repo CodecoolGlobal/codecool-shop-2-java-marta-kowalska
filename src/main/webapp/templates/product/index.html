@@ -42,7 +42,7 @@
 
     <div class="container nogap" id="section-highlighted-products">
         <h1>Highlighted products</h1>
-        <div class="boxfix rel products">
+        <div class="boxfix rel products" id="product-container">
             <div th:each="prod,iterStat : ${products}" class="product box">
                 <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
                 <h3 class="name" th:text="${prod.name}">Product name</h3>
@@ -50,6 +50,15 @@
                 <label class="price" th:text="${prod.getPrice()}">100 USD</label>
                 <button type="button" class="add-to-cart" th:attr="onclick='addToCart(' + ${prod.id} + ', \'' + ${prod.name} + '\');'">Add to cart</button>
             </div>
+
+            <div class="product box" id="product-template">
+                <img src="IMAGE" />
+                <h3 class="name" >NAME</h3>
+                <p class="description" >DESCRIPTION</p>
+                <label class="price" >PRICE</label>
+                <button type="button" class="add-to-cart" onclick='addToCart("ID", "NAME")'>Add to cart</button>
+            </div>
+
         </div>
     </div>
 
