@@ -3,6 +3,9 @@ const cartCookieKey = 'USER_CART';
 
 // INIT
 jQuery(document).ready(function () {
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
 
     if (userLoggedIn)
         getLocalCart();
@@ -71,6 +74,7 @@ function removeFromCart(productID) {
         qty.value--;
         if (qty.value==0){
             itemContainer.remove();
+            checkIfCartIsEmpty()
         }
         let itemPrice = itemContainer.querySelector(".productsTotal span");
         let price = parseFloat(itemPrice.innerText) - parseFloat(itemPrice.dataset.product_price)
@@ -105,21 +109,6 @@ function removeFromCart(productID) {
 }
 
 
-function changeSums(price, change) {
-    let subtotal = document.querySelector(".subtotal")
-    let total = document.querySelector(".total")
-    let newSubPrice=0;
-    let newTotalPrice =0;
-    if(change==="decrement") {
-        newSubPrice = parseFloat(subtotal.innerText) - parseFloat(price)
-        newTotalPrice = parseFloat(total.innerText) - parseFloat(price)
-    } else {
-        newSubPrice = parseFloat(subtotal.innerText) + parseFloat(price)
-        newTotalPrice = parseFloat(total.innerText) + parseFloat(price)
-    }
-    subtotal.innerHTML = (Math.round(newSubPrice * 100) / 100).toString();
-    total.innerHTML = (Math.round(newTotalPrice * 100) / 100).toString();
-}
 
 /**
  * @summary Deletes an item from the cart completely
@@ -135,6 +124,7 @@ function deleteFromCart(productID) {
         let itemPrice = itemContainer.querySelector(".productsTotal span");
         changeSums(itemPrice.innerText, "decrement");
         itemContainer.remove();
+        checkIfCartIsEmpty()
 
     }
 
@@ -210,4 +200,29 @@ async function manageRemoteCartItem(productID, action) {
             action: action
         }
     });
+}
+
+function changeSums(price, change) {
+    let subtotal = document.querySelector(".subtotal")
+    let total = document.querySelector(".total")
+    let newSubPrice=0;
+    let newTotalPrice =0;
+    if(change==="decrement") {
+        newSubPrice = parseFloat(subtotal.innerText) - parseFloat(price)
+        newTotalPrice = parseFloat(total.innerText) - parseFloat(price)
+    } else {
+        newSubPrice = parseFloat(subtotal.innerText) + parseFloat(price)
+        newTotalPrice = parseFloat(total.innerText) + parseFloat(price)
+    }
+    subtotal.innerHTML = (Math.round(newSubPrice * 100) / 100).toString();
+    total.innerHTML = (Math.round(newTotalPrice * 100) / 100).toString();
+}
+
+
+function checkIfCartIsEmpty() {
+    let cartContainer = document.querySelector(`.cartContainer`);
+    if (cartContainer.children.length===0){
+        document.querySelector(".summary").remove();
+        document.querySelector("h2").innerText="Shopping cart is empty!";
+    }
 }

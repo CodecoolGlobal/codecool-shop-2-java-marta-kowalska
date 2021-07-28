@@ -29,8 +29,6 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer productId = Integer.valueOf(req.getParameter("productId"));
         String action = req.getParameter("action");
-        System.out.println(productId);
-        System.out.println(action);
         switch (action){
             case "add":
                 productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));

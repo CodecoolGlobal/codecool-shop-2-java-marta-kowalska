@@ -31,3 +31,11 @@ function setCookie(name, value, hours = undefined) {
 
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
+function incrementIconCounter(){
+    let cartCounter = document.querySelector("#cart-counter");
+    cartCounter.innerText = parseInt(cartCounter.innerText)+1;
+    cartCounter.classList.add("animation");
+    setTimeout(() =>{
+        cartCounter.classList.remove("animation");
+        }, 800);
+}
