@@ -16,9 +16,23 @@ jQuery(document).ready(function () {
  */
 function addToCart(productID, productName) {
 
+    function incrementCartSum(productID) {
+        let itemContainer = document.querySelector(`.cartItem[data-product_id="${productID}"]`);
+        if (itemContainer===null){
+            return;
+        }
+        let qty = itemContainer.querySelector(".qty");
+        qty.value++;
+        let subtotal = itemContainer.querySelector(".productsTotal span");
+        let price = parseFloat(subtotal.dataset.product_price) + parseFloat(subtotal.innerText)
+        subtotal.innerHTML = (Math.round(price * 100)/100).toString();
+
+    }
+
     if (userLoggedIn) {
 
         manageRemoteCartItem(productID, 'add').then(function (result) {
+            incrementCartSum(productID);
             console.log(result);
         });
 
@@ -47,9 +61,27 @@ function addToCart(productID, productName) {
  */
 function removeFromCart(productID) {
 
+    function decrementItemInCart() {
+        let itemContainer = document.querySelector(`.cartItem[data-product_id="${productID}"]`);
+        if (itemContainer===null){
+            return;
+        }
+        let qty = itemContainer.querySelector(".qty");
+        qty.value--;
+        if (qty.value==0){
+            itemContainer.remove();
+        }
+        let subtotal = itemContainer.querySelector(".productsTotal span");
+        let price = parseFloat(subtotal.innerText) - parseFloat(subtotal.dataset.product_price)
+
+        console.log(price)
+        subtotal.innerHTML = (Math.round(price * 100)/100).toString();
+    }
+
     if (userLoggedIn) {
 
         manageRemoteCartItem(productID, 'remove').then(function (result) {
+            decrementItemInCart()
             console.log(result);
         });
 
@@ -79,9 +111,22 @@ function removeFromCart(productID) {
  */
 function deleteFromCart(productID) {
 
+    function deleteItemInCart() {
+        let itemContainer = document.querySelector(`.cartItem[data-product_id="${productID}"]`);
+        let subtotal = document.querySelector(".subtotal")
+        let total = document.querySelector(".total")
+        if (itemContainer===null){
+            return;
+        }
+
+        itemContainer.remove();
+
+    }
+
     if (userLoggedIn) {
 
         manageRemoteCartItem(productID, 'delete').then(function (result) {
+            deleteItemInCart();
             console.log(result);
         });
 

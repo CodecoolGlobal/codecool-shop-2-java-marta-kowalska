@@ -11,8 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
@@ -39,7 +37,7 @@
 
 
     <ul class="cartContainer" th:unless="${cart.isEmpty()}">
-        <li class="cartItem" th:each="prod : ${cart.keySet()}">
+        <li class="cartItem" th:attr="data-product_id=${prod.getId()}" th:each="prod : ${cart.keySet()}">
             <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
                  th:alt="${prod.name}"/>
 
@@ -49,25 +47,27 @@
 
                 <div class="quantity">
                     <button type="button" class="qty-minus" th:attr="onclick='removeFromCart(' + ${prod.id} + ');'">-</button>
-                    <input type="number" class="qty" th:placeholder="${cart.get(prod)}"/>
+                    <input type="number" class="qty" th:value="${cart.get(prod)}"/>
                     <button type="button" class="qty-plus" th:attr="onclick='addToCart(' + ${prod.id} + ', \'' + ${prod.name} + '\');'">+</button>
 
-                    <span th:text="' x ' +${prod.getPrice()}"> x $5.00</span>
+                    <span> x </span><span id="itemTotal" th:text="${prod.defaultPrice}"> x $5.00</span>  <span class="currency" th:text="${prod.defaultCurrency}">$</span>
 
                 </div>
                 <p class="stockStatus">In Stock</p>
             </div>
 
             <div class="productsTotal">
-                <p th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')} +' '+ ${prod.defaultCurrency}">100 USD</p>
+                <span th:attr="data-product_price=${prod.defaultPrice}"
+                   th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 'COMMA', 2, 'POINT')}">
+                </span><span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
             </div>
 
             <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
         </li>
     </ul>
     <div class="summary" th:unless="${cart.isEmpty()}">
-        <div class="Total">
-            <p th:text="'Subtotal: ' + ${summary}  + ' USD'">Summary</p>
+        <div class="summary_details">
+            <p class="subtotal" th:text="'Subtotal: ' + ${summary}  + ' USD'">Summary</p>
             <p>Shipping: 250 USD</p>
             <p>Estimated Taxes & Fees: 150 USD</p>
             <p class="total" th:text="'TOTAL: ' + ${#numbers.formatDecimal((summary+250+150), 0, 'COMMA', 2, 'POINT')} + ' USD'">Summary</p>
