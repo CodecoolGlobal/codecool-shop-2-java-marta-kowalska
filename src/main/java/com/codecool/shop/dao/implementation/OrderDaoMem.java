@@ -43,4 +43,9 @@ public class OrderDaoMem implements OrderDao {
     public List<Order> getAll() {
         return data;
     }
+
+    @Override
+    public int getOrderId(Order order) {
+        return order.getId();
+    }
 }

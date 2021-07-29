@@ -1,6 +1,7 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.dao.*;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
@@ -87,5 +88,9 @@ public class ProductService{
 
     public List<Supplier> getAllSuppliers() {
         return productSupplierDao.getAll();
+    }
+
+    public int getOrderId(Order order) {
+        return orderDao.getOrderId(order);
     }
 }
