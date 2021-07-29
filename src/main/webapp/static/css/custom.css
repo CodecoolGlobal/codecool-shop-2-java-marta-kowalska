@@ -52,7 +52,10 @@
 }
 
 .has-sidebar > .sidebar > div {
-    margin-top: var(--gap-large);
+    margin-bottom: var(--gap-large);
+}
+.has-sidebar > .sidebar > div:last-child {
+    margin-bottom: 0;
 }
 
 .bg-effect {
@@ -115,16 +118,17 @@
 
 /*<--------------------------------product boxes-------------------------->*/
 .products {
-    padding: var(--gap-large) 0;
-    margin-right: calc(0px - var(--gap-normal));
+    padding-bottom: var(--gap-large);
+    position: relative;
+    columns: var(--product-columns) 250px;
+    column-gap: 1rem;
 }
 
 .product.box {
-    width: calc(( 100% - var(--gap-normal) * var(--product-columns) ) / var(--product-columns));
     margin-right: var(--gap-normal);
-    margin-bottom: var(--gap-normal);
+    margin-top: var(--gap-normal);
     display: inline-block;
-    vertical-align: top;
+    width: 100%;
     background: var(--c-fade);
     border-radius: var(--radius-normal);
     overflow: hidden;
@@ -213,7 +217,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    fill: #fff;
+    fill: var(--c-fore2);
     width: 20px;
     transform: translate3d(-50%, -50%, 0) scale(1.2,1.2);
     margin-left: -1px;
@@ -224,16 +228,12 @@
     position: absolute;
     top:0;
     right: 0;
-    background: #ff2646;
-    color: #fff;
+    background: var(--c-hover);
+    color: var(--c-hover-fg);
     padding: 2px 5px;
-    border-radius: 100px;
+    border-radius: var(--radius-small);
     font-size: 0.6rem;
     font-weight: bold;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(6, 24, 44, 0.4) 0 0 0 2px,
-    rgba(6, 24, 44, 0.65) 0 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0 1px 0 inset;
     z-index: 10;
     text-align: center;
     opacity: 1;
@@ -248,14 +248,15 @@
     right: var(--gap-normal);
     cursor: pointer;
     display: block;
-    background: var(--c-accent);
     width: var(--cart-container-width);
     height: var(--cart-container-height);
-    border-radius: calc(var(--cart-container-width) / 2);
-    box-shadow: rgba(6, 24, 44, 0.4) 0 0 0 2px,
-    rgba(6, 24, 44, 0.65) 0 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0 1px 0 inset;
-    transition: 0.3s;
+}
+.cart-container:hover {
+    background: var(--c-accent);
+    border-radius: var(--radius-small);
+}
+.cart-container:active {
+    background: var(--c-hover);
 }
 
 .animation{
@@ -316,10 +317,12 @@
     text-align: center;
 }
 
-#header > h1 {
+#header > a.site-title {
     font-size: var(--header-text-height);
     font-weight: normal;
+    line-height: var(--header-text-height);
     letter-spacing: 0.1em;
+    color: var(--c-fore2);
 }
 
 #main-wrapper {
@@ -329,6 +332,7 @@
     right: 0;
     bottom: 0;
     top: var(--header-height);
+    padding-top: var(--gap-large);
 }
 
 #main-wrapper > .sidebar,
