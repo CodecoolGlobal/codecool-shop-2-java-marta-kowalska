@@ -61,4 +61,8 @@ public class ShoppingCart {
     public HashMap<Product, Integer> getCart() {
         return this.shoppingCart;
     }
+
+    public void clearCart() {
+        shoppingCart = new HashMap<>();
+    }
 }

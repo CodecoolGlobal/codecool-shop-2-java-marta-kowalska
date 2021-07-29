@@ -12,6 +12,7 @@ public interface ShoppingCartDao {
         HashMap<Product, Integer> getAll();
         ShoppingCart getCart();
 
+        void deleteCart();
 }
 
 
