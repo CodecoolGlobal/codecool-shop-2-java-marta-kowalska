@@ -38,7 +38,7 @@
         </a>
     </div>
     <div class="container-fluid" id="section-categories">
-        <h1>All categories</h1>
+        <h1>Products by categories</h1>
         <div id="categories" class="boxfix rel categories">
             <label th:each="category : ${categories}">
                 <input class="category" type="checkbox"
@@ -46,7 +46,7 @@
             </label>
 
         </div>
-        <h1>Products by supplier id:1</h1>
+        <h1>Products by suppliers</h1>
         <div id="suppliers" class="boxfix rel categories">
             <label th:each="supplier : ${suppliers}">
                 <input class="supplier" type="checkbox"
@@ -56,10 +56,10 @@
     </div>
 
     <div class="container nogap" id="section-highlighted-products">
-        <h1>Highlighted products</h1>
+
         <div class="boxfix rel products" id="product-container">
             <div th:each="prod,iterStat : ${products}" class="product box">
-                <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
+                <img th:src="${prod.getImage()}" th:alt="${prod.name}" />
                 <h3 class="name" th:text="${prod.name}">Product name</h3>
                 <p class="description" th:text="${prod.description}">Product description... </p>
                 <label class="price" th:text="${prod.getPrice()}">100 USD</label>
@@ -70,8 +70,8 @@
                 <img src="IMAGE" />
                 <h3 class="name" >NAME</h3>
                 <p class="description" >DESCRIPTION</p>
-                <label class="price" >PRICE</label>
-                <button type="button" class="add-to-cart" onclick='addToCart("ID", "NAME")'>Add to cart</button>
+                <label class="price" >PRICE USD</label>
+                <button type="button" class="add-to-cart" onclick='addToCart("ID", "NAME");incrementIconCounter();'>Add to cart</button>
             </div>
 
         </div>

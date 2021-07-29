@@ -45,43 +45,35 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(m1ck3y);
 
         //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
+        ProductCategory hardware = new ProductCategory("Hardware", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(hardware);
 
-        ProductCategory laptop = new ProductCategory("Laptop", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(laptop);
+        ProductCategory software = new ProductCategory("Software", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(software);
 
-        ProductCategory bus = new ProductCategory("Bus", "Vehicle", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(bus);
+        ProductCategory merchandise = new ProductCategory("Merchandise", "Vehicle", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(merchandise);
 
-        ProductCategory cat3 = new ProductCategory("cat3", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(cat3);
+        ProductCategory stolenData = new ProductCategory("Stolen data", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(stolenData);
 
-        ProductCategory cat4 = new ProductCategory("cat4", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(cat4);
+        ProductCategory service = new ProductCategory("Services", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(service);
 
-        ProductCategory cat5 = new ProductCategory("cat5", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(cat5);
 
         //setting up products and printing it
 
-        productDataStore.add(new Product("Amazon Fire", 49.1f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, anonymous));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 491, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, d3f4ult));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", laptop, theCalculator));
+        productDataStore.add(new Product("Hacker Laptop","hacker_laptop.jpg", 949.1f, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", hardware, anonymous));
+        productDataStore.add(new Product("My first hacking laptop", "kid_laptop.png",491, "USD", "Keep your baby's little hands (and mind) busy as can be with this interactive toy laptop that introduces password cracking, stealing data and more!", hardware, d3f4ult));
+        productDataStore.add(new Product("Cracked curriculum", "curriculum.png", 89, "USD", "Finish Codecool in one day! All tasks with solutions", software, theCalculator));
+        productDataStore.add(new Product("Cracking a password", "crack_password.jpg", 8.5f, "USD", "Cracking any password", service, theCalculator));
+        productDataStore.add(new Product("Attend attendance", "attendance.jpg", 2f, "USD", "Attending attendance instead of you: being on time and great answer for attendance question included", service, trinity));
+        productDataStore.add(new Product("Passing a PA", "PA.jpg", 20f, "USD", "We will take your PA for you, all green scores guaranteed!", service, mrRobot));
+        productDataStore.add(new Product("Anonymous mask", "mask.jpg", 15.5f, "USD", "No one will know that you are a hacker if you wear this", merchandise, anonymous));
+        productDataStore.add(new Product("Credit card credentials", "card.jpg", 15000000f, "USD", "Best credit card data with a lot of money", stolenData, m1ck3y));
+        productDataStore.add(new Product("Hoodie", "hoodie.jpg", 150, "USD", "A must have for every real hacker", merchandise, neo));
+        productDataStore.add(new Product("105 bus", "105bus.jpg", 1, "USD", "Bus to get you everywhere you want with your hacker friends. Bus connecting people", hardware, bkk));
 
-        shoppingCart.add(productDataStore.find(1));
-        shoppingCart.add(productDataStore.find(3));
-        shoppingCart.add(productDataStore.find(3));
-        shoppingCart.add(productDataStore.find(3));
-        shoppingCart.add(productDataStore.find(3));
-        shoppingCart.add(productDataStore.find(2));
-        shoppingCart.add(productDataStore.find(2));
-        shoppingCart.add(productDataStore.find(2));
-        shoppingCart.add(productDataStore.find(2));
-        shoppingCart.add(productDataStore.find(2));
-        shoppingCart.add(productDataStore.find(1));
-        shoppingCart.add(productDataStore.find(1));
-        shoppingCart.add(productDataStore.find(1));
 
     }
 }

@@ -93,4 +93,8 @@ public class ProductService{
     public int getOrderId(Order order) {
         return orderDao.getOrderId(order);
     }
+
+    public List<Product> getAllProducts(){
+        return productDao.getAll();
+    }
 }

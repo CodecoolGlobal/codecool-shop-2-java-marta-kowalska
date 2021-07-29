@@ -65,16 +65,24 @@ const filter = {
     buildProductView(data){
         const productContainer = document.querySelector("#product-container")
         productContainer.innerHTML = ""
-        data.forEach(product => {
-            let productBox = filter.PRODUCT_TEMPLATE
-                .replace("IMAGE", product.image)
-                .replace("NAME", product.name)
-                .replace("DESCRIPTION", product.description)
-                .replace("PRICE", product.price)
-                .replace("PRICE", product.id)
-                .replace("id=\"product-container\"", "");
-            productContainer.innerHTML += productBox
-        })
+        if(data.length > 0){
+            data.forEach(product => {
+                let productBox = filter.PRODUCT_TEMPLATE
+                    .replace("IMAGE", product.image)
+                    .replace("NAME", product.name)
+                    .replace("DESCRIPTION", product.description)
+                    .replace("PRICE", product.price)
+                    .replace("ID", product.id)
+                    .replace("id=\"product-container\"", "");
+                productContainer.innerHTML += productBox
+            })
+        } else {
+            productContainer.insertAdjacentHTML('beforeend',
+                "<div>" +
+                "<img class='no-product' src='/static/img/no_product.png' alt='No product' />" +
+                "</div>");
+        }
+
 
     }
 

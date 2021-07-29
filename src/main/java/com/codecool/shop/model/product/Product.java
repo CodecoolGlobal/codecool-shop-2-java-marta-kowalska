@@ -6,29 +6,34 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Currency;
 
 public class Product extends BaseModel {
-    private final static String IMG_PATH = "/static/img/product_";
-    private final static String IMG_TYPE = ".jpg";
+    private final static String IMG_PATH = "/static/img/";
 
     @Expose
     @SerializedName("price")
     private float defaultPrice;
     @Expose
     @SerializedName("image")
-    private String imageName;
+    private final String image;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(String name, String image, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+        this.image = createImageName(image);
+
     }
 
-    public void setImageName() {
-        this.imageName = IMG_PATH + this.getId() + IMG_TYPE;
+    public String getImage() {
+        return image;
+    }
+
+    private String createImageName(String imgName) {
+        return IMG_PATH + imgName;
     }
 
     public float getDefaultPrice() {

@@ -53,6 +53,8 @@ public class FilterController extends HttpServlet {
             searchForCategory(productService, category, foundProducts);
         } else if(supplier != null){
             searchForSupplier(productService, supplier, foundProducts);
+        } else if (category == null && supplier == null){
+            foundProducts = productService.getAllProducts();
         }
         return foundProducts;
     }
