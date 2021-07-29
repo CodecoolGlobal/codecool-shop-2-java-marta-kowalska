@@ -1,0 +1,107 @@
+/*<--------------------------------variables-------------------------->*/
+:root {
+    /* container szélessége */
+    --container-width: min(100%, 1140px);
+
+    /* container távolsága az ablak széleitől */
+    --container-side-space: calc((100% - var(--container-width)) / 2);
+
+    /* oldalsáv szélessége */
+    --sidebar-1-width: calc(max(10%, 100px) + var(--gap-large) * 2);
+    --sidebar-2-width: calc(max(20%, 200px) + var(--gap-large) * 2);
+
+    /* header magassága */
+    --header-text-height: 40px;
+    --header-padding-top: var(--gap-large);
+    --header-padding-bottom: var(--gap-normal);
+    --header-height: calc(var(--header-padding-top) + var(--header-padding-bottom) + var(--header-text-height));
+
+    /* containerek horizontális gap-jei */
+    --gap-atomic: 5px;
+    --gap-tiny: 10px;
+    --gap-small: 20px;
+    --gap-normal: 30px;
+    --gap-large: 50px;
+
+
+
+    /* boxok oszlopszáma */
+    --product-columns: 3;
+
+    /* rádiuszok */
+    --radius-normal: 10px;
+    --radius-small: 5px;
+
+    /* színek */
+    --c-fade: rgba(0,0,0,.1);
+
+    --c-back: #ededed;
+    --c-fore: #333;
+    --c-back2: #486b99;
+    --c-fore2: white;
+    --c-accent: #3a4659;
+    --c-accent-fg: #eee;
+    --c-hover: #42d775;
+    --c-hover-fg: #fff;
+    --c-accent2: #ae4646;
+    --c-accent2-fg: white;
+}
+
+@media screen and (max-width: 1140px) {
+    :root {
+        --product-columns: 2;
+    }
+}
+@media screen and (max-width: 768px) {
+    :root {
+        --product-columns: 1;
+    }
+}
+
+
+/*<--------------------------------global rules-------------------------->*/
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;
+    background: var(--c-back);
+    color: var(--c-fore);
+    font-family: sans-serif;
+}
+
+body *:not(.noanim) {
+    transition-property: all;
+    transition-timing-function: ease-in;
+    transition-duration: 0.1s;
+    -o-transition-delay: 0s;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+.rel {
+    position: relative;
+}
+.abs {
+    position: absolute;
+}
+.fix {
+    position: fixed;
+}
+
+.boxfix {
+    font-size: 0;
+}
+.boxfix > * {
+    font-size: 1rem;
+}

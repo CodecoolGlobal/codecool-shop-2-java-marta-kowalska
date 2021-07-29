@@ -1,82 +1,7 @@
-:root {
-    /* container szélessége */
-    --container-width: min(100%, 1140px);
-
-    /* container távolsága az ablak széleitől */
-    --container-side-space: calc( ( 100% - var(--container-width) ) / 2 );
-
-    /* containerek horizontális gap-jei */
-    --container-side-gap: 30px;
-
-
-
-    /* boxok közötti távolság */
-    --box-gap: 30px;
-    --box-columns: 3;
-    --tax-columns: 5;
-
-    /* rádiuszok */
-    --radius-normal: 10px;
-    --radius-small: 5px;
-
-    /* színek */
-    --c-fade: rgba(0,0,0,.1);
-
-    --c-background: #eee;
-    --c-foreground: #333;
-
-    --c-green: #50aa50;
-    --c-green-fg: white;
-
-    --c-blue: #6a98ff;
-    --c-blue-fg: white;
-}
-
-@media screen and (max-width: 1140px) {
-    :root {
-        --box-columns: 2;
-        --tax-columns: 3;
-    }
-}
-@media screen and (max-width: 768px) {
-    :root {
-        --box-columns: 1;
-        --tax-columns: 2;
-    }
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-}
-
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 18px;
-    background: var(--c-background);
-    color: var(--c-foreground);
-    font-family: sans-serif;
-}
-
-.rel {
+.container,
+.container-fluid,
+.container-full {
     position: relative;
-}
-.abs {
-    position: absolute;
-}
-.fix {
-    position: fixed;
-}
-
-.boxfix {
-    font-size: 0;
-}
-.boxfix > * {
-    font-size: 1rem;
 }
 
 .container {
@@ -85,9 +10,10 @@ html {
     margin-right: auto; !important;
     width: var(--container-width);
 }
-.container:not(.nogap) {
-    padding-left: var(--container-side-gap);
-    padding-right: var(--container-side-gap);
+.container:not(.nogap),
+.container-full:not(.nogap) {
+    padding-left: var(--gap-normal);
+    padding-right: var(--gap-normal);
 }
 
 .container-fluid {
@@ -96,33 +22,101 @@ html {
     padding-right: var(--container-side-space) !important;
 }
 .container-fluid:not(.nogap) {
-    padding-left: calc( var(--container-side-space) + var(--container-side-gap) ) !important;
-    padding-right: calc( var(--container-side-space) + var(--container-side-gap) ) !important;
+    padding-left: calc( var(--container-side-space) + var(--gap-normal) ) !important;
+    padding-right: calc( var(--container-side-space) + var(--gap-normal) ) !important;
 }
 
-#header {
-    padding-top: 60px;
-    padding-bottom: 30px;
-    background: var(--c-blue);
-    color: var(--c-blue-fg);
-    margin-bottom: 30px;
+.has-sidebar {
+    font-size: 0;
 }
 
-#footer {
-    text-align: center;
-    color: var(--c-foreground);
-    opacity: 0.5;
+.has-sidebar > * {
+    font-size: 1rem;
+    display: inline-block;
+    vertical-align: top;
 }
 
+.has-sidebar > .sidebar {
+    width: var(--sidebar-2-width);
+    padding: 0 var(--gap-large);
+}
+.has-sidebar > .sidebar:first-child {
+    width: var(--sidebar-1-width);
+}
+.has-sidebar > .content {
+    width: calc(100% - var(--sidebar-1-width));
+}
+.has-sidebar.two > .content {
+    width: calc(100% - var(--sidebar-1-width) - var(--sidebar-2-width));
+}
+
+.has-sidebar > .sidebar > div {
+    margin-top: var(--gap-large);
+}
+
+.bg-effect {
+    position: relative;
+}
+.bg-effect:before {
+    content: ' ';
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 0;
+    bottom: 0;
+    transition: all linear 0.1s;
+}
+.bg-effect > * {
+    position: relative;
+    z-index: 2;
+}
+
+.checkbox-state input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-state label[for] {
+    display: block;
+    width: 100%;
+    padding: var(--gap-tiny) var(--gap-small);
+    cursor: pointer;
+}
+
+.checkbox-state.bg-effect,
+.checkbox-state.bg-effect:before {
+    transition-duration: 0.2s;
+}
+
+.checkbox-state.bg-effect:hover:not(.checked) {
+    color: var(--c-hover-fg);
+}
+
+.checkbox-state.bg-effect:before {
+    background-color: var(--c-hover);
+}
+.checkbox-state.bg-effect:hover:not(.checked)::before {
+    width: 100%;
+}
+.checkbox-state.checked.bg-effect {
+    background-color: var(--c-accent);
+    color: var(--c-accent-fg);
+}
+.checkbox-state.checked.bg-effect:before {
+    left: 100%;
+}
+
+
+/*<--------------------------------product boxes-------------------------->*/
 .products {
-    margin: 20px 0;
-    padding-left: var(--box-gap);
+    padding: var(--gap-large) 0;
+    margin-right: calc(0px - var(--gap-normal));
 }
 
 .product.box {
-    width: calc(( 100% - var(--box-gap) * var(--box-columns) ) / var(--box-columns));
-    margin-right: var(--box-gap);
-    margin-bottom: var(--box-gap);
+    width: calc(( 100% - var(--gap-normal) * var(--product-columns) ) / var(--product-columns));
+    margin-right: var(--gap-normal);
+    margin-bottom: var(--gap-normal);
     display: inline-block;
     vertical-align: top;
     background: var(--c-fade);
@@ -133,9 +127,7 @@ html {
     transition: all ease-in 0.2s;
 }
 .product.box:hover {
-    -webkit-box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 30%);
-    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 30%);
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
 }
 .product.box > * {
     font-size: 1rem;
@@ -151,76 +143,67 @@ html {
 }
 
 .product .name {
-    padding: 10px;
+    padding: var(--gap-tiny);
     background: var(--c-fade);
 }
 
 .product .description {
-    padding: 10px;
+    padding: var(--gap-tiny);
 }
 
 .product button.add-to-cart {
     display: block;
     width: fit-content;
-    margin: 10px auto 20px;
-    padding: 10px 30px;
+    margin: var(--gap-tiny) auto var(--gap-small);
+    padding: var(--gap-tiny) var(--gap-normal);
     font-weight: 600;
-    background: var(--c-green);
-    color: var(--c-green-fg);
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
     transition: all ease-in 0.1s;
     border: 0;
     border-radius: var(--radius-small);
+    cursor: pointer;
 }
 
 .product button.add-to-cart:hover {
     opacity: 0.9;
     transform: scale(1.1);
+    background: var(--c-hover);
+    color: var(--c-hover-fg);
 }
 
 .product .price {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: var(--gap-tiny);
+    top: var(--gap-tiny);
     display: inline-block;
-    padding: 5px 10px;
-    background: var(--c-green);
-    color: var(--c-green-fg);
+    padding: var(--gap-atomic) var(--gap-tiny);
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
     font-weight: 600;
     border-radius: var(--radius-small);
 }
 
-#section-categories > #categories {
-    margin-bottom: 30px;
+
+/*<--------------------------------filters-------------------------->*/
+.sidebar > .filter-group > h3 {
+    padding-bottom: var(--gap-atomic);
+    border-bottom: 1px solid var(--c-fade);
 }
 
-.categories > .category {
-    display: inline-block;
-    vertical-align: top;
-    width: calc( ( 100% - var(--box-gap) * var(--tax-columns) ) / var(--tax-columns));
-    height: calc(1em + 20px);
-    overflow: hidden;
-    border: 10px solid #bbb;
-    text-align: center;
-    margin: calc( var(--box-gap) / 2 ) 0;
-    margin-right: var(--box-gap);
-    background: #bbb;
-    color: black;
+.sidebar > .filter-group > div > div.checkbox-state {
+    margin-top: var(--gap-tiny);
     border-radius: var(--radius-small);
-    transition: all ease-in 0.1s;
+    overflow: hidden;
+}
+.sidebar > .filter-group > div > div.checkbox-state:not(.checked) {
+    background-color: var(--c-fade);
 }
 
-.categories > .category:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-}
 
-#section-highlighted-products > h1 {
-    margin-left: var(--container-side-gap);
-    margin-top: 30px;
-}
+
 
 /*<--------------------------------cart-------------------------->*/
-
 .cart-icon {
     position: absolute;
     left: 50%;
@@ -238,13 +221,13 @@ html {
     right: 0;
     background: #ff2646;
     color: #fff;
-    padding: 5px 10px;
+    padding: var(--gap-atomic) var(--gap-tiny);
     border-radius: 100px;
     font-size: 14px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-                rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-                rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    box-shadow: rgba(6, 24, 44, 0.4) 0 0 0 2px,
+                rgba(6, 24, 44, 0.65) 0 4px 6px -1px,
+                rgba(255, 255, 255, 0.08) 0 1px 0 inset;
     z-index: 10;
     text-align: center;
     opacity: 1;
@@ -252,19 +235,21 @@ html {
 }
 
 .cart-container {
+    --cart-container-width: 70px;
+    --cart-container-height: 70px;
+
     position: absolute;
-    top: 5vh;
-    left: 80%;
+    top: calc(50% - var(--cart-container-height) / 2);
+    right: var(--gap-normal);
     cursor: pointer;
-    display: inline-block;
-    vertical-align: top;
-    background: #0099FF;
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-                rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-                rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    display: block;
+    background: var(--c-accent);
+    width: var(--cart-container-width);
+    height: var(--cart-container-height);
+    border-radius: calc(var(--cart-container-width) / 2);
+    box-shadow: rgba(6, 24, 44, 0.4) 0 0 0 2px,
+                rgba(6, 24, 44, 0.65) 0 4px 6px -1px,
+                rgba(255, 255, 255, 0.08) 0 1px 0 inset;
     transition: 0.3s;
 }
 
@@ -272,27 +257,72 @@ html {
     animation: porog 0.65s linear both;
 }
 
-/*<--------------------------------cart-------------------------->*/
-/*<--------------------------------animation-------------------------->*/
+.method>img{
+    width: 240px;
+}
 
+
+/*<--------------------------------mini cart-------------------------->*/
+#mini-cart {
+    position: relative;
+}
+
+#mini-cart > h3 {
+    margin-bottom: var(--gap-tiny);
+}
+
+#mini-cart > iframe {
+    width: 100%;
+    border: 0;
+}
+
+#mini-cart > iframe.loaded {
+    opacity: 1 !important;
+}
+
+
+/*<--------------------------------animation-------------------------->*/
 @keyframes porog {
     0% {
         transform: scale(1) rotateZ(0);
     }
-    50% {
+     50% {
         transform: scale(2) rotateZ(180deg);
     }
     100% {
         transform: scale(1) rotateZ(360deg);
     }
 }
-/*<--------------------------------animation-------------------------->*/
 
-.method>img{
-    width: 240px;
+
+/*<--------------------------------page parts-------------------------->*/
+#header {
+    background: var(--c-back2);
+    color: var(--c-fore2);
+    height: var(--header-text-height);
+    padding-top: var(--gap-large);
+    padding-bottom: var(--gap-normal);
+    box-sizing: content-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
 }
 
-/*.method .visa{*/
-/*    background-image: url("/static/img/VISA.png");*/
-/*    background-size: cover;*/
-/*}*/
+#main-wrapper {
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: var(--header-height);
+}
+
+#main-wrapper > .sidebar,
+#main-wrapper > .content {
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: var(--gap-large);
+}
