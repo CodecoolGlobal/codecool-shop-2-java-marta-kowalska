@@ -121,7 +121,7 @@
     padding-bottom: var(--gap-large);
     position: relative;
     columns: var(--product-columns) 250px;
-    column-gap: 1rem;
+    column-gap: var(--gap-normal);
 }
 
 .product.box {

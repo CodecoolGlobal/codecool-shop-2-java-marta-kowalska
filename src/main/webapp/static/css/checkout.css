@@ -60,9 +60,24 @@
 .paymentMethod {
     text-align: center;
 }
+.paymentMethod > label {
+    padding-top: 56%;
+    display: block;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: var(--radius-normal);
+}
 
-.paymentMethod label input{
+.paymentMethod > label > input {
+    transform: translateY(30px);
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+}
 
+.paymentMethod:hover > label {
+    background-color: var(--c-fade);
 }
 
 .hidden {
