@@ -63,7 +63,21 @@ public class CheckoutController extends HttpServlet {
         String billingZipcode = req.getParameter("b-zipcode");
         String billingAddress = req.getParameter("b-address");
 
-        orderDao.add(new Order(firstName, lastName, email, phoneNumber, country, city, zipcode, address));
+        Order order = new Order(firstName, lastName, email, phoneNumber, country, city, zipcode, address);
+        orderDao.add(order);
+
+        context.setVariable("id", productService.getOrderId(order));
+        context.setVariable("fname", firstName);
+        context.setVariable("lname", lastName);
+        context.setVariable("email", email);
+        context.setVariable("phone", phoneNumber);
+        context.setVariable("country", country);
+        context.setVariable("city", city);
+        context.setVariable("zipcode", zipcode);
+        context.setVariable("address", address);
+
+        context.setVariable("cart", productService.getAllCartItems());
+        context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
 
         shoppingCart.deleteCart();
 
