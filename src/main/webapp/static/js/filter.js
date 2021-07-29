@@ -67,12 +67,12 @@ const filter = {
         productContainer.innerHTML = ""
         data.forEach(product => {
             let productBox = filter.PRODUCT_TEMPLATE
-                .replace("IMAGE", product.image)
-                .replace("NAME", product.name)
-                .replace("DESCRIPTION", product.description)
-                .replace("PRICE", product.price)
-                .replace("PRICE", product.id)
-                .replace("id=\"product-container\"", "");
+                .replaceAll("IMAGE", product.image)
+                .replaceAll("NAME", product.name)
+                .replaceAll("DESCRIPTION", product.description)
+                .replaceAll("PRICE", product.price)
+                .replaceAll("ID", product.id)
+                .replaceAll("id=\"product-container\"", "");
             productContainer.innerHTML += productBox
         })
 
