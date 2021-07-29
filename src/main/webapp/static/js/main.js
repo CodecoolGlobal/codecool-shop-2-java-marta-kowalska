@@ -62,6 +62,25 @@ function listenMinicartIframeSizeChanges() {
     });
 }
 
+/**
+ * @summary Refreshes the Minicart Iframe(s)
+ */
+function updateMinicartIframe() {
+    let iframes = jQuery('#mini-cart iframe');
+    if (iframes === undefined || iframes.length == 0)
+        return;
+
+    iframes.each(function () {
+        let iframe = jQuery(this);
+        iframe.setDomClass('loaded', false);
+
+        setTimeout(function() {
+            let iframeSrc = iframe.attr('src');
+            iframe.attr("src", iframeSrc);
+        }, 200);
+    });
+}
+
 /////////////////////// MISC ///////////////////////
 /**
  * @summary Gets a cookies by its name

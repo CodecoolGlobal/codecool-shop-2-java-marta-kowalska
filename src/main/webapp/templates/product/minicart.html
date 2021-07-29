@@ -20,8 +20,6 @@
         <img th:src="${prod.getImage()}" th:alt="${prod.name}" />
 
         <div class="itemInfo">
-            <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
-
             <h3 th:text="${prod.name}">Item Name</h3>
 
             <div class="productsTotal">
@@ -31,7 +29,7 @@
                         </span>
                     <span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
                 </label>
-                <small class="qty-label" th:text="${cart.get(prod)} + 'x' + ${prod.defaultPrice} + ' ' + ${prod.defaultCurrency}">1 x 1USD</small>
+                <small class="qty-label" th:text="${cart.get(prod)} + ' x ' + ${prod.defaultPrice} + ' ' + ${prod.defaultCurrency}">1 x 1USD</small>
             </div>
         </div>
     </div>
