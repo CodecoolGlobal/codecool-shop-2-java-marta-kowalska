@@ -59,7 +59,7 @@
         <h1>Highlighted products</h1>
         <div class="boxfix rel products" id="product-container">
             <div th:each="prod,iterStat : ${products}" class="product box">
-                <img src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}" />
+                <img th:src="${prod.getImage()}" th:alt="${prod.name}" />
                 <h3 class="name" th:text="${prod.name}">Product name</h3>
                 <p class="description" th:text="${prod.description}">Product description... </p>
                 <label class="price" th:text="${prod.getPrice()}">100 USD</label>

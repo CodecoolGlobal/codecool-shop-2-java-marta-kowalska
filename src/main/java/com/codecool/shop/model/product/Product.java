@@ -27,6 +27,10 @@ public class Product extends BaseModel {
 
     }
 
+    public String getImage() {
+        return image;
+    }
+
     private String createImageName(String imgName) {
         return IMG_PATH + imgName;
     }
