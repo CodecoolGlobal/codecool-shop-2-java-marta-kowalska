@@ -22,48 +22,13 @@
 
 <body>
 
-    <div class="container-full" id="header">
-        <h1>Codecool Shop</h1>
-        <div class="cart-container">
-            <span id="cart-counter" th:text="${cartItemCount}">2</span>
-            <svg class="cart-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
-                <g>
-                  <path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306
-                             c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7
-                             c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408
-                             c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z" />
-                </g>
-            </svg>
-        </div>
-    </div>
+
+
+    <div th:replace="header.html :: with-cart"></div>
 
     <div class="container-full nogap has-sidebar two" id="main-wrapper">
 
-        <div class="sidebar">
-
-            <div class="filter-group">
-                <h3>Categories</h3>
-                <div id="categories">
-                    <div class="category-entry checkbox-state bg-effect" th:each="category : ${categories}">
-                        <input class="category" type="checkbox"
-                               name="category" id="category-x" th:attr="id='category-' + ${category.id}" th:value="${category.id}">
-                        <label class="category btn" for="category-x" th:attr="for='category-' + ${category.id}" th:text="${category.name}">Category</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <h3>Suppliers</h3>
-                <div id="suppliers">
-                    <div class="supplier-entry checkbox-state bg-effect" th:each="supplier : ${suppliers}">
-                        <input class="supplier" type="checkbox"
-                               name="supplier" id="supplier-x" th:attr="id='supplier-' + ${supplier.id}" th:value="${supplier.id}">
-                        <label class="supplier btn" for="supplier-x" th:attr="for='supplier-' + ${supplier.id}" th:text="${supplier.name}">Supplier</label>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <div th:replace="sidebars.html :: left"></div>
 
         <div class="content">
             <div class="boxfix rel products" id="product-container">
@@ -88,12 +53,7 @@
             </div>
         </div>
 
-        <div class="sidebar">
-            <div id="mini-cart">
-                <h3>Cart</h3>
-                <iframe src="/cart?minicart=1" style="opacity: 0"></iframe>
-            </div>
-        </div>
+        <div th:replace="sidebars.html :: right"></div>
 
     </div>
 

@@ -31,27 +31,16 @@ function listenCheckboxStates() {
 }
 
 /**
- * @summary Resizes an iframe automatically by its content.
- * @param {Object} iframe The iframe itself
- * @param {Boolean} forceMeasure We want to mease the content by force?
+ * @summary Resizes an iframe automatically
  */
-function resizeIframe(iframe, forceMeasure = false) {
+jQuery.prototype.resizeIframe = function() {
 
-    let contentHeight = iframe.attr('content-height');
-
-    if (forceMeasure || contentHeight === undefined || contentHeight === null || !contentHeight) {
-        contentHeight = Math.ceil(iframe[0].contentWindow.document.documentElement.scrollHeight);
-        iframe.attr('content-height', contentHeight);
-    }
-    else
-        contentHeight = parseInt(contentHeight);
-
-    let topOffset = iframe.offset().top;
+    let topOffset = this.offset().top;
     let windowHeight = jQuery(window).height() - 10;
 
-    let targetHeight = Math.floor(Math.min(contentHeight, windowHeight - topOffset));
+    let targetHeight = Math.floor(windowHeight - topOffset);
 
-    iframe[0].style.height = targetHeight + 'px';
+    this[0].style.height = targetHeight + 'px';
 }
 
 /**
@@ -62,16 +51,13 @@ function listenMinicartIframeSizeChanges() {
 
     iframes.on("load",function() {
         let iframe = jQuery(this);
-        setTimeout(function() {
-            resizeIframe(iframe);
-            iframes.setDomClass('loaded', true);
-        }, 1000);
+        iframe.resizeIframe();
+        iframe.setDomClass('loaded', true);
     });
 
     jQuery(window).resize(function() {
         iframes.each(function() {
-            let iframe = jQuery(this);
-            resizeIframe(iframe);
+            jQuery(this).resizeIframe();
         });
     });
 }

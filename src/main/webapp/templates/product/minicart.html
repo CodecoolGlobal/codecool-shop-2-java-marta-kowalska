@@ -6,88 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <link rel="stylesheet" type="text/css" href="/static/css/global.css"/>
-
+    <link rel="stylesheet" type="text/css" href="/static/css/minicart.css"/>
 </head>
 
 <body>
-
-    <style>
-        .cartItem {
-            margin-bottom: var(--gap-tiny);
-            padding-bottom: var(--gap-tiny);
-            border-bottom: 1px solid var(--c-fade);
-        }
-
-        .cartItem:last-child {
-            margin-bottom: 0;
-            border-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .cartItem > * {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .cartItem > img {
-            width: 100px;
-            height: auto;
-            border-radius: var(--radius-normal);
-            border: 1px solid var(--c-fade);
-        }
-
-        .cartItem {
-            width: 100%;
-        }
-        .cartItem > .itemInfo {
-            position: relative;
-            width: calc(100% - 100px);
-            padding-left: var(--gap-small);
-        }
-
-        .cartItem > .itemInfo > * {
-            display: block;
-        }
-        .cartItem > .itemInfo > .remove {
-            text-align: center;
-            float: right;
-            display: inline-block;
-            width: 20px;
-            line-height: 20px;
-            border: 0;
-            background-color: var(--c-accent2);
-            color: var(--c-accent2-fg);
-            border-radius: var(--radius-small);
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .cartItem > .itemInfo > .remove:hover {
-            opacity: 0.5;
-        }
-
-        .cartItem > .itemInfo .quantity > * {
-            display: inline-block;
-        }
-
-        .cartItem > .itemInfo h3 {
-            font-size: 0.9em;
-        }
-
-        .cartItem > .itemInfo .productsTotal {
-            font-weight: bold;
-            font-size: 0.8em;
-            width: 100%;
-            padding: var(--gap-atomic);
-            margin-top: var(--gap-atomic);
-            background: var(--c-accent);
-            color: var(--c-accent-fg);
-            border-radius: var(--radius-small);
-        }
-
-        .cartItem > .itemInfo .productsTotal > .price-label {
-            float: right;
-        }
-    </style>
 
     <!-- IF CART IS EMPTY -->
     <h2 th:if="${cart.isEmpty()}">Shopping cart is empty!</h2>
