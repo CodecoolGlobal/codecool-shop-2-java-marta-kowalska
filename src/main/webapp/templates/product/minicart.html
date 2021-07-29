@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/minicart.css"/>
+</head>
+
+<body>
+
+    <!-- IF CART IS EMPTY -->
+    <h2 th:if="${cart.isEmpty()}">Shopping cart is empty!</h2>
+
+    <!-- ELSE -->
+    <div th:unless="${cart.isEmpty()}" class="cartItem boxfix" th:attr="data-product_id=${prod.getId()}" th:each="prod : ${cart.keySet()}">
+
+        <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
+             th:alt="${prod.name}"/>
+
+        <div class="itemInfo">
+            <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
+
+            <h3 th:text="${prod.name}">Item Name</h3>
+
+            <div class="productsTotal">
+                <label class="price-label">
+                        <span th:attr="data-product_price=${prod.defaultPrice}"
+                              th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')}">
+                        </span>
+                    <span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
+                </label>
+                <small class="qty-label" th:text="${cart.get(prod)} + 'x' + ${prod.defaultPrice} + ' ' + ${prod.defaultCurrency}">1 x 1USD</small>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

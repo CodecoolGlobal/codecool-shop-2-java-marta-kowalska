@@ -55,12 +55,15 @@ public class CartController extends HttpServlet {
 
         context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
 
+        var miniCartParameter = req.getParameter("minicart");
+        boolean isMiniCart = miniCartParameter != null && Integer.parseInt(miniCartParameter) == 1;
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
-        engine.process("product/cart.html", context, resp.getWriter());
+        engine.process(isMiniCart ? "product/minicart.html" : "product/cart.html", context, resp.getWriter());
     }
 
 }

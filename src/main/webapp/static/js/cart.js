@@ -33,6 +33,8 @@ function addToCart(productID, productName) {
 
     }
 
+    cartCounterIconChange();
+
     if (userLoggedIn) {
 
         manageRemoteCartItem(productID, 'add').then(function (result) {
@@ -125,7 +127,6 @@ function deleteFromCart(productID) {
         changeSums(itemPrice.innerText, "decrement");
         itemContainer.remove();
         checkIfCartIsEmpty()
-
     }
 
     if (userLoggedIn) {
@@ -148,6 +149,19 @@ function deleteFromCart(productID) {
         setLocalCart();
 
     }
+}
+
+/**
+ * @summary Changes the Cart icon's number label when a new object added to/removed from the cart
+ * @param {Number} direction The number that we add to the cart items count
+ */
+function cartCounterIconChange(direction = 1){
+    let cartCounter = document.querySelector("#cart-counter");
+    cartCounter.innerText = parseInt(cartCounter.innerText) + direction;
+    cartCounter.classList.add("animation");
+    setTimeout(() =>{
+        cartCounter.classList.remove("animation");
+    }, 800);
 }
 
 /**
