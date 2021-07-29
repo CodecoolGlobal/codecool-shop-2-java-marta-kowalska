@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/global.css"/>
+
+</head>
+
+<body>
+
+    <style>
+        .cartItem {
+            margin-bottom: var(--gap-tiny);
+            padding-bottom: var(--gap-tiny);
+            border-bottom: 1px solid var(--c-fade);
+        }
+
+        .cartItem:last-child {
+            margin-bottom: 0;
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .cartItem > * {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .cartItem > img {
+            width: 100px;
+            height: auto;
+            border-radius: var(--radius-normal);
+            border: 1px solid var(--c-fade);
+        }
+
+        .cartItem {
+            width: 100%;
+        }
+        .cartItem > .itemInfo {
+            position: relative;
+            width: calc(100% - 100px);
+            padding-left: var(--gap-small);
+        }
+
+        .cartItem > .itemInfo > * {
+            display: block;
+        }
+        .cartItem > .itemInfo > .remove {
+            text-align: center;
+            float: right;
+            display: inline-block;
+            width: 20px;
+            line-height: 20px;
+            border: 0;
+            background-color: var(--c-accent2);
+            color: var(--c-accent2-fg);
+            border-radius: var(--radius-small);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cartItem > .itemInfo > .remove:hover {
+            opacity: 0.5;
+        }
+
+        .cartItem > .itemInfo .quantity > * {
+            display: inline-block;
+        }
+
+        .cartItem > .itemInfo h3 {
+            font-size: 0.9em;
+        }
+
+        .cartItem > .itemInfo .productsTotal {
+            font-weight: bold;
+            font-size: 0.8em;
+            width: 100%;
+            padding: var(--gap-atomic);
+            margin-top: var(--gap-atomic);
+            background: var(--c-accent);
+            color: var(--c-accent-fg);
+            border-radius: var(--radius-small);
+        }
+
+        .cartItem > .itemInfo .productsTotal > .price-label {
+            float: right;
+        }
+    </style>
+
+    <!-- IF CART IS EMPTY -->
+    <h2 th:if="${cart.isEmpty()}">Shopping cart is empty!</h2>
+
+    <!-- ELSE -->
+    <div th:unless="${cart.isEmpty()}" class="cartItem boxfix" th:attr="data-product_id=${prod.getId()}" th:each="prod : ${cart.keySet()}">
+
+        <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
+             th:alt="${prod.name}"/>
+
+        <div class="itemInfo">
+            <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
+
+            <h3 th:text="${prod.name}">Item Name</h3>
+
+            <div class="productsTotal">
+                <label class="price-label">
+                        <span th:attr="data-product_price=${prod.defaultPrice}"
+                              th:text="${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')}">
+                        </span>
+                    <span class="currency" th:text="' '+${prod.defaultCurrency}"></span>
+                </label>
+                <small class="qty-label" th:text="${cart.get(prod)} + 'x' + ${prod.defaultPrice} + ' ' + ${prod.defaultCurrency}">1 x 1USD</small>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
