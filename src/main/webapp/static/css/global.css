@@ -12,8 +12,8 @@
 
     /* header magassága */
     --header-text-height: 27px;
-    --header-padding-top: var(--gap-small);
-    --header-padding-bottom: var(--gap-tiny);
+    --header-padding-top: var(--gap-normal);
+    --header-padding-bottom: var(--gap-small);
     --header-height: calc(var(--header-padding-top) + var(--header-padding-bottom) + var(--header-text-height));
 
     /* containerek horizontális gap-jei */
@@ -45,7 +45,11 @@
     --c-accent2: #966666;
     --c-accent2-fg: #eee;
 }
-
+@media screen and (min-width: 1800px) {
+    :root {
+        --product-columns: 5;
+    }
+}
 @media screen and (max-width: 1140px) {
     :root {
         --product-columns: 2;
@@ -67,6 +71,35 @@
 
 *, *:before, *:after {
     box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, textarea {
+    -webkit-touch-callout: initial;
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+    user-select: initial;
+}
+
+::-webkit-scrollbar {
+    width: var(--gap-tiny);
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+:hover::-webkit-scrollbar-thumb {
+    background: var(--c-fade);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--c-hover);
 }
 
 html {

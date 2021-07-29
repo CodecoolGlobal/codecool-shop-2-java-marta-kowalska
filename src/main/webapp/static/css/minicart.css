@@ -1,3 +1,10 @@
+h2 {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: var(--gap-large);
+    opacity: 0.5;
+}
+
 .cartItem {
     margin-bottom: var(--gap-small);
     width: 100%;

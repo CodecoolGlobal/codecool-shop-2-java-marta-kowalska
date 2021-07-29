@@ -156,7 +156,12 @@ function deleteFromCart(productID) {
  * @param {Number} direction The number that we add to the cart items count
  */
 function cartCounterIconChange(direction = 1){
+    updateMinicartIframe();
+
     let cartCounter = document.querySelector("#cart-counter");
+    if (cartCounter === null || cartCounter === undefined)
+        return;
+
     cartCounter.innerText = parseInt(cartCounter.innerText) + direction;
     cartCounter.classList.add("animation");
     setTimeout(() =>{
