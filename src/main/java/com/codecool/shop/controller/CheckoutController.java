@@ -45,6 +45,10 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+
+
         String firstName = req.getParameter("fname");
         String lastName = req.getParameter("lname");
         String email = req.getParameter("email");
@@ -63,7 +67,7 @@ public class CheckoutController extends HttpServlet {
 
         shoppingCart.deleteCart();
 
-        resp.sendRedirect("/");
+        engine.process("/confirmed.html", context, resp.getWriter());
     }
 
 }
