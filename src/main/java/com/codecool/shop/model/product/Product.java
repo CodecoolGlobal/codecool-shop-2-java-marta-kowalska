@@ -12,7 +12,8 @@ public class Product extends BaseModel {
     @SerializedName("price")
     private float defaultPrice;
     @Expose
-    private String image;
+    @SerializedName("image")
+    private final String image;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
