@@ -287,3 +287,12 @@ html {
     }
 }
 /*<--------------------------------animation-------------------------->*/
+
+.method>img{
+    width: 240px;
+}
+
+/*.method .visa{*/
+/*    background-image: url("/static/img/VISA.png");*/
+/*    background-size: cover;*/
+/*}*/
