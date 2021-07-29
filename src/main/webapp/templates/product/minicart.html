@@ -17,8 +17,7 @@
     <!-- ELSE -->
     <div th:unless="${cart.isEmpty()}" class="cartItem boxfix" th:attr="data-product_id=${prod.getId()}" th:each="prod : ${cart.keySet()}">
 
-        <img src="http://placehold.it/50x50/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'"
-             th:alt="${prod.name}"/>
+        <img th:src="${prod.getImage()}" th:alt="${prod.name}" />
 
         <div class="itemInfo">
             <button type="button" class="remove" th:attr="onclick='deleteFromCart(' + ${prod.id} + ');'">x</button>
