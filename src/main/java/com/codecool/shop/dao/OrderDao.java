@@ -12,4 +12,5 @@ public interface OrderDao {
 
     List<Order> getAll();
 
+    int getOrderId(Order order);
 }

@@ -24,14 +24,27 @@
 
 <div class="container-fluid">
 
-<h1>Order confirmed</h1>
+    <h1>Order confirmed</h1>
 
-    <script>
-        window.onload = ()=>{
-            setTimeout(() =>{
-                window.location.href="/";
-            }, 1800);
-        };
-    </script>
+    <div class="container">
+        <p>First name: <strong th:text="${fname}">Summary</strong></p>
+        <p>Last name: <strong th:text="${lname}">Summary</strong></p>
+        <p>Email: <strong th:text="${email}">Summary</strong></p>
+        <p>Phone number: <strong th:text="${phone}">Summary</strong></p>
+        <p>Country: <strong th:text="${country}">Summary</strong></p>
+        <p>City: <strong th:text="${city}">Summary</strong></p>
+        <p>Zipcode: <strong th:text="${zipcode}">Summary</strong></p>
+        <p>Address: <strong th:text="${address}">Summary</strong></p>
+
+        <ul th:each="prod : ${cart.keySet()}">
+            <li th:text="${prod.name} + ' Quantity: ' +
+            ${cart.get(prod)} + ' Unit Price: ' +
+            ${prod.defaultPrice} + ' All Price: ' +
+            ${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')}"></li>
+        </ul>
+        <p>Summary: <strong th:text="${summary}">Summary</strong><span> USD</span></p>
+
+        <a href="/"><button type="button">OK</button></a>
+    </div>
 
 </div>
