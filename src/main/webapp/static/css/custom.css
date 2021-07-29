@@ -344,6 +344,10 @@
     padding: 0 var(--gap-small);
 }
 
+body.home #main-wrapper {
+    padding-top: var(--gap-normal);
+}
+
 @media screen and (max-width: 768px) {
     #header {
         text-align: left;

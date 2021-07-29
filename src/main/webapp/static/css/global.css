@@ -45,7 +45,11 @@
     --c-accent2: #966666;
     --c-accent2-fg: #eee;
 }
-
+@media screen and (min-width: 1800px) {
+    :root {
+        --product-columns: 5;
+    }
+}
 @media screen and (max-width: 1140px) {
     :root {
         --product-columns: 2;
