@@ -71,7 +71,7 @@ const filter = {
                 .replace("NAME", product.name)
                 .replace("DESCRIPTION", product.description)
                 .replace("PRICE", product.price)
-                .replace("PRICE", product.id)
+                .replace("ID", product.id)
                 .replace("id=\"product-container\"", "");
             productContainer.innerHTML += productBox
         })
