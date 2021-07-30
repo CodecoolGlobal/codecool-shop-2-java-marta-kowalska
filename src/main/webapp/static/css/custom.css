@@ -209,7 +209,11 @@
     background-color: var(--c-fade);
 }
 
-
+.no-product{
+    display: block;
+    margin: auto;
+    width: 40vw;
+}
 
 
 /*<--------------------------------cart-------------------------->*/
