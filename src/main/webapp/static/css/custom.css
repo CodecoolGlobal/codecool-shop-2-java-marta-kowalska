@@ -334,7 +334,6 @@
     z-index: 9;
     left: 0;
     right: 0;
-    bottom: 0;
     top: var(--header-height);
     padding-top: var(--gap-large);
 }
@@ -349,6 +348,7 @@
 }
 
 body.home #main-wrapper {
+    bottom: 0;
     padding-top: var(--gap-normal);
 }
 
