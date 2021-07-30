@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/global.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/confirm.css"/>
 </head>
 
 <body>
@@ -36,12 +37,12 @@
         <ul th:each="prod : ${cart.keySet()}">
             <li th:text="${prod.name} + ' Quantity: ' +
             ${cart.get(prod)} + ' Unit Price: ' +
-            ${prod.defaultPrice} + ' All Price: ' +
-            ${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')}"></li>
+            ${prod.defaultPrice} + ' USD Item SubTotal: ' +
+            ${#numbers.formatDecimal((prod.defaultPrice * cart.get(prod)), 0, 2, 'POINT')} + ' USD'"></li>
         </ul>
-        <p>Summary: <strong th:text="${summary}">Summary</strong><span> USD</span></p>
+        <p>Summary: <strong th:text="${#numbers.formatDecimal(summary, 1,  2, 'DEFAULT')}+250+150">Summary</strong><span> USD</span></p>
 
-        <a href="/"><button type="button">OK</button></a>
+        <a href="/"><button class="confirmBtn" type="button">OK</button></a>
     </div>
 
 </div>

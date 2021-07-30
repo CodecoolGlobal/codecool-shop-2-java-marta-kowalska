@@ -87,7 +87,7 @@
                     </div>
                 </div>
             <div class="cart-summary">
-                <span>Summary: <strong th:text="${summary}">Summary</strong></span> <span> USD</span>
+                <span>Summary: <strong th:text="${#numbers.formatDecimal(summary, 1,  2, 'DEFAULT')}+250+150">Summary</strong></span> <span> USD</span>
             </div>
 
         </div>
