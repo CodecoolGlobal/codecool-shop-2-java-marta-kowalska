@@ -1,0 +1,106 @@
+.paymentBtnGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px ;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-block {
+    margin: auto;
+}
+
+.details-block label{
+    display: inline-block;
+    width: 8vw;
+    text-align: right;
+    vertical-align: middle;
+    margin: 1vh auto;
+}
+.details-block input{
+    display: inline-block;
+    padding: 15px;
+    width: 10vw;
+    height: 2vh;
+}
+
+.cart-summary {
+    display: block;
+    text-align: center;
+    width: 40%;
+    background-color: #50aa50;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin: 10vh auto;
+}
+
+.sub-title {
+    margin: 2vh 0;
+}
+
+.cart-summary strong{
+    color: white;
+}
+
+.container img {
+    width: 180px;
+    height: 150px;
+}
+
+.container img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.paymentMethod {
+    text-align: center;
+}
+.paymentMethod > label {
+    padding-top: 56%;
+    display: block;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: var(--radius-normal);
+}
+
+.paymentMethod > label > input {
+    transform: translateY(30px);
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.paymentMethod:hover > label {
+    background-color: var(--c-fade);
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.confirmBtn {
+    display: block;
+    width: fit-content;
+    margin: 50px auto 100px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background: #50aa50;
+    color: white;
+    transition: all ease-in 0.1s;
+    border: 0;
+    border-radius: 10px;
+}
+
+.confirmBtn:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.paymentCont {
+    margin-top: 60px;
+}

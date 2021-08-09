@@ -1,0 +1,122 @@
+.itemId {
+    font-size: .75em;
+    opacity: 0.5;
+    margin-bottom: .5em;
+}
+
+.itemInfo {
+    display: inline-block;
+}
+
+.cartContainer {
+    margin-top: var(--gap-large);
+}
+
+.cartItem {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 30% 35% 25% 10%;
+    margin-bottom: var(--gap-large);
+    align-items: center;
+}
+
+.cartItem h3 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .025em;
+}
+
+.cartItem > img {
+    width: 200px;
+    height: auto;
+}
+.stockStatus {
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--c-hover);
+}
+input[type=number]{
+    width: 3em;
+    text-align: center;
+    margin: 1em 0;
+    vertical-align: middle;
+    align-items: center;
+    padding: 0.4em;
+    font-size: 0.8em;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.qty-minus, .qty-plus {
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    font-size: 1em;
+    border-radius: var(--radius-small);
+    background-color: var(--c-accent);
+    border: 0;
+    color: white;
+
+}
+
+.qty-minus:hover, .qty-plus:hover {
+    cursor: pointer;
+    background-color: var(--c-hover);
+
+}
+
+.summary {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    padding: 2em;
+}
+
+.remove {
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    font-size: 1.3em;
+    background-color: var(--c-accent2);
+    color: var(--c-accent2-fg);
+    border: 0;
+    border-radius: var(--radius-normal);
+}
+
+.remove:hover {
+    background-color: var(--c-accent);
+    color: var(--c-accent-fg);
+    cursor: pointer;
+}
+
+.checkoutBtn {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background-color: var(--c-hover);
+    color: var(--c-hover-fg);
+    transition: all ease-in 0.1s;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.checkoutBtn:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.total_price {
+    color: var(--c-hover);
+    padding: 10px 30px
+
+}

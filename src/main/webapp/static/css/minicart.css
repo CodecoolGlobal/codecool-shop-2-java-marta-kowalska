@@ -1,0 +1,102 @@
+h2 {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: var(--gap-large);
+    opacity: 0.5;
+}
+
+.cartItem {
+    margin-bottom: var(--gap-small);
+    width: 100%;
+}
+
+.cartItem:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cartItem > * {
+    display: inline-block;
+    vertical-align: bottom;
+}
+.cartItem > img {
+    width: 100px;
+    height: auto;
+    border-radius: var(--radius-small);
+}
+
+.cartItem > .itemInfo {
+    position: relative;
+    width: calc(100% - 100px);
+    padding-left: var(--gap-tiny);
+}
+
+.cartItem > .itemInfo > * {
+    display: block;
+}
+.cartItem > .itemInfo > .remove {
+    text-align: center;
+    float: right;
+    display: inline-block;
+    width: 30px;
+    line-height: 30px;
+    border: 0;
+    background-color: #966666;
+    color: transparent;
+    border-radius: var(--radius-small);
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+
+.cartItem > .itemInfo > .remove:hover {
+    opacity: 0.5;
+}
+
+.cartItem > .itemInfo > .remove:before,
+.cartItem > .itemInfo > .remove:after {
+    --times-width: 55%;
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: calc(50% - 1px);
+    left: calc((100% - var(--times-width)) / 2);
+    width: 55%;
+    height: 2px;
+    background: var(--c-accent2-fg);
+}
+.cartItem > .itemInfo > .remove:hover::before,
+.cartItem > .itemInfo > .remove:hover::after {
+    background: white;
+}
+.cartItem > .itemInfo > .remove:before {
+    transform: rotate(45deg);
+}
+.cartItem > .itemInfo > .remove:after {
+    transform: rotate(135deg);
+}
+
+.cartItem > .itemInfo .quantity > * {
+    display: inline-block;
+}
+
+.cartItem > .itemInfo h3 {
+    font-size: 0.9em;
+    line-height: 2;
+}
+
+.cartItem > .itemInfo .productsTotal {
+    font-weight: bold;
+    font-size: 0.8em;
+    width: 100%;
+    padding: var(--gap-atomic);
+    margin-top: var(--gap-atomic);
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
+    border-radius: var(--radius-small);
+}
+
+.cartItem > .itemInfo .productsTotal > .price-label {
+    float: right;
+}

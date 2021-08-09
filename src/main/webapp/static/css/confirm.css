@@ -1,0 +1,39 @@
+:root {
+    --c-hover: #3e8e5c;
+    --c-hover-fg: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+}
+
+.confirmBtn {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background-color: var(--c-hover);
+    color: var(--c-hover-fg);
+    transition: all ease-in 0.1s;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.confirmBtn:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.container {
+    margin: auto;
+    width: 60%;
+}
+.container p {
+    padding: 10px;
+}
+.container li {
+    margin-left: 30px;
+}
