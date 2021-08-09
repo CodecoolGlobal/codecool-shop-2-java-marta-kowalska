@@ -106,3 +106,37 @@ CREATE TABLE order_item
         FOREIGN KEY(product_id)
             REFERENCES product(id)
 );
+
+INSERT INTO product_category VALUES  (0, 'Hardware');
+INSERT INTO product_category VALUES  (1, 'Software');
+INSERT INTO product_category VALUES  (2, 'Merchandise');
+INSERT INTO product_category VALUES  (3, 'Stolen data');
+INSERT INTO product_category VALUES  (4, 'Services');
+SELECT pg_catalog.setval('product_category_id_seq', 4, true);
+
+INSERT INTO product_supplier VALUES  (0, 'BKK');
+INSERT INTO product_supplier VALUES  (1, 'Anonymous');
+INSERT INTO product_supplier VALUES  (2, 'Neo');
+INSERT INTO product_supplier VALUES  (3, 'Trinity');
+INSERT INTO product_supplier VALUES  (4, 'D3F4ULT');
+INSERT INTO product_supplier VALUES  (5, 'The Calculator');
+INSERT INTO product_supplier VALUES  (6, 'Mr.Robot');
+INSERT INTO product_supplier VALUES  (7, 'M1CK3Y');
+SELECT pg_catalog.setval('product_supplier_id_seq', 7, true);
+
+INSERT INTO product VALUES  (0, 'Hacker Laptop', 'Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.',
+                             949, DEFAULT, 'hacker_laptop.jpg', 0, 1);
+INSERT INTO product VALUES  (1, 'My first hacking laptop', 'Keep your baby''s little hands (and mind) busy as can be with this interactive toy laptop that introduces password cracking, stealing data and more!',
+                             491, DEFAULT, 'kid_laptop.png', 0, 4);
+INSERT INTO product VALUES  (2, 'Cracked curriculum', 'Finish Codecool in one day! All tasks with solutions',
+                             89, DEFAULT, 'curriculum.png', 1, 5);
+INSERT INTO product VALUES  (3, 'Cracking a password', 'Cracking any password', 8.5, DEFAULT, 'crack_password.jpg', 4, 5);
+INSERT INTO product VALUES  (4, 'Attend attendance', 'Attending attendance instead of you: being on time and great answer for attendance question included', 2, DEFAULT, 'attendance.jpg', 4, 3);
+INSERT INTO product VALUES  (5, 'Passing a PA', 'We will take your PA for you, all green scores guaranteed!', 20, DEFAULT, 'PA.jpg', 4, 6);
+INSERT INTO product VALUES  (6, 'Anonymous mask', 'No one will know that you are a hacker if you wear this', 15.5, DEFAULT, 'mask.jpg', 2, 1);
+INSERT INTO product VALUES  (7, 'Credit card credentials', 'Best credit card data with a lot of money', 150000, DEFAULT, 'card.jpg', 3, 7);
+INSERT INTO product VALUES  (8, 'Hoodie', 'A must have for every real hacker', 150, DEFAULT, 'hoodie.jpg', 2, 2);
+INSERT INTO product VALUES  (9, '105 bus', 'Bus to get you everywhere you want with your hacker friends. Bus connecting people', 1, DEFAULT, '105bus.jpg', 0, 0);
+SELECT pg_catalog.setval('product_id_seq', 9, true);
+
+
