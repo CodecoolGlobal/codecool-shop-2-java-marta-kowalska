@@ -71,7 +71,28 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return data;
+        try (Connection conn = dataSource.getConnection()) {
+            List<Product> allProducts = new ArrayList<>();
+            String sql = "SELECT id, name, description, price, currency, picture, category_id, supplier_id FROM product";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product(rs.getInt("ID"),
+                    rs.getString("NAME"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getFloat("PRICE"),
+                    rs.getString("CURRENCY"),
+                    rs.getString("PICTURE"),
+                    rs.getInt("CATEGORY_ID"),
+                    rs.getInt("SUPPLIER_ID")
+                );
+                allProducts.add(product);
+            }
+            return allProducts;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
