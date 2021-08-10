@@ -19,13 +19,6 @@ public class OrderDaoMem implements OrderDao {
         OrderDaoMem.dataSource = dataSource;
     }
 
-    public static OrderDaoMem getInstance() {
-        if (instance == null) {
-            instance = new OrderDaoMem(dataSource);
-        }
-        return instance;
-    }
-
     public static OrderDaoMem getInstance(DataSource dataSource) {
         if (instance == null) {
             instance = new OrderDaoMem(dataSource);

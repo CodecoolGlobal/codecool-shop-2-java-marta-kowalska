@@ -23,13 +23,6 @@ public class ProductDaoMem implements ProductDao {
         ProductDaoMem.dataSource = dataSource;
     }
 
-    public static ProductDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoMem(dataSource);
-        }
-        return instance;
-    }
-
     public static ProductDaoMem getInstance(DataSource dataSource) {
         if (instance == null) {
             instance = new ProductDaoMem(dataSource);

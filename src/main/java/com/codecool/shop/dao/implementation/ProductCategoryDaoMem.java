@@ -20,13 +20,6 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
         ProductCategoryDaoMem.dataSource = dataSource;
     }
 
-    public static ProductCategoryDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ProductCategoryDaoMem(dataSource);
-        }
-        return instance;
-    }
-
     public static ProductCategoryDaoMem getInstance(DataSource dataSource) {
         if (instance == null) {
             instance = new ProductCategoryDaoMem(dataSource);

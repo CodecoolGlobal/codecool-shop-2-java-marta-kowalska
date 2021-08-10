@@ -20,12 +20,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         ShoppingCartDaoMem.dataSource = dataSource;
     }
 
-    public static ShoppingCartDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ShoppingCartDaoMem(dataSource);
-        }
-        return instance;
-    }
 
     public static ShoppingCartDaoMem getInstance(DataSource dataSource) {
         if (instance == null) {

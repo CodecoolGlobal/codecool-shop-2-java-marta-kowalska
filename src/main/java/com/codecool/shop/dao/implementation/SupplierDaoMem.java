@@ -18,12 +18,6 @@ public class SupplierDaoMem implements SupplierDao {
         SupplierDaoMem.dataSource = dataSource;
     }
 
-    public static SupplierDaoMem getInstance() {
-        if (instance == null) {
-            instance = new SupplierDaoMem(dataSource);
-        }
-        return instance;
-    }
 
     public static SupplierDaoMem getInstance(DataSource dataSource) {
         if (instance == null) {
