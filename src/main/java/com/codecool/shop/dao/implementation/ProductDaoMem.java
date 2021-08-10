@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
     private static DataSource dataSource;
@@ -152,10 +151,31 @@ public class ProductDaoMem implements ProductDao {
     }
 
     public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
-//        return data.stream()
-//            .filter(t -> t.getProductCategory().equals(productCategory))
-//            .filter(t -> t.getSupplier().equals(supplier))
-//            .collect(Collectors.toList());
-        return null;
+        int productCategoryId = productCategory.getId();
+        int supplierId = supplier.getId();
+        try (Connection conn = dataSource.getConnection()) {
+            List<Product> productsBySupplier = new ArrayList<>();
+            String sql = "SELECT id, name, description, price, currency, picture, category_id, supplier_id FROM product WHERE category_id=? AND supplier_id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, productCategoryId);
+            statement.setInt(2, supplierId);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product(rs.getInt("ID"),
+                    rs.getString("NAME"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getFloat("PRICE"),
+                    rs.getString("CURRENCY"),
+                    rs.getString("PICTURE"),
+                    rs.getInt("CATEGORY_ID"),
+                    rs.getInt("SUPPLIER_ID")
+                );
+                productsBySupplier.add(product);
+            }
+            return productsBySupplier;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
