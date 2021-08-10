@@ -56,7 +56,6 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-//                System.out.println(rs.getString("NAME"));
                 ProductCategory category = new ProductCategory(rs.getString("NAME"));
                 category.setId(rs.getInt("ID"));
                 allCategories.add(category);
