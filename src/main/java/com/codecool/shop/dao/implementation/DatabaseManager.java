@@ -7,11 +7,23 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DatabaseManager {
+    private static DatabaseManager instance = null;
+
     private OrderDao orderDao;
     private ProductCategoryDao productCategoryDao;
     private ProductDao productDao;
     private ShoppingCartDao shoppingCartDao;
     private SupplierDao supplierDao;
+
+    private DatabaseManager() {
+    }
+
+    public static DatabaseManager getInstance() {
+        if (instance == null) {
+            instance = new DatabaseManager();
+        }
+        return instance;
+    }
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
@@ -20,6 +32,26 @@ public class DatabaseManager {
         productDao = ProductDaoMem.getInstance(dataSource);
         shoppingCartDao = ShoppingCartDaoMem.getInstance(dataSource);
         supplierDao = SupplierDaoMem.getInstance(dataSource);
+    }
+
+    public OrderDao getOrderDao() {
+        return orderDao;
+    }
+
+    public ProductCategoryDao getProductCategoryDao() {
+        return productCategoryDao;
+    }
+
+    public ProductDao getProductDao() {
+        return productDao;
+    }
+
+    public ShoppingCartDao getShoppingCartDao() {
+        return shoppingCartDao;
+    }
+
+    public SupplierDao getSupplierDao() {
+        return supplierDao;
     }
 
     private DataSource connect() throws SQLException {
