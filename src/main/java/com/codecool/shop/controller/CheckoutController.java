@@ -19,8 +19,10 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
-    ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
-    OrderDao orderDao = OrderDaoMem.getInstance();
+
+    DatabaseManager dbManager = DatabaseManager.getInstance();
+    ShoppingCartDao shoppingCart = dbManager.getShoppingCartDao();
+    OrderDao orderDao = dbManager.getOrderDao();
 
     ProductService productService = new ProductService(shoppingCart, orderDao);
 

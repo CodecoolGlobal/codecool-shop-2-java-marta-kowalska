@@ -4,10 +4,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -25,10 +22,11 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
-        ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
+        DatabaseManager dbManager = DatabaseManager.getInstance();
+        ProductDao productDataStore = dbManager.getProductDao();
+        ProductCategoryDao productCategoryDataStore = dbManager.getProductCategoryDao();
+        SupplierDao productSupplierDataStore = dbManager.getSupplierDao();
+        ShoppingCartDao shoppingCart = dbManager.getShoppingCartDao();
 
         ProductService productService = new ProductService(productDataStore, productCategoryDataStore, productSupplierDataStore, shoppingCart);
 

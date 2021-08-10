@@ -1,7 +1,10 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.service.ProductService;
@@ -18,9 +21,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
-    ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
 
-    ProductDao productDataStore = ProductDaoMem.getInstance();
+    DatabaseManager dbManager = DatabaseManager.getInstance();
+    ProductDao productDataStore = dbManager.getProductDao();
+    ShoppingCartDao shoppingCart = dbManager.getShoppingCartDao();
 
     ProductService productService = new ProductService(productDataStore, shoppingCart);
 
