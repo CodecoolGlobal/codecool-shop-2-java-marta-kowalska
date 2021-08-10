@@ -4,9 +4,11 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.shoppingCart.ShoppingCart;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
+    private static DataSource dataSource;
 
     private ShoppingCart shoppingCart = new ShoppingCart();
 
@@ -14,12 +16,20 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ShoppingCartDaoMem() {
+    private ShoppingCartDaoMem(DataSource dataSource) {
+        ShoppingCartDaoMem.dataSource = dataSource;
     }
 
     public static ShoppingCartDaoMem getInstance() {
         if (instance == null) {
-            instance = new ShoppingCartDaoMem();
+            instance = new ShoppingCartDaoMem(dataSource);
+        }
+        return instance;
+    }
+
+    public static ShoppingCartDaoMem getInstance(DataSource dataSource) {
+        if (instance == null) {
+            instance = new ShoppingCartDaoMem(dataSource);
         }
         return instance;
     }

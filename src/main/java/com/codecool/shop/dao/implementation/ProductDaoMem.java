@@ -6,23 +6,33 @@ import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
+    private static DataSource dataSource;
 
     private List<Product> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoMem() {
+    private ProductDaoMem(DataSource dataSource) {
+        ProductDaoMem.dataSource = dataSource;
     }
 
     public static ProductDaoMem getInstance() {
         if (instance == null) {
-            instance = new ProductDaoMem();
+            instance = new ProductDaoMem(dataSource);
+        }
+        return instance;
+    }
+
+    public static ProductDaoMem getInstance(DataSource dataSource) {
+        if (instance == null) {
+            instance = new ProductDaoMem(dataSource);
         }
         return instance;
     }

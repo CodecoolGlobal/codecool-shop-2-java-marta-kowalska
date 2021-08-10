@@ -4,22 +4,32 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.product.ProductCategory;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
+    private static DataSource dataSource;
 
     private List<ProductCategory> data = new ArrayList<>();
     private static ProductCategoryDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductCategoryDaoMem() {
+    private ProductCategoryDaoMem(DataSource dataSource) {
+        ProductCategoryDaoMem.dataSource = dataSource;
     }
 
     public static ProductCategoryDaoMem getInstance() {
         if (instance == null) {
-            instance = new ProductCategoryDaoMem();
+            instance = new ProductCategoryDaoMem(dataSource);
+        }
+        return instance;
+    }
+
+    public static ProductCategoryDaoMem getInstance(DataSource dataSource) {
+        if (instance == null) {
+            instance = new ProductCategoryDaoMem(dataSource);
         }
         return instance;
     }
