@@ -2,9 +2,14 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +32,32 @@ public class OrderDaoMem implements OrderDao {
     }
 
     @Override
-    public void add(Order order) {
-        order.setId(data.size() + 1);
-        data.add(order);
+    public int add(String firstName,
+                    String lastName,
+                    String email,
+                    String phoneNumber,
+                    String country,
+                    String city,
+                    String zipcode,
+                    String address) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "INSERT INTO webshop_order VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, email);
+            statement.setString(4, phoneNumber);
+            statement.setString(5, country);
+            statement.setString(6, city);
+            statement.setString(7, zipcode);
+            statement.setString(8, address);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+            // TODO create order items (same as cart items)
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
