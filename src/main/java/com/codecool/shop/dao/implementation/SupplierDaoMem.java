@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
 
 import javax.sql.DataSource;
@@ -61,6 +62,20 @@ public class SupplierDaoMem implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() {
-        return data;
+        try (Connection conn = dataSource.getConnection()) {
+            List<Supplier> allSuppliers = new ArrayList<>();
+            String sql = "SELECT id, name FROM product_supplier";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Supplier supplier = new Supplier(rs.getString("NAME"));
+                supplier.setId(rs.getInt("ID"));
+                allSuppliers.add(supplier);
+            }
+            return allSuppliers;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
