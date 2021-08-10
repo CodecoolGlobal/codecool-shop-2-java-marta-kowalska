@@ -7,6 +7,10 @@ import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,21 +34,40 @@ public class ProductDaoMem implements ProductDao {
         return instance;
     }
 
-    @Override
-    public void add(Product product) {
-        product.setId(data.size() + 1);
-        data.add(product);
-    }
+//    @Override
+//    public void add(Product product) {
+//        product.setId(data.size() + 1);
+//        data.add(product);
+//    }
 
     @Override
     public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT id, name, description, price, currency, picture, category_id, supplier_id FROM product WHERE id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            return new Product(rs.getInt("ID"),
+                rs.getString("NAME"),
+                rs.getString("DESCRIPTION"),
+                rs.getFloat("PRICE"),
+                rs.getString("CURRENCY"),
+                rs.getString("PICTURE"),
+                rs.getInt("CATEGORY_ID"),
+                rs.getInt("SUPPLIER_ID")
+                );
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
-    public void remove(int id) {
-        data.remove(find(id));
-    }
+//    @Override
+//    public void remove(int id) {
+//        data.remove(find(id));
+//    }
 
     @Override
     public List<Product> getAll() {
@@ -53,18 +76,21 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+        return null;
+//        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+//        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    return null;
     }
 
     public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
-        return data.stream()
-            .filter(t -> t.getProductCategory().equals(productCategory))
-            .filter(t -> t.getSupplier().equals(supplier))
-            .collect(Collectors.toList());
+//        return data.stream()
+//            .filter(t -> t.getProductCategory().equals(productCategory))
+//            .filter(t -> t.getSupplier().equals(supplier))
+//            .collect(Collectors.toList());
+        return null;
     }
 }
