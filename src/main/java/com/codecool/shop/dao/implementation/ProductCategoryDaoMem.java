@@ -5,13 +5,13 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.product.ProductCategory;
 
 import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
     private static DataSource dataSource;
 
-    private List<ProductCategory> data = new ArrayList<>();
     private static ProductCategoryDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -27,24 +27,43 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
         return instance;
     }
 
-    @Override
-    public void add(ProductCategory category) {
-        category.setId(data.size() + 1);
-        data.add(category);
-    }
 
     @Override
     public ProductCategory find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT name FROM product_category WHERE id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            ProductCategory productCategory = new ProductCategory(rs.getString(1));
+            productCategory.setId(id);
+            return productCategory;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
-    public void remove(int id) {
-        data.remove(find(id));
-    }
 
     @Override
     public List<ProductCategory> getAll() {
-        return data;
+        try (Connection conn = dataSource.getConnection()) {
+            List<ProductCategory> allCategories = new ArrayList<>();
+            String sql = "SELECT id, name FROM product_category";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+//                System.out.println(rs.getString("NAME"));
+                ProductCategory category = new ProductCategory(rs.getString("NAME"));
+                category.setId(rs.getInt("ID"));
+                allCategories.add(category);
+            }
+            return allCategories;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
