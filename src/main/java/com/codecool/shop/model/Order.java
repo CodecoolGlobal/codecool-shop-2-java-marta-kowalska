@@ -11,10 +11,6 @@ public class Order {
     String city;
     String zipcode;
     String address;
-    String billingCountry;
-    String billingCity;
-    String billingZipcode;
-    String billingAddress;
 
     public Order(
                  String firstName,
@@ -55,10 +51,6 @@ public class Order {
                 ", city='" + city + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", address='" + address + '\'' +
-                ", billingCountry='" + billingCountry + '\'' +
-                ", billingCity='" + billingCity + '\'' +
-                ", billingZipcode='" + billingZipcode + '\'' +
-                ", billingAddress='" + billingAddress + '\'' +
                 '}';
     }
 }
