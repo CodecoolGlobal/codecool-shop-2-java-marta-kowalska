@@ -15,15 +15,23 @@ public class Product extends BaseModel {
     @SerializedName("image")
     private final String image;
     private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    private int categoryId;
+    private int supplierId;
 
 
-    public Product(String name, String image, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(int id,
+                   String name,
+                   String image,
+                   float defaultPrice,
+                   String currencyString,
+                   String description,
+                   int categoryId,
+                   int supplierId) {
         super(name, description);
+        this.setId(id);
         this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
+        this.supplierId = supplierId;
+        this.categoryId = categoryId;
         this.image = createImageName(image);
 
     }
@@ -65,22 +73,22 @@ public class Product extends BaseModel {
         this.defaultCurrency = Currency.getInstance(currency);
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public int getProductCategoryId() {
+        return categoryId;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
+    public void setProductCategoryId(int productCategoryId) {
+        this.categoryId = productCategoryId;
+
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public int getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-        this.supplier.addProduct(this);
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+//        this.supplier.addProduct(this);
     }
 
     @Override
@@ -89,13 +97,13 @@ public class Product extends BaseModel {
                         "name: %2$s, " +
                         "defaultPrice: %3$f, " +
                         "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s",
+                        "productCategoryId: %5$d, " +
+                        "supplierId: %6$d",
                 this.id,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
+                this.categoryId,
+                this.supplierId);
     }
 }
