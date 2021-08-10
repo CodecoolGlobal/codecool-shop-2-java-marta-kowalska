@@ -4,6 +4,10 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.product.Supplier;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +38,20 @@ public class SupplierDaoMem implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT name FROM product_supplier WHERE id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            Supplier supplier = new Supplier(rs.getString(1));
+            supplier.setId(id);
+            return supplier;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
 //    @Override
