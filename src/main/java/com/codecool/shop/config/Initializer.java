@@ -19,7 +19,7 @@ public class Initializer implements ServletContextListener {
     }
 
     private void setupDbManager () {
-        dbManager = new DatabaseManager();
+        dbManager = DatabaseManager.getInstance();
         try {
             dbManager.setup();
         } catch (SQLException ex) {
