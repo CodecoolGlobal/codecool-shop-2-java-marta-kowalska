@@ -29,9 +29,9 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
-        logger.debug("Temperature set e");
-        logger.warn("Temperature has risen above 50 degrees.");
-        logger.info("Temperature has risen above 30 degrees.");
+//        logger.debug("Temperature set e");
+//        logger.warn("Temperature has risen above 50 degrees.");
+//        logger.info("Temperature has risen above 30 degrees.");
 
         //setting up a new supplier
         Supplier bkk = new Supplier("BKK", "Buses");
