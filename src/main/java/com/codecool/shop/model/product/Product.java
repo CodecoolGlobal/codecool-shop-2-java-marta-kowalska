@@ -21,10 +21,10 @@ public class Product extends BaseModel {
 
     public Product(int id,
                    String name,
-                   String image,
+                   String description,
                    float defaultPrice,
                    String currencyString,
-                   String description,
+                   String image,
                    int categoryId,
                    int supplierId) {
         super(name, description);
