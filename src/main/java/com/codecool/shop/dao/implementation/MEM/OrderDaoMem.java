@@ -1,8 +1,8 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.MEM;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.product.ProductCategory;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,15 @@ public class OrderDaoMem implements OrderDao {
         return instance;
     }
 
-    @Override
+
     public void add(Order order) {
         order.setId(data.size() + 1);
         data.add(order);
+    }
+
+    @Override
+    public int add(String firstName, String lastName, String email, String phoneNumber, String country, String city, String zipcode, String address) {
+        return 0;
     }
 
     @Override

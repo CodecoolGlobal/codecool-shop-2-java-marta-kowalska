@@ -11,8 +11,8 @@ public interface ShoppingCartDao {
         void remove(Product product);
         HashMap<Product, Integer> getAll();
         ShoppingCart getCart();
-
         void deleteCart();
+        void deleteItem(Product product);
 }
 
 

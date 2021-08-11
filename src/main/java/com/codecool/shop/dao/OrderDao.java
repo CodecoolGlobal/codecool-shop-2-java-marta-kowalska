@@ -6,7 +6,15 @@ import java.util.List;
 
 public interface OrderDao {
 
-    void add(Order order);
+    int add(String firstName,
+             String lastName,
+             String email,
+             String phoneNumber,
+             String country,
+             String city,
+             String zipcode,
+             String address);
+
     Order find(int id);
     void remove(int id);
 

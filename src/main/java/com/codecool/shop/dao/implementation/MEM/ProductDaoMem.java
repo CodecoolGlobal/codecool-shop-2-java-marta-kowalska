@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.MEM;
 
 
 import com.codecool.shop.dao.ProductDao;
@@ -64,4 +64,6 @@ public class ProductDaoMem implements ProductDao {
             .filter(t -> t.getSupplier().equals(supplier))
             .collect(Collectors.toList());
     }
+
+
 }

@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class ShoppingCart {
 
     private HashMap<Product, Integer> shoppingCart;
+    private int id;
     private static final Logger logger = LoggerFactory.getLogger(ShoppingCart.class);
 
     public float getShoppingCartSummary(){
@@ -73,5 +74,9 @@ public class ShoppingCart {
     public void clearCart() {
         shoppingCart = new HashMap<>();
         logger.debug("Shopping cart emptied. ");
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

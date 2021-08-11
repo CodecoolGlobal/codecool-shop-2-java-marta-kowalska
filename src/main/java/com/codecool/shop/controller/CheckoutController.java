@@ -19,8 +19,10 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
-    ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
-    OrderDao orderDao = OrderDaoMem.getInstance();
+
+    DatabaseManager dbManager = DatabaseManager.getInstance();
+    ShoppingCartDao shoppingCart = dbManager.getShoppingCartDao();
+    OrderDao orderDao = dbManager.getOrderDao();
 
     ProductService productService = new ProductService(shoppingCart, orderDao);
 
@@ -34,20 +36,14 @@ public class CheckoutController extends HttpServlet {
 
         context.setVariable("summary", productService.getShoppingCart().getShoppingCartSummary());
 
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
         engine.process("product/checkout.html", context, resp.getWriter());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
 
         String firstName = req.getParameter("fname");
         String lastName = req.getParameter("lname");
@@ -58,15 +54,9 @@ public class CheckoutController extends HttpServlet {
         String zipcode = req.getParameter("zipcode");
         String address = req.getParameter("address");
 
-        String billingCountry = req.getParameter("b-country");
-        String billingCity = req.getParameter("b-city");
-        String billingZipcode = req.getParameter("b-zipcode");
-        String billingAddress = req.getParameter("b-address");
+        int orderId = orderDao.add(firstName, lastName, email, phoneNumber, country, city, zipcode, address);
 
-        Order order = new Order(firstName, lastName, email, phoneNumber, country, city, zipcode, address);
-        orderDao.add(order);
-
-        context.setVariable("id", productService.getOrderId(order));
+        context.setVariable("id", orderId);
         context.setVariable("fname", firstName);
         context.setVariable("lname", lastName);
         context.setVariable("email", email);
