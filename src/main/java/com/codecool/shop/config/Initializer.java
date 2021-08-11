@@ -16,8 +16,12 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebListener
 public class Initializer implements ServletContextListener {
+    private static final Logger logger = LoggerFactory.getLogger(Initializer.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -25,6 +29,9 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
+//        logger.debug("Temperature set e");
+//        logger.warn("Temperature has risen above 50 degrees.");
+//        logger.info("Temperature has risen above 30 degrees.");
 
         //setting up a new supplier
         Supplier bkk = new Supplier("BKK", "Buses");
