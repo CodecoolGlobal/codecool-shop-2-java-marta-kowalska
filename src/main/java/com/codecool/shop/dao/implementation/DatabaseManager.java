@@ -27,11 +27,11 @@ public class DatabaseManager {
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
-        orderDao = OrderDaoMem.getInstance(dataSource);
-        productCategoryDao = ProductCategoryDaoMem.getInstance(dataSource);
-        productDao = ProductDaoMem.getInstance(dataSource);
-        shoppingCartDao = ShoppingCartDaoMem.getInstance(dataSource);
-        supplierDao = SupplierDaoMem.getInstance(dataSource);
+        orderDao = OrderDaoJdbc.getInstance(dataSource);
+        productCategoryDao = ProductCategoryDaoJdbc.getInstance(dataSource);
+        productDao = ProductDaoJdbc.getInstance(dataSource);
+        shoppingCartDao = ShoppingCartDaoJdbc.getInstance(dataSource);
+        supplierDao = SupplierDaoJdbc.getInstance(dataSource);
     }
 
     public OrderDao getOrderDao() {

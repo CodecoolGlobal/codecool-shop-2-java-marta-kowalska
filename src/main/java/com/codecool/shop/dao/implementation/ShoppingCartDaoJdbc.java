@@ -7,23 +7,23 @@ import com.codecool.shop.model.shoppingCart.ShoppingCart;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
-public class ShoppingCartDaoMem implements ShoppingCartDao {
+public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     private static DataSource dataSource;
 
     private ShoppingCart shoppingCart = new ShoppingCart();
 
-    private static ShoppingCartDaoMem instance = null;
+    private static ShoppingCartDaoJdbc instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ShoppingCartDaoMem(DataSource dataSource) {
-        ShoppingCartDaoMem.dataSource = dataSource;
+    private ShoppingCartDaoJdbc(DataSource dataSource) {
+        ShoppingCartDaoJdbc.dataSource = dataSource;
     }
 
 
-    public static ShoppingCartDaoMem getInstance(DataSource dataSource) {
+    public static ShoppingCartDaoJdbc getInstance(DataSource dataSource) {
         if (instance == null) {
-            instance = new ShoppingCartDaoMem(dataSource);
+            instance = new ShoppingCartDaoJdbc(dataSource);
         }
         return instance;
     }

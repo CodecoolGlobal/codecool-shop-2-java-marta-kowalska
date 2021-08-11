@@ -14,21 +14,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoMem implements ProductDao {
+public class ProductDaoJdbc implements ProductDao {
     private static DataSource dataSource;
 
     private List<Product> data = new ArrayList<>();
-    private static ProductDaoMem instance = null;
+    private static ProductDaoJdbc instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoMem(DataSource dataSource) {
-        ProductDaoMem.dataSource = dataSource;
+    private ProductDaoJdbc(DataSource dataSource) {
+        ProductDaoJdbc.dataSource = dataSource;
     }
 
-    public static ProductDaoMem getInstance(DataSource dataSource) {
+    public static ProductDaoJdbc getInstance(DataSource dataSource) {
         if (instance == null) {
-            instance = new ProductDaoMem(dataSource);
+            instance = new ProductDaoJdbc(dataSource);
         }
         return instance;
     }

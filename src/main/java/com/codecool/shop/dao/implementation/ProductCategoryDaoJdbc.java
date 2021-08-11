@@ -9,20 +9,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoMem implements ProductCategoryDao {
+public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static DataSource dataSource;
 
-    private static ProductCategoryDaoMem instance = null;
+    private static ProductCategoryDaoJdbc instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductCategoryDaoMem(DataSource dataSource) {
-        ProductCategoryDaoMem.dataSource = dataSource;
+    private ProductCategoryDaoJdbc(DataSource dataSource) {
+        ProductCategoryDaoJdbc.dataSource = dataSource;
     }
 
-    public static ProductCategoryDaoMem getInstance(DataSource dataSource) {
+    public static ProductCategoryDaoJdbc getInstance(DataSource dataSource) {
         if (instance == null) {
-            instance = new ProductCategoryDaoMem(dataSource);
+            instance = new ProductCategoryDaoJdbc(dataSource);
         }
         return instance;
     }
