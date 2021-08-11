@@ -105,18 +105,13 @@ public class Product extends BaseModel {
 
     @Override
     public String toString() {
-        return "product";
-//        String.format("id: %1$d, " +
-//                "name: %2$s, " +
-//                "defaultPrice: %3$f, " +
-//                "defaultCurrency: %4$s, " +
-//                "productCategory: %5$s, " +
-//                "supplier: %6$s",
-//            this.id,
-//            this.name,
-//            this.defaultPrice,
-//            this.defaultCurrency.toString(),
-//            this.productCategory.getName(),
-//            this.supplier.getName());
+        return String.format("id: %1$d, " +
+                "name: %2$s, " +
+                "defaultPrice: %3$f, " +
+                "defaultCurrency: %4$s, ",
+            this.id,
+            this.name,
+            this.defaultPrice,
+            this.defaultCurrency.toString());
     }
 }
