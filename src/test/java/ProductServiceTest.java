@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,7 @@ class ProductServiceTest {
     private ProductDao productDaoMock;
     private ProductCategoryDao productCategoryDaoMock;
     private SupplierDao productSupplierDaoMock;
-    private ShoppingCartDao shoppingCartMock;
+    private ShoppingCartDao shoppingCartDaoMock;
     ProductService productService;
     private OrderDao orderDaoMock;
     private List<Product> emptyProductList = new ArrayList<>();
@@ -38,9 +37,9 @@ class ProductServiceTest {
         productDaoMock = mock(ProductDao.class);
         productCategoryDaoMock = mock(ProductCategoryDao.class);
         productSupplierDaoMock = mock(SupplierDao.class);
-        shoppingCartMock = mock(ShoppingCartDao.class);
+        shoppingCartDaoMock = mock(ShoppingCartDao.class);
         orderDaoMock = mock(OrderDao.class);
-        productService = new ProductService(productDaoMock,productCategoryDaoMock,productSupplierDaoMock,shoppingCartMock);
+        productService = new ProductService(productDaoMock,productCategoryDaoMock,productSupplierDaoMock, shoppingCartDaoMock);
     }
 
     @AfterEach
@@ -196,7 +195,7 @@ class ProductServiceTest {
         HashMap<Product, Integer> expected = new HashMap<>();
         expected.put(dummyProduct, 5);
 
-        when(shoppingCartMock
+        when(shoppingCartDaoMock
             .getAll())
             .thenReturn(expected);
 
@@ -208,7 +207,7 @@ class ProductServiceTest {
     void getAllCartItems_WhenNoProducts_ThenReturnsEmptyHashMap() {
         HashMap<Product, Integer> expected = new HashMap<>();
 
-        when(shoppingCartMock
+        when(shoppingCartDaoMock
             .getAll())
             .thenReturn(new HashMap<>());
 
@@ -218,7 +217,7 @@ class ProductServiceTest {
 
     @Test
     void getAllCartItems_nullProvided_returnsNull() {
-         when(shoppingCartMock
+         when(shoppingCartDaoMock
             .getAll())
             .thenReturn(null);
 
@@ -228,7 +227,7 @@ class ProductServiceTest {
 
     @Test
     void getShoppingCart_WhenShoppingCartExists_ThenReturnsShoppingCart() {
-        when(shoppingCartMock
+        when(shoppingCartDaoMock
             .getCart())
             .thenReturn(dummyShoppingCart);
 
@@ -240,7 +239,7 @@ class ProductServiceTest {
 
     @Test
     void getShoppingCart_WhenNoShoppingCartExists_ThenReturnsNull() {
-        when(shoppingCartMock
+        when(shoppingCartDaoMock
             .getCart())
             .thenReturn(null);
 
@@ -250,7 +249,24 @@ class ProductServiceTest {
     }
 
     @Test
-    void getAllSuppliers() {
+    void getAllSuppliers_WhenSuppliersExist_ThenReturnsListOfSuppliers() {
+        var expected = List.of(dummySupplier, dummySupplier);
+        when(productSupplierDaoMock
+            .getAll())
+            .thenReturn(List.of(dummySupplier, dummySupplier));
+
+        var result = productService.getAllSuppliers();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void getAllSuppliers_WhenNoSuppliersExist_ThenReturnsNull() {
+        when(productSupplierDaoMock
+            .getAll())
+            .thenReturn(null);
+
+        var result = productService.getAllSuppliers();
+        assertNull(result);
     }
 
     @Test
