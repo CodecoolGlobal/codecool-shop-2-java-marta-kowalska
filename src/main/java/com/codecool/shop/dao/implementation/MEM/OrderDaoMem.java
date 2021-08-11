@@ -1,8 +1,8 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.MEM;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.product.ProductCategory;
+
 
 import java.util.ArrayList;
 import java.util.List;

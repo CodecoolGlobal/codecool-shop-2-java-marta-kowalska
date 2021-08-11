@@ -1,29 +1,25 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.MEM;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.shoppingCart.ShoppingCart;
 
-import javax.sql.DataSource;
 import java.util.HashMap;
 
-public class ShoppingCartDaoJdbc implements ShoppingCartDao {
-    private static DataSource dataSource;
+public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     private ShoppingCart shoppingCart = new ShoppingCart();
 
-    private static ShoppingCartDaoJdbc instance = null;
+    private static ShoppingCartDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ShoppingCartDaoJdbc(DataSource dataSource) {
-        ShoppingCartDaoJdbc.dataSource = dataSource;
+    private ShoppingCartDaoMem() {
     }
 
-
-    public static ShoppingCartDaoJdbc getInstance(DataSource dataSource) {
+    public static ShoppingCartDaoMem getInstance() {
         if (instance == null) {
-            instance = new ShoppingCartDaoJdbc(dataSource);
+            instance = new ShoppingCartDaoMem();
         }
         return instance;
     }

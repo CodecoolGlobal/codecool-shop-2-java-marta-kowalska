@@ -1,12 +1,7 @@
 package com.codecool.shop.model;
 
 
-import com.codecool.shop.model.shoppingCart.ShoppingCart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Order {
-    private static final Logger logger = LoggerFactory.getLogger(ShoppingCart.class);
     int id;
     String firstName;
     String lastName;
@@ -16,6 +11,10 @@ public class Order {
     String city;
     String zipcode;
     String address;
+    String billingCountry;
+    String billingCity;
+    String billingZipcode;
+    String billingAddress;
 
     public Order(
                  String firstName,
@@ -34,8 +33,6 @@ public class Order {
         this.city = city;
         this.zipcode = zipcode;
         this.address = address;
-        logger.info("Order added. " +this.toString());
-        logger.warn("Not payed yet. ");
     }
 
     public void setId(int id) {
@@ -58,6 +55,10 @@ public class Order {
                 ", city='" + city + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", address='" + address + '\'' +
+                ", billingCountry='" + billingCountry + '\'' +
+                ", billingCity='" + billingCity + '\'' +
+                ", billingZipcode='" + billingZipcode + '\'' +
+                ", billingAddress='" + billingAddress + '\'' +
                 '}';
     }
 }

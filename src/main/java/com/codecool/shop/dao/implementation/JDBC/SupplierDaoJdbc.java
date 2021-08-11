@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.product.Supplier;
@@ -30,11 +30,11 @@ public class SupplierDaoJdbc implements SupplierDao {
         return instance;
     }
 
-//    @Override
-//    public void add(Supplier supplier) {
-//        supplier.setId(data.size() + 1);
-//        data.add(supplier);
-//    }
+    @Override
+    public void add(Supplier supplier) { //TODO change implementation
+        supplier.setId(data.size() + 1);
+        data.add(supplier);
+    }
 
     @Override
     public Supplier find(int id) {
@@ -54,10 +54,10 @@ public class SupplierDaoJdbc implements SupplierDao {
         }
     }
 
-//    @Override
-//    public void remove(int id) {
-//        data.remove(find(id));
-//    }
+    @Override
+    public void remove(int id) { //TODO change implementation
+        data.remove(find(id));
+    }
 
     @Override
     public List<Supplier> getAll() {

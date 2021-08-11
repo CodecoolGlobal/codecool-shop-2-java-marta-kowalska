@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.JDBC;
 
 
 import com.codecool.shop.dao.ProductCategoryDao;
@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static DataSource dataSource;
@@ -29,6 +30,11 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
 
     @Override
+    public void add(ProductCategory category) {
+
+    }
+
+    @Override
     public ProductCategory find(int id) {
         try (Connection conn = dataSource.getConnection()) {
             String sql = "SELECT name FROM product_category WHERE id=?";
@@ -44,6 +50,11 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void remove(int id) {
+
     }
 
 

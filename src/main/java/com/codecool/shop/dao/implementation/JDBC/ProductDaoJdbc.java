@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.JDBC;
 
 
 import com.codecool.shop.dao.ProductDao;
@@ -33,11 +33,11 @@ public class ProductDaoJdbc implements ProductDao {
         return instance;
     }
 
-//    @Override
-//    public void add(Product product) {
-//        product.setId(data.size() + 1);
-//        data.add(product);
-//    }
+    @Override
+    public void add(Product product) {
+        product.setId(data.size() + 1);
+        data.add(product);
+    }
 
     @Override
     public Product find(int id) {
@@ -63,10 +63,10 @@ public class ProductDaoJdbc implements ProductDao {
         }
     }
 
-//    @Override
-//    public void remove(int id) {
-//        data.remove(find(id));
-//    }
+    @Override
+    public void remove(int id) {
+        data.remove(find(id));
+    }
 
     @Override
     public List<Product> getAll() {
