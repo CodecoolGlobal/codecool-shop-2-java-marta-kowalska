@@ -14,24 +14,22 @@ public class ProductService{
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao productSupplierDao;
-    private ShoppingCartDao shoppingCart;
+    private ShoppingCartDao shoppingCartDao;
     private OrderDao orderDao;
 
     public ProductService(ProductDao productDao,
                           ProductCategoryDao productCategoryDao,
                           SupplierDao productSupplierDataStore,
-                          ShoppingCartDao shoppingCart
+                          ShoppingCartDao shoppingCartDao
                           ) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.productSupplierDao = productSupplierDataStore;
-        this.shoppingCart = shoppingCart;
-
-
+        this.shoppingCartDao = shoppingCartDao;
     }
 
     public ProductService(ProductDao productDao, ShoppingCartDao shoppingCartDao){
-        this.shoppingCart = shoppingCartDao;
+        this.shoppingCartDao = shoppingCartDao;
         this.productDao = productDao;
     }
 
@@ -45,12 +43,12 @@ public class ProductService{
 
     }
 
-    public ProductService(ShoppingCartDao shoppingCart) {
-        this.shoppingCart = shoppingCart;
+    public ProductService(ShoppingCartDao shoppingCartDao) {
+        this.shoppingCartDao = shoppingCartDao;
     }
 
-    public ProductService(ShoppingCartDao shoppingCart, OrderDao orderDao) {
-        this.shoppingCart = shoppingCart;
+    public ProductService(ShoppingCartDao shoppingCartDao, OrderDao orderDao) {
+        this.shoppingCartDao = shoppingCartDao;
         this.orderDao = orderDao;
     }
 
@@ -79,11 +77,11 @@ public class ProductService{
     }
 
     public HashMap<Product,Integer> getAllCartItems(){
-        return shoppingCart.getAll();
+        return shoppingCartDao.getAll();
     }
 
     public ShoppingCart getShoppingCart() {
-        return shoppingCart.getCart();
+        return shoppingCartDao.getCart();
     }
 
     public List<Supplier> getAllSuppliers() {
