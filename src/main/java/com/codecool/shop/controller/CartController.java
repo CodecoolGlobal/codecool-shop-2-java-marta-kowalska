@@ -31,7 +31,8 @@ public class CartController extends HttpServlet {
         String action = req.getParameter("action");
         switch (action){
             case "add":
-                productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));
+                productService.addProductToShippingCart(productDataStore.find(productId));
+//                productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));
                 break;
             case "remove":
                 productService.getShoppingCart().removeOneItemFromShoppingCart(productDataStore.find(productId));
