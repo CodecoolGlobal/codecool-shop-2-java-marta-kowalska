@@ -40,12 +40,6 @@ public class ProductController extends HttpServlet {
         context.setVariable("products", productService.getAllProducts());
         context.setVariable("cartItemCount", productService.getShoppingCart().getCartItemCount());
 
-
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
         engine.process("product/index.html", context, resp.getWriter());
     }
 
