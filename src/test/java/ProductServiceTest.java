@@ -11,7 +11,9 @@ import org.mockito.Mockito;
 import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -190,7 +192,38 @@ class ProductServiceTest {
     }
 
     @Test
-    void getAllCartItems() {
+    void getAllCartItems_WhenHaveProducts_ThenReturnsHashMapWithProducts() {
+        HashMap<Product, Integer> expected = new HashMap<>();
+        expected.put(dummyProduct, 5);
+
+        when(shoppingCartMock
+            .getAll())
+            .thenReturn(expected);
+
+        var result = productService.getAllCartItems();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void getAllCartItems_WhenNoProducts_ThenReturnsEmptyHashMap() {
+        HashMap<Product, Integer> expected = new HashMap<>();
+
+        when(shoppingCartMock
+            .getAll())
+            .thenReturn(new HashMap<>());
+
+        var result = productService.getAllCartItems();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void getAllCartItems_nullProvided_returnsNull() {
+         when(shoppingCartMock
+            .getAll())
+            .thenReturn(null);
+
+        var result = productService.getAllCartItems();
+        assertNull(result);
     }
 
     @Test
