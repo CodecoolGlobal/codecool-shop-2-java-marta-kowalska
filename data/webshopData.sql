@@ -71,7 +71,8 @@ CREATE TABLE cart_item
             REFERENCES shopping_cart(id),
     CONSTRAINT fk_product_id
         FOREIGN KEY(product_id)
-            REFERENCES product(id)
+            REFERENCES product(id),
+            unique(product_id)
 );
 
 DROP TABLE IF EXISTS webshop_order;
@@ -139,4 +140,6 @@ INSERT INTO product VALUES  (8, 'Hoodie', 'A must have for every real hacker', 1
 INSERT INTO product VALUES  (9, '105 bus', 'Bus to get you everywhere you want with your hacker friends. Bus connecting people', 1, DEFAULT, '105bus.jpg', 0, 0);
 SELECT pg_catalog.setval('product_id_seq', 9, true);
 
+INSERT INTO shopping_cart VALUES  (1, DEFAULT);
+SELECT pg_catalog.setval('shopping_cart_id_seq', 1, true);
 
