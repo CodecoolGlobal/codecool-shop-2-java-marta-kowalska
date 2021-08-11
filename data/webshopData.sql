@@ -66,6 +66,11 @@ CREATE TABLE cart_item
     quantity INT NOT NULL,
     shopping_cart_id INT,
     product_id INT,
+    name varchar NOT NULL,
+    description varchar NOT NULL,
+    picture varchar NOT NULL,
+    category_id INT,
+    supplier_id INT,
     CONSTRAINT fk_shopping_cart_id
         FOREIGN KEY(shopping_cart_id)
             REFERENCES shopping_cart(id),
@@ -100,6 +105,11 @@ CREATE TABLE order_item
     quantity INTEGER NOT NULL,
     order_id INT,
     product_id INT,
+    name varchar NOT NULL,
+    description varchar NOT NULL,
+    picture varchar NOT NULL,
+    category_id INT,
+    supplier_id INT,
     CONSTRAINT fk_order_id
         FOREIGN KEY(order_id)
             REFERENCES webshop_order(id),
