@@ -8,6 +8,7 @@ public class Supplier extends BaseModel {
 
     public Supplier(String name) {
         super(name);
+        products = new ArrayList<>();
     }
 
     public void setProducts(ArrayList<Product> products) {
