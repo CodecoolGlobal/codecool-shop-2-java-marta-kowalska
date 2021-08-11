@@ -2,6 +2,7 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
+import com.codecool.shop.model.shoppingCart.ShoppingCart;
 import com.codecool.shop.service.ProductService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,6 @@ import org.mockito.internal.matchers.Null;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -31,7 +31,7 @@ class ProductServiceTest {
     ProductCategory dummyCategory = new ProductCategory("dummyCategory");
     Supplier dummySupplier = new Supplier("dummySupplier");
     Product dummyProduct = new Product("dummyProduct", 150, "USD", "hoodie.jpg", "A must have for every real hacker", dummyCategory, dummySupplier);
-
+    ShoppingCart dummyShoppingCart = new ShoppingCart();
 
     @BeforeEach
     void setUp() {
@@ -227,7 +227,26 @@ class ProductServiceTest {
     }
 
     @Test
-    void getShoppingCart() {
+    void getShoppingCart_WhenShoppingCartExists_ThenReturnsShoppingCart() {
+        when(shoppingCartMock
+            .getCart())
+            .thenReturn(dummyShoppingCart);
+
+        var expected = dummyShoppingCart;
+        var result = productService.getShoppingCart();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void getShoppingCart_WhenNoShoppingCartExists_ThenReturnsNull() {
+        when(shoppingCartMock
+            .getCart())
+            .thenReturn(null);
+
+        var result = productService.getShoppingCart();
+
+        assertNull(result);
     }
 
     @Test
