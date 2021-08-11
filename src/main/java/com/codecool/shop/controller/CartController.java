@@ -2,8 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -18,9 +17,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
-    ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
 
-    ProductDao productDataStore = ProductDaoMem.getInstance();
+    DatabaseManager dbManager = DatabaseManager.getInstance();
+    ProductDao productDataStore = dbManager.getProductDao();
+    ShoppingCartDao shoppingCart = dbManager.getShoppingCartDao();
 
     ProductService productService = new ProductService(productDataStore, shoppingCart);
 
@@ -31,7 +31,8 @@ public class CartController extends HttpServlet {
         String action = req.getParameter("action");
         switch (action){
             case "add":
-                productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));
+                productService.addProductToShippingCart(productDataStore.find(productId));
+//                productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));
                 break;
             case "remove":
                 productService.getShoppingCart().removeOneItemFromShoppingCart(productDataStore.find(productId));

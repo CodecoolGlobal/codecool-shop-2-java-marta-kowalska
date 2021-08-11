@@ -1,21 +1,18 @@
 package com.codecool.shop.config;
 
 
+import com.codecool.shop.dao.implementation.DatabaseManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.sql.DataSource;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class LoadJDBCSettingsFromPropertiesFile {
 
     private static Logger logger = LoggerFactory.getLogger(LoadJDBCSettingsFromPropertiesFile.class);
+    private DatabaseManager dbManager;
 
     public void load() {
         try {
@@ -37,53 +34,26 @@ public class LoadJDBCSettingsFromPropertiesFile {
             String dbName = props.getProperty("db.dbname");
             String dbUserName = props.getProperty("db.username");
             String dbPassword = props.getProperty("db.password");
-            System.out.printf(" %s  %s  %s %n ",dbUserName, dbPassword , dbName);
+            String dao = props.getProperty("dao");
 
-
-//            if (!"".equals(dbDriverClass) && !"".equals(dbConnUrl)) {
-//                /* Register jdbc driver class. */
-//                Class.forName(dbDriverClass);
-//
-//                // Get database connection object.
-//                Connection dbConn = DriverManager.getConnection(dbConnUrl, dbUserName, dbPassword);
-//
-//                // Get dtabase meta data.
-//                DatabaseMetaData dbMetaData = dbConn.getMetaData();
-//
-//                // Get database name.
-//                String dbName = dbMetaData.getDatabaseProductName();
-//
-//                // Get database version.
-//                String dbVersion = dbMetaData.getDatabaseProductVersion();
-//        }
-
-//            public void setup() throws SQLException {
-//                DataSource dataSource = connect();
-//            }
-//
-//            private DataSource connect() throws SQLException {
-//                PGSimpleDataSource dataSource = new PGSimpleDataSource();
-//                String dbName = dbPassword;
-//                String user = dbUserName
-//                String password = dbPassword;
-//
-//                dataSource.setDatabaseName(dbName);
-//                dataSource.setUser(user);
-//                dataSource.setPassword(password);
-//
-//                System.out.println("Trying to connect");
-//                dataSource.getConnection().close();
-//                System.out.println("Connection ok.");
-//                return dataSource;
-//            }
-
-
-//            }else{
-//            /* use classes as Database Objects. */
-//            }
+            if (!"".equals(dbDriverClass) && !"".equals(dbConnUrl)) {
+                dbManager = DatabaseManager.getInstance();
+                if (dao.equals("memory")) {
+                    dbManager.initializeMemoryData();
+                } else {
+                    try {
+                        dbManager.setup(dbName, dbUserName, dbPassword);
+                    } catch (SQLException ex) {
+                        System.out.println("Cannot connect to database.");
+                        System.out.println(ex.getMessage());
+                        logger.error("Cannot connect to database, switched to memory." + ex);
+                        dbManager.initializeMemoryData();
+                    }
+                }
+            }
 
         } catch (FileNotFoundException err) {
-            logger.error("Error " +err);
+            logger.error("Error " + err);
             err.printStackTrace();
         } catch (Exception ex) {
             logger.error("Error " + ex);

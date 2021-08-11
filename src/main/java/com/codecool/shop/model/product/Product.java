@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Currency;
 
 public class Product extends BaseModel {
+
     private final static String IMG_PATH = "/static/img/";
 
     @Expose
@@ -13,23 +14,38 @@ public class Product extends BaseModel {
     private float defaultPrice;
     @Expose
     @SerializedName("image")
-    private final String image;
+    private String image;
     private Currency defaultCurrency;
+    private int categoryId;
+    private int supplierId;
     private ProductCategory productCategory;
     private Supplier supplier;
 
 
-    public Product(String name, String image, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(String name, float defaultPrice, String currencyString, String image, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
         this.image = createImageName(image);
-
     }
 
-    public String getImage() {
-        return image;
+
+    public Product(int id,
+                   String name,
+                   String description,
+                   float defaultPrice,
+                   String currencyString,
+                   String image,
+                   int categoryId,
+                   int supplierId) {
+        super(name, description);
+        this.setId(id);
+        this.setPrice(defaultPrice, currencyString);
+        this.supplierId = supplierId;
+        this.categoryId = categoryId;
+        this.image = createImageName(image);
+
     }
 
     private String createImageName(String imgName) {
@@ -56,10 +72,6 @@ public class Product extends BaseModel {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
-    public float getPriceForCart() {
-        return this.defaultPrice;
-    }
-
     public void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
@@ -83,19 +95,23 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public float getPriceForCart() {
+        return this.defaultPrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "defaultPrice: %3$f, " +
-                        "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s",
-                this.id,
-                this.name,
-                this.defaultPrice,
-                this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
+                "name: %2$s, " +
+                "defaultPrice: %3$f, " +
+                "defaultCurrency: %4$s, ",
+            this.id,
+            this.name,
+            this.defaultPrice,
+            this.defaultCurrency.toString());
     }
 }
