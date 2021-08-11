@@ -103,6 +103,10 @@ public class Product extends BaseModel {
         return image;
     }
 
+    public String getImageWithoutPath() {
+        return image.replace(IMG_PATH, "");
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -113,5 +117,13 @@ public class Product extends BaseModel {
             this.name,
             this.defaultPrice,
             this.defaultCurrency.toString());
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
     }
 }
