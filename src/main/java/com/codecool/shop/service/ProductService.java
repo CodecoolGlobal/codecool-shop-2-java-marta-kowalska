@@ -96,7 +96,18 @@ public class ProductService{
         return productDao.getAll();
     }
 
-    public void addProductToShippingCart(Product product){
+    public void addProductToShippingCart(int productId){
+        Product product = productDao.find(productId);
         shoppingCartDao.add(product);
+    }
+
+    public void decreaseProductQty(int productId){
+        Product product = productDao.find(productId);
+        shoppingCartDao.remove(product);
+    }
+
+    public void removeProductFromCart(int productId) {
+        Product product = productDao.find(productId);
+        shoppingCartDao.deleteItem(product);
     }
 }

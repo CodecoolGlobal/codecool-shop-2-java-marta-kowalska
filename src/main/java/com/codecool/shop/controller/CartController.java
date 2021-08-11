@@ -31,14 +31,13 @@ public class CartController extends HttpServlet {
         String action = req.getParameter("action");
         switch (action){
             case "add":
-                productService.addProductToShippingCart(productDataStore.find(productId));
-//                productService.getShoppingCart().addToShoppingCart(productDataStore.find(productId));
+                productService.addProductToShippingCart(productId);
                 break;
             case "remove":
-                productService.getShoppingCart().removeOneItemFromShoppingCart(productDataStore.find(productId));
+                productService.decreaseProductQty(productId);
                 break;
             case "delete":
-                productService.getShoppingCart().removeItemFromShoppingCart(productDataStore.find(productId));
+                productService.removeProductFromCart(productId);
                 break;
         }
 
@@ -59,11 +58,6 @@ public class CartController extends HttpServlet {
         var miniCartParameter = req.getParameter("minicart");
         boolean isMiniCart = miniCartParameter != null && Integer.parseInt(miniCartParameter) == 1;
 
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
         engine.process(isMiniCart ? "product/minicart.html" : "product/cart.html", context, resp.getWriter());
     }
 
