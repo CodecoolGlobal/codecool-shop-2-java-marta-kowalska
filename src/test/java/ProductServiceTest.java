@@ -39,7 +39,7 @@ class ProductServiceTest {
         productSupplierDaoMock = mock(SupplierDao.class);
         shoppingCartDaoMock = mock(ShoppingCartDao.class);
         orderDaoMock = mock(OrderDao.class);
-        productService = new ProductService(productDaoMock,productCategoryDaoMock,productSupplierDaoMock, shoppingCartDaoMock);
+        productService = new ProductService(productDaoMock, productCategoryDaoMock, productSupplierDaoMock, shoppingCartDaoMock);
     }
 
     @AfterEach
@@ -49,117 +49,120 @@ class ProductServiceTest {
     @Test
     void getProductCategory_givenProductCategory_WhenProductCategoryIdExists_ThenReturnCategory() {
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummyCategory);
-       var result =  productService.getProductCategory(1);
-       assertEquals(dummyCategory, result);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummyCategory);
+        var result = productService.getProductCategory(1);
+        assertEquals(dummyCategory, result);
     }
 
     @Test
     void getProductCategory_givenProductCategory_WhenProductCategoryIdNotExists_ThenReturnNull() {
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
-       var result =  productService.getProductCategory(1);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
+        var result = productService.getProductCategory(1);
         assertNull(result);
     }
 
     @Test
     void getProductsForCategory_givenProductCategory_WhenProductCategoryIdExists_ThenReturnListOfProducts() {
-        var expected = List.of(dummyProduct,dummyProduct);
+        var expected = List.of(dummyProduct, dummyProduct);
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummyCategory);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummyCategory);
         when(productDaoMock
-                .getBy(dummyCategory))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-      var result =  productService.getProductsForCategory(1);
-      assertEquals(expected, result);
+            .getBy(dummyCategory))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForCategory(1);
+        assertEquals(expected, result);
     }
 
     @Test
     void getProductsForCategory_givenNull_WhenProductCategoryIdNotExists_ThenReturnNull() {
         var expected = new ArrayList<>();
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productDaoMock
-                .getBy(dummyCategory))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-      var result =  productService.getProductsForCategory(1);
-        assertEquals(expected,result);
+            .getBy(dummyCategory))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForCategory(1);
+        assertEquals(expected, result);
     }
 
     @Test
     void getProductsForSupplier_givenSupplierId_WhenSupplierIdExists_ThenReturnListOfProducts() {
-        var expected = List.of(dummyProduct,dummyProduct);
+        var expected = List.of(dummyProduct, dummyProduct);
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummySupplier);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummySupplier);
         when(productDaoMock
-                .getBy(dummySupplier))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-        var result =  productService.getProductsForSupplier(1);
+            .getBy(dummySupplier))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForSupplier(1);
         assertEquals(expected, result);
 
     }
+
     @Test
     void getProductsForSupplier_givenSupplierId_WhenSupplierIdNotExists_ThenReturnNull() {
         var expected = List.of();
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productDaoMock
-                .getBy(dummySupplier))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-        var result =  productService.getProductsForSupplier(1);
+            .getBy(dummySupplier))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForSupplier(1);
         assertEquals(expected, result);
 
     }
 
     @Test
     void getProductsForCategoryAndSupplier_givenSupplierIdAndCategoryId_WhenBothExists_ThenReturnProducts() {
-        var expected = List.of(dummyProduct,dummyProduct);
+        var expected = List.of(dummyProduct, dummyProduct);
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummySupplier);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummySupplier);
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummyCategory);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummyCategory);
         when(productDaoMock
-                .getBy(dummyCategory,dummySupplier))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-        var result =  productService.getProductsForCategoryAndSupplier(1,1);
+            .getBy(dummyCategory, dummySupplier))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForCategoryAndSupplier(1, 1);
         assertEquals(expected, result);
     }
+
     @Test
     void getProductsForCategoryAndSupplier_givenSupplierIdAndCategoryId_WhenSupplierIdNotExists_ThenReturnProducts() {
-        var expected = List.of(dummyProduct,dummyProduct);
+        var expected = List.of(dummyProduct, dummyProduct);
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummyCategory);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummyCategory);
         when(productDaoMock
-                .getBy(dummyCategory,null))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-        var result =  productService.getProductsForCategoryAndSupplier(1,1);
+            .getBy(dummyCategory, null))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForCategoryAndSupplier(1, 1);
         assertEquals(expected, result);
     }
+
     @Test
-    void getProductsForCategoryAndSupplier_givenSupplierIdAndCategoryId_WhenCategoryIdNotExists_ThenReturnProducts(){
-        var expected = List.of(dummyProduct,dummyProduct);
+    void getProductsForCategoryAndSupplier_givenSupplierIdAndCategoryId_WhenCategoryIdNotExists_ThenReturnProducts() {
+        var expected = List.of(dummyProduct, dummyProduct);
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(dummySupplier);
+            .find(Mockito.anyInt()))
+            .thenReturn(dummySupplier);
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productDaoMock
-                .getBy(null,dummySupplier))
-                .thenReturn(List.of(dummyProduct,dummyProduct));
-        var result =  productService.getProductsForCategoryAndSupplier(1,1);
+            .getBy(null, dummySupplier))
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+        var result = productService.getProductsForCategoryAndSupplier(1, 1);
         assertEquals(expected, result);
     }
 
@@ -167,26 +170,26 @@ class ProductServiceTest {
     void getProductsForCategoryAndSupplier_givenSupplierIdAndCategoryId_WhenNeitherIdExists_ThenReturnNull() {
         var expected = List.of();
         when(productSupplierDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productCategoryDaoMock
-                .find(Mockito.anyInt()))
-                .thenReturn(null);
+            .find(Mockito.anyInt()))
+            .thenReturn(null);
         when(productDaoMock
-                .getBy(dummyCategory,dummySupplier))
-                .thenReturn(List.of());
-        var result =  productService.getProductsForCategoryAndSupplier(1,1);
+            .getBy(dummyCategory, dummySupplier))
+            .thenReturn(List.of());
+        var result = productService.getProductsForCategoryAndSupplier(1, 1);
         assertEquals(expected, result);
     }
 
 
     @Test
     void getAllCategory_WhenHaveProducts_ThenReturnListOfProducts() {
-        var expected = List.of(dummyCategory,dummyCategory);
+        var expected = List.of(dummyCategory, dummyCategory);
         when(productCategoryDaoMock
-                .getAll())
-                .thenReturn(List.of(dummyCategory,dummyCategory));
-        var result =  productService.getAllCategory();
+            .getAll())
+            .thenReturn(List.of(dummyCategory, dummyCategory));
+        var result = productService.getAllCategory();
         assertEquals(expected, result);
     }
 
@@ -217,7 +220,7 @@ class ProductServiceTest {
 
     @Test
     void getAllCartItems_nullProvided_returnsNull() {
-         when(shoppingCartDaoMock
+        when(shoppingCartDaoMock
             .getAll())
             .thenReturn(null);
 
@@ -270,10 +273,28 @@ class ProductServiceTest {
     }
 
     @Test
-    void getOrderId() {
+    void getAllProducts_WhenProductsExist_ThenReturnsProducts() {
+        var expected = List.of(dummyProduct, dummyProduct);
+
+        when(productDaoMock
+            .getAll())
+            .thenReturn(List.of(dummyProduct, dummyProduct));
+
+        var result = productService.getAllProducts();
+
+        assertEquals(expected, result);
+
     }
 
     @Test
-    void getAllProducts() {
+    void getAllProducts_WhenNoProductsExist_ThenReturnsNull() {
+        when(productDaoMock
+            .getAll())
+            .thenReturn(null);
+
+        var result = productService.getAllProducts();
+
+       assertNull(result);
+
     }
 }
