@@ -133,7 +133,8 @@ INSERT INTO product_supplier VALUES  (4, 'D3F4ULT');
 INSERT INTO product_supplier VALUES  (5, 'The Calculator');
 INSERT INTO product_supplier VALUES  (6, 'Mr.Robot');
 INSERT INTO product_supplier VALUES  (7, 'M1CK3Y');
-SELECT pg_catalog.setval('product_supplier_id_seq', 7, true);
+INSERT INTO product_supplier VALUES  (8, 'Codecool');
+SELECT pg_catalog.setval('product_supplier_id_seq', 8, true);
 
 INSERT INTO product VALUES  (0, 'Hacker Laptop', 'Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.',
                              949, DEFAULT, 'hacker_laptop.jpg', 0, 1);
@@ -148,7 +149,11 @@ INSERT INTO product VALUES  (6, 'Anonymous mask', 'No one will know that you are
 INSERT INTO product VALUES  (7, 'Credit card credentials', 'Best credit card data with a lot of money', 150000, DEFAULT, 'card.jpg', 3, 7);
 INSERT INTO product VALUES  (8, 'Hoodie', 'A must have for every real hacker', 150, DEFAULT, 'hoodie.jpg', 2, 2);
 INSERT INTO product VALUES  (9, '105 bus', 'Bus to get you everywhere you want with your hacker friends. Bus connecting people', 1, DEFAULT, '105bus.jpg', 0, 0);
-SELECT pg_catalog.setval('product_id_seq', 9, true);
+INSERT INTO product VALUES  (10, 'Bust of Alex', 'A little bust of Alex, to make your workplace/working environment a nicer place to be in', 99, DEFAULT, 'alexbust.png', 2, 8);
+INSERT INTO product VALUES  (11, 'Bust of Feri', 'A little bust of Feri, to make your workplace/working environment a nicer place to be in', 99, DEFAULT, 'feribust.png', 2, 8);
+INSERT INTO product VALUES  (12, 'Alex Clone', 'A Russian startup is selling autonomous robots, which buyers can choose to make look like any person on Earth. We offer you unlimited copy of Alex', 399, DEFAULT, 'clone.jpg', 0, 8);
+INSERT INTO product VALUES  (13, 'Feri Clone', 'A Russian startup is selling autonomous robots, which buyers can choose to make look like any person on Earth. We offer you unlimited copy of Feri', 399, DEFAULT, 'clone.jpg', 0, 8);
+SELECT pg_catalog.setval('product_id_seq', 13, true);
 
 INSERT INTO shopping_cart VALUES  (1, DEFAULT);
 SELECT pg_catalog.setval('shopping_cart_id_seq', 1, true);
