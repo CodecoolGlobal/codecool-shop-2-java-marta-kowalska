@@ -137,7 +137,7 @@ public class DatabaseManager {
         productDao.add(new Product("105 bus", 1, "USD", "105bus.jpg", "Bus to get you everywhere you want with your hacker friends. Bus connecting people", hardware, bkk));
         productDao.add(new Product("Feri Clone", 399, "USD", "clone.jpg", "A Russian startup is selling autonomous robots, which buyers can choose to make look like any person on Earth. We offer you unlimited copy of Feri", merchandise, codecool));
         productDao.add(new Product("Alex Clone", 399, "USD", "clone.jpg", "A Russian startup is selling autonomous robots, which buyers can choose to make look like any person on Earth. We offer you unlimited copy of Alex", merchandise, codecool));
-        productDao.add(new Product("Bust of Feri", 99, "USD", "feribust.png", "A little bust of Feri, to make your workplace/working environment a nicer place to be in", merchandise, codecool));
+        productDao.add(new Product("Poster of Feri not online", 99, "USD", "feribust.png", "A poster of Feri not online, to make your workplace/working environment a nicer place to be in", merchandise, codecool));
         productDao.add(new Product("Bust of Alex", 99, "USD", "alexbust.png", "A little bust of Alex, to make your workplace/working environment a nicer place to be in", merchandise, codecool));
     }
 }
