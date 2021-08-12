@@ -40,15 +40,10 @@ public class LoadJDBCSettingsFromPropertiesFile {
                 dbManager = DatabaseManager.getInstance();
                 if (dao.equals("memory")) {
                     dbManager.initializeMemoryData();
+                }else if(dao.equals("database")){
+                    tryToConnenctDb(dbName, dbUserName, dbPassword);
                 } else {
-                    try {
-                        dbManager.setup(dbName, dbUserName, dbPassword);
-                    } catch (SQLException ex) {
-                        System.out.println("Cannot connect to database.");
-                        System.out.println(ex.getMessage());
-                        logger.error("Cannot connect to database, switched to memory." + ex);
-                        dbManager.initializeMemoryData();
-                    }
+                    tryToConnenctDb(dbName, dbUserName, dbPassword);
                 }
             }
 
@@ -58,6 +53,17 @@ public class LoadJDBCSettingsFromPropertiesFile {
         } catch (Exception ex) {
             logger.error("Error " + ex);
             ex.printStackTrace();
+        }
+    }
+
+    private void tryToConnenctDb(String dbName, String dbUserName, String dbPassword) {
+        try {
+            dbManager.setup(dbName, dbUserName, dbPassword);
+        } catch (SQLException ex) {
+            System.out.println("Cannot connect to database.");
+            System.out.println(ex.getMessage());
+            logger.error("Cannot connect to database, switched to memory." + ex);
+            dbManager.initializeMemoryData();
         }
     }
 }
