@@ -3,6 +3,8 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.product.ProductCategory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -14,7 +16,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static DataSource dataSource;
 
     private static ProductCategoryDaoJdbc instance = null;
-
+    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductCategoryDaoJdbc(DataSource dataSource) {
@@ -48,6 +50,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
             productCategory.setId(id);
             return productCategory;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -73,6 +76,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
             }
             return allCategories;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }

@@ -2,6 +2,8 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,7 +17,7 @@ public class OrderDaoJdbc implements OrderDao {
     private static DataSource dataSource;
     private List<Order> data = new ArrayList<>();
     private static OrderDaoJdbc instance = null;
-
+    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private OrderDaoJdbc(DataSource dataSource) {
@@ -54,6 +56,7 @@ public class OrderDaoJdbc implements OrderDao {
             return rs.getInt(1);
             // TODO create order items (same as cart items)
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }

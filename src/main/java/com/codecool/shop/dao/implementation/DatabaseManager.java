@@ -7,13 +7,15 @@ import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
 import org.postgresql.ds.PGSimpleDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DatabaseManager {
     private static DatabaseManager instance = null;
-
+    private Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
     private OrderDao orderDao;
     private ProductCategoryDao productCategoryDao;
     private ProductDao productDao;
@@ -67,8 +69,11 @@ public class DatabaseManager {
         dataSource.setPassword(password);
 
         System.out.println("Trying to connect");
+        logger.info("Trying to connect");
         dataSource.getConnection().close();
         System.out.println("Connection ok.");
+        logger.info("Connection ok.");
+        logger.info("Database connected. Everything is fine:)");
 
         return dataSource;
     }
@@ -127,7 +132,5 @@ public class DatabaseManager {
         productDao.add(new Product("Credit card credentials", 15000000f, "USD", "card.jpg", "Best credit card data with a lot of money", stolenData, m1ck3y));
         productDao.add(new Product("Hoodie", 150, "USD", "hoodie.jpg", "A must have for every real hacker", merchandise, neo));
         productDao.add(new Product("105 bus", 1, "USD", "105bus.jpg", "Bus to get you everywhere you want with your hacker friends. Bus connecting people", hardware, bkk));
-
-        System.out.println(productDao.getAll());
     }
 }

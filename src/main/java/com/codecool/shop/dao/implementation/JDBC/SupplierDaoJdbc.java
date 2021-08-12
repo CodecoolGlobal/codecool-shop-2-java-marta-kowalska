@@ -2,6 +2,8 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.product.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,7 +17,7 @@ public class SupplierDaoJdbc implements SupplierDao {
     private static DataSource dataSource;
     private List<Supplier> data = new ArrayList<>();
     private static SupplierDaoJdbc instance = null;
-
+    private static Logger logger = LoggerFactory.getLogger(SupplierDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private SupplierDaoJdbc(DataSource dataSource) {
@@ -50,6 +52,7 @@ public class SupplierDaoJdbc implements SupplierDao {
             supplier.setId(id);
             return supplier;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -74,6 +77,7 @@ public class SupplierDaoJdbc implements SupplierDao {
             }
             return allSuppliers;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }

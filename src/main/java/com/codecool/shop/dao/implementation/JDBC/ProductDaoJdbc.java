@@ -5,6 +5,8 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.product.ProductCategory;
 import com.codecool.shop.model.product.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -19,7 +21,7 @@ public class ProductDaoJdbc implements ProductDao {
 
     private List<Product> data = new ArrayList<>();
     private static ProductDaoJdbc instance = null;
-
+    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductDaoJdbc(DataSource dataSource) {
@@ -59,6 +61,7 @@ public class ProductDaoJdbc implements ProductDao {
                 rs.getInt("SUPPLIER_ID")
                 );
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -90,6 +93,7 @@ public class ProductDaoJdbc implements ProductDao {
             }
             return allProducts;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -118,6 +122,7 @@ public class ProductDaoJdbc implements ProductDao {
             }
             return productsBySupplier;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -146,6 +151,7 @@ public class ProductDaoJdbc implements ProductDao {
             }
             return productsBySupplier;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -175,6 +181,7 @@ public class ProductDaoJdbc implements ProductDao {
             }
             return productsBySupplier;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }

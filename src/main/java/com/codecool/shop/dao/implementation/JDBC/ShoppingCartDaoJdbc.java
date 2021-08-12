@@ -1,8 +1,11 @@
 package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.model.product.Product;
 import com.codecool.shop.model.shoppingCart.ShoppingCart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,7 +17,7 @@ import java.util.HashMap;
 public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     private static DataSource dataSource;
     private static int shoppingCartId = 1;
-
+    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
 
     private ShoppingCart shoppingCart = new ShoppingCart();
 
@@ -61,6 +64,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             }
 
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
 
@@ -78,6 +82,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             }
             return rs.getInt(1);
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -92,6 +97,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
                 statement.setInt(1, product.getId());
                 statement.executeUpdate();
             } catch(SQLException e){
+                logger.error("Sql Error" + e);
                 throw new RuntimeException(e);
             }
         } else if(quantity == 1){
@@ -122,6 +128,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             }
             return allProducts;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -132,6 +139,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             shoppingCart.setShoppingCart(getAll());
             return shoppingCart;
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -145,6 +153,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             statement.setInt(1, shoppingCartId);
             statement.executeUpdate();
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
@@ -157,6 +166,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
             statement.setInt(1, product.getId());
             statement.executeUpdate();
         } catch(SQLException e){
+            logger.error("Sql Error" + e);
             throw new RuntimeException(e);
         }
     }
