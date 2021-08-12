@@ -1,3 +1,7 @@
+:root {
+    --filter: drop-shadow(0px 0px 20px #4ead08);
+}
+
 .container,
 .container-fluid,
 .container-full {
@@ -219,10 +223,11 @@
 /*<--------------------------------cart-------------------------->*/
 .cart-icon {
     position: absolute;
+    filter: var(--filter);
     left: 50%;
     top: 50%;
     fill: var(--c-fore2);
-    width: 30px;
+    width: 35px;
     transform: translate3d(-50%, -50%, 0) scale(1.2,1.2);
     margin-left: -1px;
 }
@@ -230,13 +235,14 @@
 #cart-counter {
     display: inline-block;
     position: absolute;
-    top:0;
-    right: 0;
+    top: -10px;
+    right: -10px;
+    width: 30px;
     background: var(--c-hover);
     color: var(--c-hover-fg);
-    padding: 2px 5px;
+    padding: 5px 5px;
     border-radius: var(--radius-small);
-    font-size: 0.6rem;
+    font-size: 1rem;
     font-weight: bold;
     z-index: 10;
     text-align: center;
@@ -308,6 +314,10 @@
 /*<--------------------------------page parts-------------------------->*/
 #header {
     background: var(--c-back2);
+    background-image: url("/static/img/Digital_rain_banner.gif");
+    background-size: contain;
+    background-repeat: repeat-x;
+    border-bottom: 2px solid rgba(200,200,200,0.8);
     color: var(--c-fore2);
     height: var(--header-text-height);
     padding-top: var(--gap-normal);
@@ -329,7 +339,8 @@
     color: var(--c-fore2);
 }
 .site-title{
-    background-image: url("/static/img/bus105ba.png");
+    background-image: url("/static/img/bus105logo.png");
+    filter: var(--filter);
     /*background-color: var(--c-back2);*/
     width: 300px;
     height: 250px;
