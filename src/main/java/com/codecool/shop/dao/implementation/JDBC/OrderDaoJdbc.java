@@ -59,10 +59,12 @@ public class OrderDaoJdbc implements OrderDao {
             addOrderItems(rs.getInt(1),shoppingCart.getAll());
             changeOrderStatus(rs.getInt(1));
             createNewCart();
+            logger.info("Webshop order successfully created ");
             return rs.getInt(1);
 
+
         } catch(SQLException e){
-            logger.error("Sql Error" + e);
+            logger.error("Sql Error adding webshop order " + e);
             throw new RuntimeException(e);
         }
     }
@@ -72,9 +74,10 @@ public class OrderDaoJdbc implements OrderDao {
             String sql = "INSERT INTO shopping_cart VALUES (DEFAULT, false)";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.executeUpdate();
+            logger.info("New cart created ");
 
         } catch(SQLException e){
-            logger.error("Sql Error" + e);
+            logger.error("Sql Error creating new cart " + e);
             throw new RuntimeException(e);
         }
     }
@@ -85,9 +88,10 @@ public class OrderDaoJdbc implements OrderDao {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, orderId);
             statement.executeUpdate();
+            logger.info("Order status changed ");
 
         } catch(SQLException e){
-            logger.error("Sql Error" + e);
+            logger.error("Sql Error changing order status " + e);
             throw new RuntimeException(e);
         }
 
@@ -109,9 +113,10 @@ public class OrderDaoJdbc implements OrderDao {
                 statement.setInt(9, product.getCategoryId());
                 statement.setInt(10, product.getSupplierId());
                 statement.executeUpdate();
+                logger.info("Order inserted to table ");
             }
         } catch(SQLException e){
-            logger.error("Sql Error" + e);
+            logger.error("Sql Error in inserting order items " + e);
             throw new RuntimeException(e);
         }
     }
