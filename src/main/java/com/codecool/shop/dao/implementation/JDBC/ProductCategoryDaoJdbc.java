@@ -16,7 +16,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static DataSource dataSource;
 
     private static ProductCategoryDaoJdbc instance = null;
-    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
+    private Logger logger = LoggerFactory.getLogger(ProductCategoryDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductCategoryDaoJdbc(DataSource dataSource) {
