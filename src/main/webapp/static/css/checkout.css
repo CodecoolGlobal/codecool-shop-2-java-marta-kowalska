@@ -1,3 +1,7 @@
+:root {
+    --c-green: #50aa50;
+}
+
 .paymentBtnGroup {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -5,6 +9,21 @@
     justify-content: center;
     align-items: center;
 }
+.checkout_container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "details1 summary"
+    "details2 summary"
+    "details3 summary";
+}
+
+.details1 { grid-area: details1; }
+
+.details2 { grid-area: details2; }
+
+.details3 { grid-area: details3; }
 
 .details-block {
     margin: auto;
@@ -25,14 +44,16 @@
 }
 
 .cart-summary {
-    display: block;
+    grid-area: summary;
+    display: flex;
     text-align: center;
-    width: 40%;
-    background-color: #50aa50;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    background-color: var(--c-green);
     padding: 15px;
     text-transform: uppercase;
     font-weight: bolder;
-    margin: 10vh auto;
 }
 
 .sub-title {
@@ -86,10 +107,10 @@
 .confirmBtn {
     display: block;
     width: fit-content;
-    margin: 50px auto 100px;
+    margin: 20px auto 20px;
     padding: 10px 30px;
     font-weight: 600;
-    background: #50aa50;
+    background: var(--c-green);
     color: white;
     transition: all ease-in 0.1s;
     border: 0;
@@ -99,8 +120,4 @@
 .confirmBtn:hover {
     opacity: 0.9;
     transform: scale(1.1);
-}
-
-.paymentCont {
-    margin-top: 60px;
 }

@@ -1,3 +1,8 @@
+:root {
+    --filter: drop-shadow(0px 0px 30px #6aee07);
+    --product_box: rgba(18, 79, 29, 0.6);
+}
+
 .container,
 .container-fluid,
 .container-full {
@@ -129,7 +134,8 @@
     margin-top: var(--gap-normal);
     display: inline-block;
     width: 100%;
-    background: var(--c-fade);
+    /*background: var(--c-fade);*/
+    background: var(--product_box);
     border-radius: var(--radius-normal);
     overflow: hidden;
     font-size: 0;
@@ -219,10 +225,11 @@
 /*<--------------------------------cart-------------------------->*/
 .cart-icon {
     position: absolute;
+    filter: var(--filter);
     left: 50%;
     top: 50%;
     fill: var(--c-fore2);
-    width: 30px;
+    width: 35px;
     transform: translate3d(-50%, -50%, 0) scale(1.2,1.2);
     margin-left: -1px;
 }
@@ -230,13 +237,14 @@
 #cart-counter {
     display: inline-block;
     position: absolute;
-    top:0;
-    right: 0;
-    background: var(--c-hover);
+    top: -5px;
+    right: -5px;
+    width: 30px;
+    background: red;
     color: var(--c-hover-fg);
-    padding: 2px 5px;
+    padding: 2px 2px;
     border-radius: var(--radius-small);
-    font-size: 0.6rem;
+    font-size: 1rem;
     font-weight: bold;
     z-index: 10;
     text-align: center;
@@ -308,6 +316,10 @@
 /*<--------------------------------page parts-------------------------->*/
 #header {
     background: var(--c-back2);
+    background-image: url("/static/img/Digital_rain_banner.gif");
+    background-size: contain;
+    background-repeat: repeat-x;
+    border-bottom: 2px solid rgba(200,200,200,0.8);
     color: var(--c-fore2);
     height: var(--header-text-height);
     padding-top: var(--gap-normal);
@@ -329,10 +341,9 @@
     color: var(--c-fore2);
 }
 .site-title{
-    background-image: url("/static/img/bus105ba.png");
+    background-image: url("/static/img/bus105logo.png");
+    filter: var(--filter);
     /*background-color: var(--c-back2);*/
-    background-color: rgba(64,64,64,0.5);
-
     width: 300px;
     height: 250px;
     background-repeat: no-repeat;

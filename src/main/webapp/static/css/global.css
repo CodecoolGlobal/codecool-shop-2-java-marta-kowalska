@@ -34,16 +34,21 @@
 
     /* színek */
     --c-fade: rgba(0,0,0,.1);
-    --c-back: #EAEAEA;
-    --c-fore: #555;
-    --c-back2: #404040;
+    --c-back: #070606;
+    --c-fore: #ffffff;
+    --c-back2: #1a1313;
     --c-fore2: #ececec;
-    --c-accent: #AD974F;
+    --c-accent: #194284;
     --c-accent-fg: #eee;
-    --c-hover: #3e8e5c;
+    --c-hover: #20b62f;
     --c-hover-fg: #fff;
     --c-accent2: #966666;
     --c-accent2-fg: #eee;
+    --background1: #1e1f34;
+    --background2: #262d39;
+    --c-grad: linear-gradient(180deg, rgba(64,64,64,1) 0%,
+    rgba(64,64,64,0.700717787114846) 44%,
+    rgba(255,255,255,0.639093137254902) 100%);
 }
 @media screen and (min-width: 1800px) {
     :root {
@@ -77,7 +82,61 @@
     -ms-user-select: none;
     user-select: none;
 }
+.noise {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.02;
+}
+.overlay {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+    background-size: auto 4px;
+    z-index: 1;
+}
 
+.overlay::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, transparent 0%, rgba(32, 128, 32, 0.2) 2%, rgba(32, 128, 32, 0.8) 3%, rgba(32, 128, 32, 0.2) 3%, transparent 100%);
+    background-repeat: no-repeat;
+    -webkit-animation: scan 7.5s linear 0s infinite;
+    animation: scan 7.5s linear 0s infinite;
+}
+
+@-webkit-keyframes scan {
+    0% {
+        background-position: 0 -100vh;
+    }
+    35%, 100% {
+        background-position: 0 100vh;
+    }
+}
+
+@keyframes scan {
+    0% {
+        background-position: 0 -100vh;
+    }
+    35%, 100% {
+        background-position: 0 100vh;
+    }
+}
 input, textarea {
     -webkit-touch-callout: initial;
     -webkit-user-select: initial;
@@ -107,6 +166,11 @@ html {
     background: var(--c-back);
     color: var(--c-fore);
     font-family: sans-serif;
+    height: 100%;
+    background-color: #000000;
+    background-image: radial-gradient(var(--background1), var(--background2)), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 body *:not(.noanim) {
@@ -114,11 +178,13 @@ body *:not(.noanim) {
     transition-timing-function: ease-in;
     transition-duration: 0.1s;
     -o-transition-delay: 0s;
+
 }
 
 body {
     min-height: 100vh;
     position: relative;
+
 }
 
 .rel {
