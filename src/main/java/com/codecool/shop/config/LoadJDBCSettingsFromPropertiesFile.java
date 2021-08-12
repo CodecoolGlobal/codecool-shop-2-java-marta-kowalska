@@ -31,9 +31,16 @@ public class LoadJDBCSettingsFromPropertiesFile {
             // Get each property value.
             String dbDriverClass = props.getProperty("db.driver.class");
             String dbConnUrl = props.getProperty("db.conn.url");
+            int dbConnPort = Integer.parseInt(props.getProperty("db.conn.port"));
             String dbName = props.getProperty("db.dbname");
             String dbUserName = props.getProperty("db.username");
             String dbPassword = props.getProperty("db.password");
+            if (dbPassword.equals("environmentVariable")){
+                dbPassword = System.getenv("password");
+            }
+            if (dbUserName.equals("environmentVariable")){
+                dbUserName = System.getenv("username");
+            }
             String dao = props.getProperty("dao");
 
             if (!"".equals(dbDriverClass) && !"".equals(dbConnUrl)) {
@@ -41,9 +48,9 @@ public class LoadJDBCSettingsFromPropertiesFile {
                 if (dao.equals("memory")) {
                     dbManager.initializeMemoryData();
                 }else if(dao.equals("database")){
-                    tryToConnenctDb(dbName, dbUserName, dbPassword);
+                    tryToConnenctDb(dbConnUrl, dbConnPort,dbName, dbUserName, dbPassword);
                 } else {
-                    tryToConnenctDb(dbName, dbUserName, dbPassword);
+                    tryToConnenctDb(dbConnUrl, dbConnPort,dbName, dbUserName, dbPassword);
                 }
             }
 
@@ -56,9 +63,9 @@ public class LoadJDBCSettingsFromPropertiesFile {
         }
     }
 
-    private void tryToConnenctDb(String dbName, String dbUserName, String dbPassword) {
+    private void tryToConnenctDb(String url, int port, String dbName, String dbUserName, String dbPassword) {
         try {
-            dbManager.setup(dbName, dbUserName, dbPassword);
+            dbManager.setup(url, port,dbName, dbUserName, dbPassword);
         } catch (SQLException ex) {
             System.out.println("Cannot connect to database.");
             System.out.println(ex.getMessage());
