@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation.JDBC;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.product.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,13 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderDaoJdbc implements OrderDao {
     private static DataSource dataSource;
     private List<Order> data = new ArrayList<>();
     private static OrderDaoJdbc instance = null;
-    private Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJdbc.class);
+    private Logger logger = LoggerFactory.getLogger(OrderDaoJdbc.class);
     /* A private Constructor prevents any other class from instantiating.
      */
     private OrderDaoJdbc(DataSource dataSource) {
@@ -53,13 +55,72 @@ public class OrderDaoJdbc implements OrderDao {
             statement.setString(8, address);
             ResultSet rs = statement.executeQuery();
             rs.next();
+            ShoppingCartDaoJdbc shoppingCart = ShoppingCartDaoJdbc.getInstance(dataSource);
+            addOrderItems(rs.getInt(1),shoppingCart.getAll());
+            changeOrderStatus(rs.getInt(1));
+            createNewCart();
+            logger.info("Webshop order successfully created ");
             return rs.getInt(1);
-            // TODO create order items (same as cart items)
+
+
         } catch(SQLException e){
-            logger.error("Sql Error" + e);
+            logger.error("Sql Error adding webshop order " + e);
             throw new RuntimeException(e);
         }
     }
+
+    private void createNewCart() {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "INSERT INTO shopping_cart VALUES (DEFAULT, false)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.executeUpdate();
+            logger.info("New cart created ");
+
+        } catch(SQLException e){
+            logger.error("Sql Error creating new cart " + e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void changeOrderStatus(int orderId) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "UPDATE shopping_cart SET checked_out = true WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, orderId);
+            statement.executeUpdate();
+            logger.info("Order status changed ");
+
+        } catch(SQLException e){
+            logger.error("Sql Error changing order status " + e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void addOrderItems(int orderId, HashMap<Product, Integer> items) {
+        try (Connection conn = dataSource.getConnection()) {
+            for (Product product: items.keySet()){
+                String sql = "INSERT INTO order_item VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setFloat(1, product.getDefaultPrice());
+                statement.setString(2, product.getDefaultCurrency().toString());
+                statement.setInt(3, items.get(product));
+                statement.setInt(4, orderId);
+                statement.setInt(5, product.getId());
+                statement.setString(6, product.getName());
+                statement.setString(7, product.getDescription());
+                statement.setString(8, product.getImageWithoutPath());
+                statement.setInt(9, product.getCategoryId());
+                statement.setInt(10, product.getSupplierId());
+                statement.executeUpdate();
+                logger.info("Order inserted to table ");
+            }
+        } catch(SQLException e){
+            logger.error("Sql Error in inserting order items " + e);
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public Order find(int id) {

@@ -81,7 +81,7 @@
 }
 
 .checkbox-state label[for] {
-    display: block;
+    /*display: block;*/
     width: 100%;
     padding: var(--gap-tiny) var(--gap-small);
     cursor: pointer;
@@ -222,7 +222,7 @@
     left: 50%;
     top: 50%;
     fill: var(--c-fore2);
-    width: 20px;
+    width: 30px;
     transform: translate3d(-50%, -50%, 0) scale(1.2,1.2);
     margin-left: -1px;
 }
@@ -327,6 +327,27 @@
     line-height: var(--header-text-height);
     letter-spacing: 0.1em;
     color: var(--c-fore2);
+}
+.site-title{
+    background-image: url("/static/img/bus105ba.png");
+    /*background-color: var(--c-back2);*/
+    background-color: rgba(64,64,64,0.5);
+
+    width: 300px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: inline-block;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    padding-bottom: -30px;
+}
+
+.left {
+    margin-top: 8%;
+    margin-bottom: 10%;
 }
 
 #main-wrapper {
