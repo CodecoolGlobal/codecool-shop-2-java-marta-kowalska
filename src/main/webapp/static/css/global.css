@@ -38,7 +38,7 @@
     --c-fore: #ffffff;
     --c-back2: #1a1313;
     --c-fore2: #ececec;
-    --c-accent: #1f3f90;
+    --c-accent: #194284;
     --c-accent-fg: #eee;
     --c-hover: #20b62f;
     --c-hover-fg: #fff;
@@ -91,7 +91,6 @@
     z-index: -1;
     opacity: 0.02;
 }
-
 .overlay {
     pointer-events: none;
     position: absolute;
@@ -177,11 +176,13 @@ body *:not(.noanim) {
     transition-timing-function: ease-in;
     transition-duration: 0.1s;
     -o-transition-delay: 0s;
+
 }
 
 body {
     min-height: 100vh;
     position: relative;
+
 }
 
 .rel {
