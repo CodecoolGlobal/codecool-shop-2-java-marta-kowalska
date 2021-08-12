@@ -44,6 +44,8 @@
     --c-hover-fg: #fff;
     --c-accent2: #966666;
     --c-accent2-fg: #eee;
+    --background1: #1e1f34;
+    --background2: #262d39;
     --c-grad: linear-gradient(180deg, rgba(64,64,64,1) 0%,
     rgba(64,64,64,0.700717787114846) 44%,
     rgba(255,255,255,0.639093137254902) 100%);
