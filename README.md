@@ -1,21 +1,23 @@
-# Codecool shop (sprint 1)
+<h1 align="center"> 👩‍💻 Welcome to our codecool / hacker webshop! 👨‍💻 </h1>
 
-## Story
+In our webshop for hacker newbies, you can find all the items a beginner hacker dreams about, from hardware to hoodies. 
+  
+## 🧐 Project philosophy
 
-Everyone loves to buy and sell stuff but we need a shop for that! In this
-project the goal is to build one the [most common type of websites on the
-web](https://www.expertmarket.co.uk/web-design/different-types-of-websites): an
-online eCommerce web-application, where users can browse products, add them into
-a shopping cart, checkout items and make payments.
+> This project's goal is to build an online eCommerce web-application, where users can browse products, add them into a shopping cart, checkout items and make payments.
 
-## What are you going to learn?
+### Main takeaways: 
+- how to create dynamic web pages in `Java` with `servlets`
+- how to use the `DAO` design pattern in `Java`
+- how to use the `Thymeleaf` templating engine
 
-- how to create dynamic web pages in `Java` with `servlets`,
-- how to use the `DAO` design pattern in `Java`,
-- how to use the `Thymeleaf` templating engine.
+## 👨‍💻 Tech stack
 
+- Java and Java servlets
+- Thymeleaf templating engine
+- PostgreSQL
 
-## Tasks
+## 🖊️ Detailed tasks 
 
 1. As a Developer, I want to have a version-controlled project, where a webserver serves requests. So that I can start developing in a sandboxed environment.
     - Given I start up my Java web-application server, when I open `http://localhost:8888` in my browser, then ensure the server gives back an index page
@@ -60,26 +62,3 @@ a shopping cart, checkout items and make payments.
 
 11. As an Admin, I want to have a logfile about the checkout processes (per Order) so that I can see the steps of every Order and investigate issues.
     - Given the User started a checkout process then ensure it saves all the steps and details into a JSON file (where the filename is the Order ID and Date)
-
-## General requirements
-
-- Advanced OOP concepts are used in the project: inheritance, there is at least on abstract class, there is at least one interface implemented
-- The project keeps the three-layer structure: servlets handle HTTP, service objects handle business logic, and DAOs handle data access.
-- The page doesn't show a server error anytime during the review
-- All code is pushed to GitHub repository by atomic commits. The implemented feature related commits managed on separated feature branches and merged by a pull request to the `master` branch.
-
-## Hints
-
-- Do not use a database, now only use in-memory storage or file storage but
-  through the DAO pattern (Data Access Object).
-- It's not required to integrate real payment services - you can use fake
-  payment implementations.
-
-## Background materials
-
-- <i class="far fa-exclamation"></i> [Introducing servlets](project/curriculum/materials/pages/java/introducing-servlets.md)
-- <i class="far fa-exclamation"></i> [Servlet tutorial](https://www.tutorialspoint.com/servlets/servlets-form-data.htm)
-- <i class="far fa-exclamation"></i> [Java Dao pattern](https://www.baeldung.com/java-dao-pattern)
-- <i class="far fa-exclamation"></i> [Thymeleaf standard dialect](https://www.thymeleaf.org/doc/articles/standarddialect5minutes.html)
-- <i class="far fa-book-open"></i> [Thymeleaf introductions](https://www.thymeleaf.org/documentation.html#introductions)
-
